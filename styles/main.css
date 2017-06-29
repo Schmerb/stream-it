@@ -1,0 +1,447 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+/* =================================================================================/
+/* 		Base  / Mobile
+/* ================================================================================*/
+body {
+	background: url('../assets/backgrounds/textures/diagonal-texture-black.jpg') center;
+	background-attachment: fixed;
+	/*border: 2px solid white;*/
+	color: #F8F1E5;
+}
+
+.banner {
+    position: relative;
+    top: 0;
+    left: 0;
+    background: rgba(32,178,170,0.95);
+	background: url('../assets/backgrounds/tablets/william-iven-5895.jpg') center;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: right -100px bottom 100px;
+    width: 100%;
+    height: 40%;
+    z-index: 2;
+}
+
+.filter {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.4);
+}
+
+.banner-inner-container {
+	position: relative;
+	width: 100%;
+	height: 70vh;
+	margin: 0 auto;
+}
+
+.title {
+    display: block;
+	font-size: 36px;
+	width: 150px;
+	margin: 0 auto;
+}
+
+.main-nav {
+    display: inline-block;
+}
+
+.burger.fa.fa-bars {
+	position: absolute;
+	top: 55%;
+	right: 20px;
+	font-size: 36px;
+}
+
+.dropdown-menu {
+	display: none;
+}
+
+.nav-item {
+	position: relative;
+    display: inline-block;
+    list-style: none;
+    margin-right: 20px;
+	/*border-bottom: 1px solid transparent;*/
+	transition: all 200ms linear;
+}
+
+.nav-item:hover {
+	cursor: pointer;
+	/*color: green;*/
+	/*border-bottom: 1px solid white;*/
+}
+
+.nav-search-glass,
+.nav-search-input {
+	display: none;
+}
+
+.header-message {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 24px;
+	text-align: center;
+}
+
+.search-form {
+    position: absolute;
+    display: block;
+    font-size: 0;
+	width: 100%;
+	height: 30px;
+	top: 50%;
+	right: 50%;
+	transform: translateY(-50%) translateX(50%);
+	text-align: center;
+}
+
+
+#query-input {
+	background: rgba(248, 241, 229, 0.7);
+    width: 75%;
+	height: 100%;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+#submit-btn {
+	display: inline-block;
+    background: rgb(134, 194, 50);
+	font-size: 16px;
+	height: 100%;
+	width: 60px;
+    border: none;
+    padding: 0;
+    vertical-align: top;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+main {
+	background: url('../assets/backgrounds/tablets/gilles-lambert-8649.jpg') center;
+	background-size: cover;
+	background-attachment: fixed;
+    margin-top: 100px;
+}
+
+.landing-header {
+	width: 320px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.poster {
+	width: 185px;
+	margin: 10px auto;
+}
+
+.poster-overlay {
+		display: none;
+}
+
+.poster-img-wrap {
+	width: 185px;
+	height: 278px;
+}
+
+.poster img {
+	display: block;
+	width: 185px;
+	height: 278px;
+}
+.poster-label {
+	display: block;
+	text-align: center;
+}
+
+footer {
+	position: relative;
+	background: rgba(96, 125, 139, 0.6);
+	color: greenyellow;
+	height: 100px;
+	font-size: 12px;
+}
+
+.copy {
+	position: absolute;
+	bottom: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+
+@media only screen and (min-width: 415px) {
+	.banner {
+		background-position: right 0 bottom 100px;
+	}
+
+	.banner-inner-container {
+		width: 85%;
+	}
+	
+	.banner-top {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.title {
+		display: inline-block;
+		margin: 0;
+	}
+
+	.main-nav {
+		display: inline-block;
+		margin-left: 100px;
+	}
+
+	.burger.fa.fa-bars {
+		display: none;
+	}
+
+	.dropdown-menu {
+		display: inline-block;
+	}
+
+	.nav-item {
+		position: relative;
+		display: inline-block;
+		list-style: none;
+		margin-right: 20px;
+		transition: all 200ms linear;
+	}
+
+	.nav-item:hover {
+		cursor: pointer;
+	}
+
+	.nav-item,
+	.nav-item:after {
+		transition: all 0.6s;
+	}
+
+	.nav-item:after {
+		position: absolute;
+		bottom: -5px;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 0%;
+		content: '.';
+		color: transparent;
+		background: greenyellow;
+		height: 2px;
+	}
+
+	.nav-item:hover {
+	}
+
+	.nav-item:hover:after {
+		width: 100%;
+	}
+
+	.nav-search-container {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+		font-size: 0;
+	}
+
+	.nav-search-glass {
+		fill: rgb(134, 195, 35);
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		vertical-align: top;
+	}
+
+	.nav-search-glass:hover {
+		cursor: pointer;
+	}
+
+	.nav-search-input {
+		/*display: inline-block;*/
+		width: 0;
+		background: rgba(248, 241, 229, 0.7);
+		font-size: 16px;
+		border: none;
+		border-radius: 20px;
+		padding-left: 10px;
+	}
+
+	.nav-search-glass:hover .nav-search-input{
+		display: inline-block;
+	} 
+
+	.search-form {
+		/*position: absolute;*/
+		display: inline-block;
+		width: 50%;
+		height: 40px;
+		min-width: 300px;
+		border-radius: 10px;
+		box-shadow: 0 0 20px 4px rgba(0,0,0,0.4);
+	}
+
+	.search-form-focus {
+		box-shadow: 0 0 20px 5px rgba(0,0,0,0.4),
+					0 0 20px 5px rgba(0,0,0,0.4);
+	}
+
+	#query-input {
+		height: 40px;
+	}
+
+	#submit-btn {
+		height: 40px;
+		width: 25%;
+	}
+	
+	#submit-btn:hover {
+		cursor: pointer;
+	}
+
+	#search-glass:hover {
+		cursor: pointer;
+	}
+
+	main {
+		margin-top: 0;
+		position: relative;
+		min-height: 100vh;
+	}
+
+	.landing {
+		/*position: absolute;*/
+		/*top: 550px;*/
+		/*margin-top: 100px;*/
+		
+	}
+
+	.discover-container {
+		/*position: absolute;*/
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 400px;
+	}
+
+	.container {
+		max-width: 80%;
+		margin: auto;
+	}
+
+
+	.content-container {
+		/*background: lightblue;*/
+		overflow: auto;
+		margin: 0 auto;
+		width: 390px;
+	}
+
+	#content {
+		float: left;
+		margin-top: 50px;
+	}
+
+	
+
+	.poster {
+		position: relative;
+		margin-top: 0;
+		margin-right: 5px;
+		margin-left: 5px;
+		margin-bottom: 50px;
+		max-height: 290px;
+		width: 185px;
+		float: left;
+	}
+
+	.poster:hover {
+		cursor: pointer;
+	}
+
+
+	.poster-overlay {
+		display: none;
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 278px;
+	}
+
+	.poster:hover .poster-overlay{
+		display: inline-block;
+	}
+
+	.view-detail {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	
+	.poster-label {
+		display: block;
+		max-width: 185px;
+		font-size: 12px;
+		padding-top: 5px;
+	}
+
+	.tv::after {
+		content: 'TV';
+		background: #2F3131;
+		font-size: 14px;
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		padding: 2px;
+		border-radius: 5px;
+    }
+}
+
+@media only screen and (min-width: 748px) {
+	.content-container {
+		width: 585px;
+	}
+}
+
+@media only screen and (min-width: 990px) {
+	.content-container {
+		width: 780px;
+	}
+}
+
+@media only screen and (min-width: 1234px) {
+	.content-container {
+		width: 975px;
+	}
+}
+
+@media only screen and (min-width: 1478px) {
+	.content-container {
+		width: 1170px;
+	}
+}
+
+.hidden {
+	display: none;
+}
