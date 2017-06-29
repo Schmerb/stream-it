@@ -17,13 +17,16 @@ const NAV_SEARCH_INPUT = '.nav-search-input';
 const NAV_SEARCH_GLASS = '.nav-search-glass';
 
 const MAIN = 'main';
-const DISCOVER_CONTAINER = '.discover-container';
 const CONTENT = '#content';
 const LANDING_PAGE = '.landing';
 const LANDING_HEADER = '.landing-header';
 const SEARCH_PAGE = '.search-page';
 const SEARCH_FORM = '.search-form';
 const QUERY_INPUT = '#query-input';
+
+const DISCOVER_CONTAINER = '.discover-container';
+const DISCOVER_CONTENT = '.discover-content';
+const DISCOVER_SLIDER = '.discover-slider';
 
 const POSTER_IMG = '.poster img';
 const DETAIL_PAGE = '.detail-page';
@@ -35,7 +38,7 @@ const DETAIL_PAGE = '.detail-page';
 let widths = ["w92","w154","w185","w342","w500","w780","original"]
 let img_width = widths[2];
       
-let IMG_BASE_URL = `https://image.tmdb.org/t/p/${img_width}`;
+let IMG_BASE_URL = `https://image.tmdb.org/t/p`;
 
 //
 // Returns template for movie poster
@@ -43,9 +46,10 @@ let IMG_BASE_URL = `https://image.tmdb.org/t/p/${img_width}`;
 function posterTemplate(tv, poster_path, title, id, overview, release_date, backdrop_path) {
     return `<div class="${tv ? 'tv': ''} poster">
                 <div class="poster-img-wrap">
-                    <img src="${IMG_BASE_URL + '/' + poster_path}" 
+                    <img src="${IMG_BASE_URL}/${img_width}/${poster_path}" 
                         alt="Poster image for ${title}."
                         id="${id}"
+                        data-tv="${tv}" 
                         data-title="${title}"
                         data-id="${id}"
                         data-overview="${overview}"
@@ -53,7 +57,7 @@ function posterTemplate(tv, poster_path, title, id, overview, release_date, back
                         data-backdrop="${backdrop_path}"
                     >
                 </div>
-                <div class="poster-overlay">
+                <div class="poster-overlay" data-id="${id}" data-tv="${tv}">
                     <span class="view-detail">View Details</span>
                 </div>
                 <label for="${id}" class="poster-label">
@@ -100,6 +104,60 @@ function displayPopularTv() {
     $(CONTENT).append(shows);
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Display detail page
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function displayDetailPage(tmdb, video, imdb, guidebox) {
+
+}
+
+
+// ================================================================================
+// Slick Carousel 
+// ================================================================================
+
+//
+// Discover by genre carousels
+//
+function genreSliderInit() {
+    $(DISCOVER_SLIDER).slick({
+        dots: false,
+        arrows: true,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 8,
+        slidesToScroll: 6,
+        variableWidth: true,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+}
 
 // ================================================================================
 // Utilities / Helper Functions
@@ -267,13 +325,75 @@ function searchMultiHandler() {
     });
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Handler for detail page. Fetches all metadata
+//  for movies and tv shows and prepares them to 
+//  display to user
+// * * * * * * * * * * * * * * * * * * * * * * * * *
 function displayDetailPageHandler(poster) {
-    $(LANDING_PAGE).addClass('hidden');
-    $(DETAIL_PAGE).removeClass('hidden');
+    // $(LANDING_PAGE).addClass('hidden');
+    // $(DETAIL_PAGE).removeClass('hidden');
+    if (poster.attr('data-tv') == 'true') {
+        getTvDetailsTMDB(poster.attr('data-id'), function(detail_resp) {
+            getTvVideosTMDB(detail_resp.id, function(video_resp) {
+                getTVExternalIdsTMDB(detail_resp.id, function(ids_resp) {
+                    searchByIdOMDB(ids_resp.imdb_id, function(imdb_resp) {
+                        // call to guidebox for streaming links / prices
+                        displayDetailPage(detail_resp, video_resp, imdb_resp);
+                    });
+                });
+            });
+        });
+    } else {
+        getMovieDetailsByIdTMDB(poster.attr('data-id'), function(detail_resp) {
+            getMovieVideosTMDB(detail_resp.id, function(video_resp) {
+                searchByIdOMDB(detail_resp.imdb_id, function(imdb_resp) {
+                    // call to guidebox for streaming links / prices
+                    
+                    displayDetailPage(detail_resp, video_resp, imdb_resp);
+                });
+            });
+        });
+    }
+
 }
 
+               //  0  ,  1   ,  2   ,  3   ,  4   ,  5   ,    6
+// let widths = ["w92","w154","w185","w342","w500","w780","original"]
+// let img_width = widths[2];
 function discoverHandler() {
+    $(DISCOVER_CONTAINER).removeClass('hidden');
+    $(DISCOVER_CONTENT).empty();
+    genres.forEach(function(genre) {
+        discoverMoviesByGenreTMDB(genre.id, 1, function(resp) {
+            console.log(genre.name);
+            console.log(resp);
 
+            
+            let genreSlides = resp.results.map(function(movie) {
+                let overview = movie.overview.replace(/["]/g, "'");
+                return `<div class="disc-slide">
+                            <div class="slide-poster">
+                                <img src="${IMG_BASE_URL}/${widths[0]}/${movie.poster_path}"
+                                        id="${movie.id}"
+                                >
+                            </div>
+                        </div>`;
+            });
+            let sliderTemplate = `<div class="discover-slider">
+                                      <h3 class="genre">${genre.name}</h3>
+                                      ${genreSlides}
+                                  </div>`;
+            $(DISCOVER_CONTENT).append(sliderTemplate);
+            // genreSliderInit();
+        });
+    });
+
+    // Waits until all 'discoverMoviesByGenreTMDB' api requests are 
+    // successful then triggers callback
+    $.when(discoverMoviesByGenreTMDB()).done(function(a) {
+        genreSliderInit();
+    });
 }
 
 
@@ -334,6 +454,16 @@ function discoverMoviesTMDB(page = 1, callback = printResp, filter = 'popularity
     $.getJSON(TMDB_DISCOVER_MOVIES_URL, query, callback);
 }
 
+function discoverMoviesByGenreTMDB(genreIds, page = 1, callback = printResp, filter = 'popularity.desc', ) {
+    let TMDB_DISCOVER_MOVIES_GENRE_URL = `${TMDB_BASE_URL}/discover/movie`;
+    let query = {
+        api_key: '33e990a96c93fc44034cdc76ec1ec949',
+        with_genres: genreIds,
+        page: page,
+        sort_by: filter,
+    };
+    return $.getJSON(TMDB_DISCOVER_MOVIES_GENRE_URL, query, callback);
+}
 
 function getMovieDetailsByIdTMDB(movieId, callback = printResp) {
     let TMDB_GET_MOVIE_URL = `${TMDB_BASE_URL}/movie/${movieId}`;
@@ -352,7 +482,7 @@ function getMovieImagesTMDB(movieId, callback = printResp) {
 }
 
 function getMovieVideosTMDB(movieId, callback = printResp) {
-    let TMDB_MOVIE_VIDEOS_URL = `${TMDB_BASE_URL}/movie/${moiveId}/videos`;
+    let TMDB_MOVIE_VIDEOS_URL = `${TMDB_BASE_URL}/movie/${movieId}/videos`;
     let query = {
         api_key: '33e990a96c93fc44034cdc76ec1ec949'
     };
@@ -384,6 +514,25 @@ function getMoviesNowPlayingTMDB(page = 1, callback = printResp) {
         page: page
     };
     $.getJSON(TMDB_MOVIES_NOW_PLAYING_URL, query, callback);
+}
+
+
+function getPopularMoviesTMDB(page = 1, callback = printResp) {
+    let TMDB_POPULAR_MOVIES_URL = `${TMDB_BASE_URL}/movie/popular`;
+    let query = {
+        api_key: '33e990a96c93fc44034cdc76ec1ec949',
+        page: page
+    };
+    $.getJSON(TMDB_POPULAR_MOVIES_URL, query, callback);
+}
+
+function getTopRatedMoviesTMDB(page = 1, callback = printResp) {
+    let TMDB_TOP_RATED_MOVIES_URL = `${TMDB_BASE_URL}/movie/top_rated`;
+    let query = {
+        api_key: '33e990a96c93fc44034cdc76ec1ec949',
+        page: page
+    };
+    $.getJSON(TMDB_TOP_RATED_MOVIES_URL, query, callback);
 }
 
 function getUpcomingMoviesTMDB(page = 1, callback = printResp) {
@@ -523,8 +672,7 @@ function getTvEpisodeVideosTMDB(tvId, seasonNumber, episodeNumber, callback = pr
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 let OMDB_URL = 'https://www.omdbapi.com/';
 
-function searchByIdOMDB(id, callback) {
-    (arguments.length == 1) ? callback = printResp : null;
+function searchByIdOMDB(id, callback = printResp) {
     let query = {
         i: id,
         plot: 'short',
@@ -534,8 +682,7 @@ function searchByIdOMDB(id, callback) {
     $.getJSON(OMDB_URL, query, callback);
 }
 
-function searchCustomOMDB(params, callback) {
-    (arguments.length == 1) ? callback = printResp : null;
+function searchCustomOMDB(params, callback = printResp) {
     let query = {
         apikey: '48bffb4a'
     };
@@ -543,8 +690,7 @@ function searchCustomOMDB(params, callback) {
     $.getJSON(OMDB_URL, query, callback);
 }
 
-function searchPosterOMDB(id, callback) {
-    (arguments.length == 1) ? callback = printResp : null;
+function searchPosterOMDB(id, callback = printResp) {
     let POSTER_OMDB_URL = 'http://img.omdbapi.com/';
     let query = {
         i: 'tt3896198',
@@ -640,9 +786,9 @@ function navSearchGlassClick() {
 }
 
 function posterImgClick() {
-    $(CONTENT).on('click', POSTER_IMG, e => {
+    $(CONTENT).on('click', '.poster-overlay', function(e) {
         e.preventDefault();
-        $poster = $(this);
+        let $poster = $(this);
         displayDetailPageHandler($poster);
     });
 }
@@ -653,8 +799,8 @@ function posterImgClick() {
 function init() {
     $(SEARCH_FORM).focusin();
     $(QUERY_INPUT).focus();
-    popularMoviesHandler();
-    popularTvShowsHandler();
+    // popularMoviesHandler();
+    // popularTvShowsHandler();
 }
 
 function watchNavItems() {
@@ -664,6 +810,10 @@ function watchNavItems() {
     searchFormSubmit();
     navSearchGlassClick();
     searchFormFocus();
+}
+
+function displays() {
+    posterImgClick();
 }
 
 function utilities() {
@@ -677,5 +827,7 @@ function utilities() {
 $(function() {
     watchNavItems();
     utilities();
+    displays();
     init();
+    genreSliderInit();
 });

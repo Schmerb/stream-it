@@ -3,9 +3,9 @@
     font-family: 'Droid Sans', sans-serif;
 }
 
-/* =================================================================================/
+/*=================================================================================/
 /* 		Base  / Mobile
-/* ================================================================================*/
+/*================================================================================*/
 body {
 	background: url('../assets/backgrounds/textures/diagonal-texture-black.jpg') center;
 	background-attachment: fixed;
@@ -54,7 +54,8 @@ body {
 	display: inline-block;
 }
 
-.main-nav {
+.main-nav,
+.footer-nav {
     display: inline-block;
 }
 
@@ -178,6 +179,7 @@ footer {
 	color: greenyellow;
 	height: 100px;
 	font-size: 12px;
+	text-align: center;
 }
 
 .copy {
@@ -188,6 +190,10 @@ footer {
 }
 
 
+
+/*================================================================================/
+/* DESKTOP VIEW
+/*===============================================================================*/
 @media only screen and (min-width: 415px) {
 	.banner {
 		background-position: right 0 bottom 100px;
@@ -219,6 +225,10 @@ footer {
 
 	.dropdown-menu {
 		display: inline-block;
+	}
+
+	.footer-nav .dropdown-menu {
+		padding: 0;
 	}
 
 	.nav-item {
@@ -292,6 +302,10 @@ footer {
 		display: inline-block;
 	} 
 
+	.header-message {
+		min-width: 340px;
+	}
+
 	.search-form {
 		/*position: absolute;*/
 		display: inline-block;
@@ -324,6 +338,9 @@ footer {
 		cursor: pointer;
 	}
 
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	/*  Main body (DESKTOP)
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
 	main {
 		margin-top: 0;
 		position: relative;
@@ -337,14 +354,6 @@ footer {
 		
 	}
 
-	.discover-container {
-		/*position: absolute;*/
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 400px;
-	}
-
 	.container {
 		max-width: 80%;
 		margin: auto;
@@ -356,10 +365,12 @@ footer {
 		overflow: auto;
 		margin: 0 auto;
 		width: 390px;
+		text-align: center;
 	}
 
 	#content {
-		float: left;
+		/*float: left;*/
+		display: inline-block;
 		margin-top: 50px;
 	}
 
@@ -420,6 +431,51 @@ footer {
 		padding: 2px;
 		border-radius: 5px;
     }
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	/*  Discover container / Slick Carousel (DESKTOP)
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	.discover-container {
+		color: blue;
+		width: 100%;
+		height: 400px;
+	}
+
+	.discover-slider {
+		position: relative;
+		margin-bottom: 50px;
+	}
+
+	.disc-slide {
+		display: inline-block;
+		background: white;
+		width: 100px;
+		height: 150px;
+	}
+
+	.slick-list {
+		overflow: hidden;
+	}
+
+	.slick-slide {
+		margin-right: 10px;
+	}
+
+	.slick-prev,
+	.slick-next {
+		fill: green;
+		z-index: 2;
+		top: 60%;
+	}
+
+	.slick-prev {
+		/*left: -25px;*/
+	}
+
+	.slick-next {
+		/*right: -25px;*/
+	}
+
 }
 
 @media only screen and (min-width: 748px) {
