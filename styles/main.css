@@ -50,6 +50,10 @@ body {
 	margin: 0 auto;
 }
 
+.fixed-container {
+	display: inline-block;
+}
+
 .main-nav {
     display: inline-block;
 }

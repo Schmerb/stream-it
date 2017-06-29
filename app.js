@@ -25,6 +25,8 @@ const SEARCH_PAGE = '.search-page';
 const SEARCH_FORM = '.search-form';
 const QUERY_INPUT = '#query-input';
 
+const POSTER_IMG = '.poster img';
+const DETAIL_PAGE = '.detail-page';
 
 // ================================================================================
 // Displays
@@ -263,6 +265,11 @@ function searchMultiHandler() {
             $(CONTENT).empty().append(posters);
         });
     });
+}
+
+function displayDetailPageHandler(poster) {
+    $(LANDING_PAGE).addClass('hidden');
+    $(DETAIL_PAGE).removeClass('hidden');
 }
 
 function discoverHandler() {
@@ -613,9 +620,11 @@ function navSearchGlassClick() {
         $(NAV_SEARCH_INPUT).show()
                             .animate({width: '200px'}, {
                                     duration: 500,
-                                    easing: 'linear'
-                            })
-                            .focus();
+                                    easing: 'linear',
+                                    complete: () => {
+                                        $(NAV_SEARCH_INPUT).focus();
+                                    }
+        });
     });
 
     $(NAV_SEARCH_INPUT).focusout(e => {
@@ -626,7 +635,15 @@ function navSearchGlassClick() {
                                     complete: () => {
                                         $(NAV_SEARCH_INPUT).hide();
                                     }
-                            });
+        });
+    });
+}
+
+function posterImgClick() {
+    $(CONTENT).on('click', POSTER_IMG, e => {
+        e.preventDefault();
+        $poster = $(this);
+        displayDetailPageHandler($poster);
     });
 }
 
