@@ -28,17 +28,19 @@
                                 <li class="nav-item discover">Discover</li>
                             </ul>
                         </nav> 
-                        <div class="nav-search-container">
-                            <input class="nav-search-input" type="text" name="" value="" placeholder="Search . . .">
+                        <form id="nav-search-form" class="search-form">
+                            <input id="nav-search-input" class="query-input" type="text" name="" value="" placeholder="Search . . .">
                             <svg class="nav-search-glass" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="3 0 22 25"><path d="M14 8c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3m0-1c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zM4.195 17.674c0 1.727 1.404 3.131 3.131 3.131.756 0 1.503-.277 2.104-.783l2.397-2.386c.685.227 1.412.364 2.173.364 3.86 0 7-3.141 7-7s-3.14-7-7-7c-3.859 0-7 3.141-7 7 0 .761.136 1.486.364 2.173l-2.245 2.283c-.596.59-.924 1.378-.924 2.218zm6.459-1.694l-2.512 2.511c-.223.187-.504.313-.816.313-.624 0-1.131-.506-1.131-1.131 0-.311.127-.594.332-.797l2.492-2.531c.435.645.99 1.2 1.635 1.635zm3.346.02c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"/></svg>
-                        </div>
+                        </form>
                     </div>
                 </div> <!-- banner top --> 
-                <h3 class="header-message">Wondering where you can stream your favorite movies and shows?</h3>
-                <form class="search-form">
-                    <input id="query-input" type="text" name="" value="" placeholder="Search for movies or tv shows . . ." autofocus>
-                    <button for="query-input" id="submit-btn" type="submit">Search</button>
-                </form>
+                <div class="banner-bottom">
+                    <h3 class="header-message">Wondering where you can stream your favorite movies and shows?</h3>
+                    <form id="main-search-form" class="search-form">
+                        <input id="main-input" class="query-input" type="text" name="" value="" placeholder="Search for movies or tv shows . . ." autofocus>
+                        <button for="main-input" id="submit-btn" type="submit">Search</button>
+                    </form>
+                </div>
             </div> <!-- banner inner container -->
         </header>
 
@@ -47,11 +49,11 @@
                 
                 <!-- LANDING PAGE-->
 
-                <section class="landing">
+                <section class="landing hidden">
                     <h1 class="landing-header"></h1>
                     
                     <div class="content-container">
-                        <div id="content">
+                        <div id="landing-content" class="content">
                             
                             <!--<div class="tv poster">
                                 <div class="poster-img-wrap">
@@ -543,13 +545,13 @@
 
                 <!-- DSICOVER PAGE-->
 
-                <section class="discover-container ">
+                <section class="discover-container hidden">
                      <div class="discover-inner-container">
-                        <h2>Discover content</h2>
-                        <div class="discover-content">
+                        <h2 id="discovery-title">Discover content</h2>
+                        <div class="discover-content content">
 
+                            <h3>Action</h3>
                             <div class="discover-slider">
-                                <h3>Action</h3>
                                 <div class="disc-slide">
                                     
                                 </div>
@@ -602,8 +604,8 @@
                                     
                                 </div>
                             </div>
+                            <h3>Horror</h3>
                             <div class="discover-slider">
-                                <h3>Horror</h3>
                                 <div class="disc-slide">
                                     
                                 </div>
@@ -656,8 +658,8 @@
                                     
                                 </div>
                             </div>
+                            <h3>Sci-Fi</h3>
                             <div class="discover-slider">
-                                <h3>Sci-Fi</h3>
                                 <div class="disc-slide">
                                     
                                 </div>
@@ -710,8 +712,8 @@
                                     
                                 </div>
                             </div>
+                            <h3>Adventure</h3>
                             <div class="discover-slider">
-                                <h3>Adventure</h3>
                                 <div class="disc-slide">
                                     
                                 </div>
@@ -768,25 +770,309 @@
                         </div>
 
                     </div>
-                    
+
                 </section>
 
 
                 <!-- SEARCH PAGE-->
 
-                <section class="search-page" class="hidden">
+                <section class="search-page hidden">
                     
                 </section>
 
 
                 <!-- DETAIL PAGE-->
 
-                <section class="detail-page" class="hidden">
-                    <div class="carousel-container">
+                <section class="detail-page hidden">
+
+                    <section class="detail-carousel-container">
                         <div class="js-carousel">
                             
                         </div>
-                    </div>
+                    </section>
+
+                    <section id="detail-page-container">
+
+                        <div class="detail-poster-container">
+                            <div class="poster-num-metadata">
+                                <label for="detail-poster" class="js-movie-title">Interstellar</label>
+                                <ul>
+                                    <li class="js-year">2014</li>
+                                    <li class="js-rated">PG-13</li>
+                                    <li class="js-runtime">2h 49m</li>
+                                </ul>
+                            </div>
+
+                            <div class="detail-poster-img-wrap">
+                                <img id="detail-poster" class="js-detail-poster" src="https://image.tmdb.org/t/p/w342/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="">
+                            </div>
+
+                            <div class="ratings-container">
+                                <label for="" class="ratings-label">
+                                    <img class="ratings imdb" src="./assets/icons/imdb-long.png" alt="">
+                                    <span class="js-imdb"></span>
+                                </label>
+                                <label for="" class="ratings-label">
+                                    <img class="ratings rotten" src="./assets/icons/rotten-tomatoe.png" alt="">
+                                    <span class="js-rotten"></span>
+                                </label>
+                                <label for="" class="ratings-label">
+                                    <img class="ratings metacritic" src="./assets/icons/metacritic.png" alt="">
+                                    <span class="js-metacritic"></span>
+                                </label>
+                            </div>
+                        </div> <!-- detail poster container-->
+
+
+
+                        <div class="streaming-links-container">
+                            
+                            <!-- PURCHASE LINKS SLIDER -->
+                            <!--<label for="purch-links">Buy / Rent</label>
+                            <ul id="purch-links" class="purchase-links streaming-links-slider">
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="amazon" class="icon" src="./assets/icons/amazon-instant-video.jpeg" alt=""></a>
+                                    <label for="amazon">Amazon Prime Video</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li>  
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="itunes" class="icon" src="./assets/icons/itunes.jpeg" alt=""></a>
+                                    <label for="itunes">iTunes</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="vudu" class="icon" src="./assets/icons/vudu.jpeg" alt=""></a>
+                                    <label for="vudu">Vudu</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="google-play" class="icon" src="./assets/icons/google-play.jpeg" alt=""></a>
+                                    <label for="google-play">Google Play</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="cinemanow" class="icon" src="./assets/icons/cinemanow.jpeg" alt=""></a>
+                                    <label for="cinemanow">Cinema Now</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="youtube-play" class="icon" src="./assets/icons/youtube-play.png" alt=""></a>
+                                    <label for="youtube-play">YouTube Play</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="sony" class="icon" src="./assets/icons/sony-main.png" alt=""></a>
+                                    <label for="sony">Sony</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                 Source Option
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="verizon-on-demand" class="icon" src="./assets/icons/Verizon-on-Demand.png" alt=""></a>
+                                    <label for="verizon-on-demand">Verizon (On Demand)</label>
+                                    <ul class="purchase-options-list"> 
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Buy</dt>
+                                                <dd><span class="definition-span">HD</span>$12.99</dd>
+                                                <dd><span class="definition-span">SD</span>$6.99</dd>
+                                            </dl>
+                                        </li>
+                                        <li> 
+                                            <dl class="prices">
+                                                <dt>Rent</dt>
+                                                <dd><span class="definition-span">HD</span>$3.99</dd>
+                                                <dd><span class="definition-span">SD</span>$2.99</dd>
+                                            </dl>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>-->
+
+                            <!-- SUBSCRIPTION LINKS SLIDER -->
+                            <!--<label for="sub-links">Subscription</label>
+                            <ul id="sub-links" class="subscription-links streaming-links-slider">
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="starz_amazon_prime" class="icon" src="./assets/icons/starz.jpeg" alt=""></a>
+								  	<label for="starz_amazon_prime">Starz (via Amazon Prime)</label>
+                                    <span class="package-price">$8.99 / month</span>
+                                </li>
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="starz_amazon_prime" class="icon" src="./assets/icons/starz.jpeg" alt=""></a>
+								  	<label for="starz_amazon_prime">Starz (via Amazon Prime)</label>
+                                    <span class="package-price">$8.99 / month</span>
+                                </li>
+                            </ul>-->
+
+                            <!-- TV LINKS SLIDER -->
+                            <!--<label for="tv-stream-link">TV</label>
+                            <ul id="tv-stream-link" class="tv-links streaming-links-slider">
+                                <li class="source-slide">
+                                    <a href="" target="__blank"><img id="starz_tveverywhere" src="assets/icons/cinemax-max-go.png" alt="" class="icon"></a>
+									<label for="starz_tveverywhere">MAX GO</label>
+                                    <span class="package-price">Included with Cinemax</span>
+                                </li>
+                            </ul>-->
+
+                        </div> <!-- stream links container-->
+
+
+
+                        <div class="meta-data">
+                            <div class="people-container">
+                                <ul>
+                                    <li>
+                                        <span>Synopsis</span>
+                                        <p class="js-plot"></p>
+                                    </li>
+                                    <li>
+                                        <span>Director</span>
+                                        <span class="js-director"></span>
+                                    </li>
+                                    <li>
+                                        <span>Writers</span>
+                                        <p class="js-writers"></p>
+                                    </li>
+                                    <li>
+                                        <span>Cast</span>
+                                        <p class="js-cast"></p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="trailer-container">
+                                <div class="frame-container">
+                                    <iframe class="frame js-frame" src=""></iframe>
+                                </div>
+                                <div class="trailer-slider">
+
+                                </div>
+                            </div>
+
+                        </div> <!-- meta data -->
+
+                    </section>                    
+
                 </section>
 
             </div>
@@ -794,13 +1080,46 @@
 
         <footer role="footer">
             <nav class="footer-nav" role="navigation">
-                <ul class="dropdown-menu">
-                    <li class="nav-item search">Search</li>
-                    <li class="nav-item popular">Popular</li>
-                    <li class="nav-item discover">Discover</li>
+                <ul id="search-menu">
+                    <label for="search-menu" class="search f-nav-label">SEARCH</label>
+                    <li class="search-movie-f-nav">Search Movies</li>
+                    <li class="search-tv-f-nav">Search TV Shows</li>
+                </ul>
+                <ul id="popular-menu">
+                    <label for="popular-menu" class="popular f-nav-label">POPULAR</label>
+                    <li class="popular-movies-f-nav">Popular Movies</li>
+                    <li class="popular-tv-f-nav">Popular TV Shows</li>
+                </ul>
+                <ul id="discover-menu">
+                    <label for="discover-menu" class="discover f-nav-label">DISCOVER</label>
+                    <li class="genre-f-nav">Action</li>
+                    <li class="genre-f-nav">Adventure</li>
+                    <li class="genre-f-nav">Animation</li>
+                    <li class="genre-f-nav">Comedy</li>
+                    <li class="genre-f-nav">Crime</li>
+                    <li class="genre-f-nav">Documentary</li>
+                </ul>
+                <ul id="disc-menu-2">
+                    <li class="genre-f-nav">Drama</li>
+                    <li class="genre-f-nav">Fantasy</li>
+                    <li class="genre-f-nav">History</li>
+                    <li class="genre-f-nav">Horror</li>
+                    <li class="genre-f-nav">Music</li>
+                    <li class="genre-f-nav">Mystery</li>
+                </ul>
+                <ul id="disc-menu-3">
+                    <li class="genre-f-nav">Romance</li>
+                    <li class="genre-f-nav">Sci-Fi</li>
+                    <li class="genre-f-nav">TV Movie</li>
+                    <li class="genre-f-nav">Thriller</li>
+                    <li class="genre-f-nav">War</li>
+                    <li class="genre-f-nav">Western</li>
                 </ul>
             </nav> 
-            <span class="copy">copyright &copy; 2017 Mike Schmerbeck</span>
+            <div class="credit">
+                <span class="copy">copyright &copy; 2017 Mike Schmerbeck</span>
+                <span id="tmdb-attr">This product uses the TMDb API but is not endorsed or certified by TMDb.</span>
+            </div>
         </footer>
 
 
@@ -808,8 +1127,9 @@
         <script type="text/javascript" src="./slick-1.6.0/slick/slick.min.js"></script>
         <script src="https://use.fontawesome.com/9f828cce4e.js"></script>
         <script src="https://use.fontawesome.com/3e1d7b509c.js"></script>
-        <script type="text/javascript" src="icons.js"></script>
+        <script type="text/javascript" src="stream-sources.js"></script>
         <script type="text/javascript" src="category-ids.js"></script>
+        <script type="text/javascript" src="test.js"></script>
         <script type="text/javascript" src="app.js"></script>
     </body>
 </html>

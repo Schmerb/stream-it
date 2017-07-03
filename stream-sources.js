@@ -1,4 +1,4 @@
-var icons = {
+let icons = {
     a_and_e: 'assets/icons/aande.jpeg',
     abc: 'assets/icons/abc.jpeg',
     acorn_tv: 'assets/icons/acorn-tv.jpeg',
@@ -10,6 +10,7 @@ var icons = {
     britbox: 'assets/icons/britbox.jpeg',
     cbs: 'assets/icons/cbs.jpeg',
     cinemanow: 'assets/icons/cinemanow.jpeg',
+    cinemax_amazon_prime: 'assets/icons/cinemax.png',
     crackle: 'assets/icons/crackle.jpeg',
     disney_movies_anywhere: 'assets/icons/disney-movies-anywhere.jpg',
     distrify: 'assets/icons/distrify.jpg',
@@ -29,6 +30,7 @@ var icons = {
     imdb: 'assets/icons/imdb_standard.png',
     imdb_long: 'assets/icons/imdb_long.png',
     lifetime: 'assets/icons/lifetime.jpeg',
+    maxgo: 'assets/icons/cinemax-max-go.png',
     metacritic: 'assets/icons/metacritic.png',
     microsoft_store: 'assets/icons/microsoft-store.jpeg',
     mubi: 'assets/icons/mubi.jpeg',
@@ -54,4 +56,9 @@ var icons = {
     xfinity: 'assets/icons/xfinity.png',
     yahoo_view: 'assets/icons/yahoo-view.jpeg',
     youtube_purchase: 'assets/icons/youtube-play.png'
+};
+
+let package_prices = {
+    netflix: 'SD $9.99, HD $11.99',
+    cinemax_amazon_prime: '$9.99'
 };

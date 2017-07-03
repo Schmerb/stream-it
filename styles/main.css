@@ -86,33 +86,38 @@ body {
 }
 
 .nav-search-glass,
-.nav-search-input {
+#nav-search-input {
 	display: none;
 }
 
 .header-message {
-	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translateX(-50%);
 	font-size: 24px;
 	text-align: center;
 }
 
-.search-form {
-    position: absolute;
-    display: block;
-    font-size: 0;
-	width: 100%;
-	height: 30px;
+.banner-bottom {
+	position: absolute;
 	top: 50%;
 	right: 50%;
+	width: 100%;
 	transform: translateY(-50%) translateX(50%);
 	text-align: center;
 }
 
+#main-search-form {
+    /*position: absolute;*/
+    display: block;
+    font-size: 0;
+	width: 100%;
+	height: 30px;
+	/*top: 50%;*/
+	/*right: 50%;*/
+	/*transform: translateY(-50%) translateX(50%);*/
+	text-align: center;
+}
 
-#query-input {
+
+#main-input {
 	background: rgba(248, 241, 229, 0.7);
     width: 75%;
 	height: 100%;
@@ -136,6 +141,11 @@ body {
 	border-bottom-right-radius: 10px;
 }
 
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/* Main landing (Base / Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */ 
 main {
 	background: url('../assets/backgrounds/tablets/gilles-lambert-8649.jpg') center;
 	background-size: cover;
@@ -143,15 +153,27 @@ main {
     margin-top: 100px;
 }
 
+.detail-page-main {
+	background: transparent;
+}
+
 .landing-header {
 	width: 320px;
 	margin: 0 auto;
+	padding-top: 40px;
 	text-align: center;
 }
 
 .poster {
 	width: 185px;
+	
+}
+
+.poster {
+	position: relative;
 	margin: 10px auto;
+	max-height: 290px;
+	width: 185px;
 }
 
 .poster-overlay {
@@ -173,22 +195,324 @@ main {
 	text-align: center;
 }
 
+.movie-section,
+.tv-section {
+	margin-top: 50px;
+	overflow: auto;
+}
+
+.tv::after {
+	content: 'TV';
+	background: #2F3131;
+	font-size: 14px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 2px;
+	border-radius: 5px;
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/*  Discovery Carousel (Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */ 
+.discover-container {
+	padding-top: 40px;
+}
+
+#discovery-title {
+	width: 185px;
+	margin: 0 auto;
+}
+
+.disc-slide {
+	display: inline-block;
+	text-align: center;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/* Detail page (Base / Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+
+.detail-page {
+	/*background: url("https://image.tmdb.org/t/p/original//xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg") center;*/
+}
+
+
+.detail-carousel-container {
+	width: 100%;
+	height: 150px;
+	/*border: 1px solid white;*/
+}
+
+#detail-page-container {
+	/*border: 1px solid white;*/
+
+}
+
+.detail-poster-container {
+	display: block;
+	/*border: 1px solid blue;*/
+	vertical-align: top;
+}
+
+.poster-num-metadata ul {
+	padding: 0;
+	margin: 0;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.poster-num-metadata li {
+	display: inline-block;
+	list-style: none;
+}
+
+.poster-num-metadata li:not(:last-of-type)::after{
+	content: ' | ';
+	padding: 0 5px;
+} 
+
+
+.detail-poster-img-wrap {
+	width: 200px;
+}
+
+#detail-poster {
+	width: 100%;
+	height: auto;
+}
+
+.ratings-label {
+	margin-right: 10px;
+}
+
+.ratings { 
+	width: 30px;
+	height: auto;
+	vertical-align: top;
+}
+
+.rotten,
+.metacritic {
+	width: 18px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/* Stream links carousel (Base / Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+.streaming-links-container {
+	display: block;
+	width: 100%;
+	/*height: 340px;*/
+	float: right;
+	/*border: 1px solid red;*/
+}
+
+
+.streaming-links-slider {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 10px;
+	/*border: 1px solid darkred;*/
+}
+
+.purchase-links {
+	/*height: 100px;*/
+}
+
+
+.streaming-links-slider li {
+	display: inline-block;
+	list-style: none;
+}
+
+.source-slide {
+	display: inline-block;
+	font-size: 12px;
+	/*border: 1px solid white;*/
+	width: 100%;
+}
+
+.source-slide ul {
+	padding: 0;
+}
+
+.source-slide li {
+	list-style: none;
+}
+
+.theater-source {
+	padding-left: 20px;
+	margin-bottom: 20px;
+}
+
+
+.icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	/*border-radius: 5px;*/
+	margin-left: 5px;
+}
+
+img#cinemax_amazon_prime {
+	background: white;
+}
+
+.source-slide label {
+	margin-left: 5px;
+}
+
+.prices {
+	margin: 0;
+}
+
+.prices:first-child {
+	margin-right: 20px;
+}
+
+
+.prices dd {
+	margin: 0;
+}
+
+.prices dt,
+.definition-span {
+	color: #df9a07;
+}
+
+.prices dt {
+	margin-bottom: 5px;
+}
+
+.package-price {
+	display: block;
+}
+
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/* meta-data / trailers (Base / Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+.meta-data {
+	clear: both;
+	width: 100%;
+	/*border: 1px solid greenyellow;*/
+}
+
+.meta-data ul {
+	padding: 0 ;
+}
+
+.meta-data li {
+	list-style: none;
+	margin-bottom: 10px;
+}
+
+.people-container {
+	display: inline-block;
+	/*border: 1px solid aqua;*/
+}
+
+.people-container li p {
+	display: inline-block;
+	width: 300px;
+	margin: 0;
+	vertical-align: top;
+}
+
+.people-container li span:first-child {
+	color: #df9a07;
+	display: inline-block;
+	width: 70px;
+}
+
+.trailer-container {
+	display: inline-block;
+	width: 50%;
+	height: 400px;
+	/*border: 1px solid purple;*/
+	vertical-align: top;
+	float: right;
+}
+
+.frame-container {
+	text-align: center;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/*  Footer (Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */ 
 footer {
 	position: relative;
 	background: rgba(96, 125, 139, 0.6);
 	color: greenyellow;
-	height: 100px;
+	/*height: 100px;*/
 	font-size: 12px;
 	text-align: center;
 }
 
-.copy {
+.footer-nav {
+	margin-bottom: 50px;
+}
+
+.footer-nav ul {
+	text-align: left;
+	vertical-align: top;
+}
+
+.footer-nav li {
+	list-style: none;
+}
+
+.f-nav-label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.f-nav-label:hover {
+	cursor: pointer;
+}
+
+#search-menu {
+	display: inline-block;
+}
+
+#popular-menu {
+	display: inline-block;
+}
+
+#discover-menu {
+	display: inline-block;
+}
+
+#disc-menu-2,
+#disc-menu-3 {
+	display: inline-block;
+	margin-top: 30px;
+	padding-left: 10px;
+}
+
+.credit {
 	position: absolute;
 	bottom: 5px;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
+.copy {
+	margin-bottom: 5px;
+}
+
+.copy,
+#tmdb-attr {
+	display: block;
+}
 
 
 /*================================================================================/
@@ -207,6 +531,7 @@ footer {
 		position: absolute;
 		top: 0;
 		width: 100%;
+		min-width: 640px;
 	}
 
 	.title {
@@ -216,7 +541,6 @@ footer {
 
 	.main-nav {
 		display: inline-block;
-		margin-left: 100px;
 	}
 
 	.burger.fa.fa-bars {
@@ -262,13 +586,14 @@ footer {
 	}
 
 	.nav-item:hover {
+		
 	}
 
 	.nav-item:hover:after {
 		width: 100%;
 	}
 
-	.nav-search-container {
+	#nav-search-form {
 		position: absolute;
 		top: 50%;
 		right: 0;
@@ -288,7 +613,7 @@ footer {
 		cursor: pointer;
 	}
 
-	.nav-search-input {
+	#nav-search-input {
 		/*display: inline-block;*/
 		width: 0;
 		background: rgba(248, 241, 229, 0.7);
@@ -298,15 +623,15 @@ footer {
 		padding-left: 10px;
 	}
 
-	.nav-search-glass:hover .nav-search-input{
+	.nav-search-glass:hover #nav-search-input{
 		display: inline-block;
 	} 
 
 	.header-message {
-		min-width: 340px;
+		min-width: 390px;
 	}
 
-	.search-form {
+	#main-search-form {
 		/*position: absolute;*/
 		display: inline-block;
 		width: 50%;
@@ -316,12 +641,12 @@ footer {
 		box-shadow: 0 0 20px 4px rgba(0,0,0,0.4);
 	}
 
-	.search-form-focus {
+	#main-search-form-focus {
 		box-shadow: 0 0 20px 5px rgba(0,0,0,0.4),
 					0 0 20px 5px rgba(0,0,0,0.4);
 	}
 
-	#query-input {
+	#main-input {
 		height: 40px;
 	}
 
@@ -355,7 +680,7 @@ footer {
 	}
 
 	.container {
-		max-width: 80%;
+		max-width: 1060px;
 		margin: auto;
 	}
 
@@ -368,7 +693,7 @@ footer {
 		text-align: center;
 	}
 
-	#content {
+	#landing-content {
 		/*float: left;*/
 		display: inline-block;
 		margin-top: 50px;
@@ -377,13 +702,10 @@ footer {
 	
 
 	.poster {
-		position: relative;
 		margin-top: 0;
 		margin-right: 5px;
 		margin-left: 5px;
 		margin-bottom: 50px;
-		max-height: 290px;
-		width: 185px;
 		float: left;
 	}
 
@@ -402,9 +724,6 @@ footer {
 		height: 278px;
 	}
 
-	.poster:hover .poster-overlay{
-		display: inline-block;
-	}
 
 	.view-detail {
 		position: absolute;
@@ -421,7 +740,7 @@ footer {
 		padding-top: 5px;
 	}
 
-	.tv::after {
+	/*.tv::after {
 		content: 'TV';
 		background: #2F3131;
 		font-size: 14px;
@@ -430,27 +749,50 @@ footer {
 		right: 5px;
 		padding: 2px;
 		border-radius: 5px;
-    }
+    }*/
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * */
 	/*  Discover container / Slick Carousel (DESKTOP)
 	/* * * * * * * * * * * * * * * * * * * * * * * * * */
 	.discover-container {
-		color: blue;
+		color: white;
 		width: 100%;
-		height: 400px;
+	}
+
+	.discover-wrap {
+		margin-bottom: 50px;
 	}
 
 	.discover-slider {
 		position: relative;
-		margin-bottom: 50px;
+		height: 138px;
 	}
 
 	.disc-slide {
 		display: inline-block;
 		background: white;
-		width: 100px;
-		height: 150px;
+		/*width: 100px;*/
+		/*height: 150px;*/
+	}
+
+	.slide-poster {
+		position: relative;
+		width: 92px;
+		height: 138px;
+	}
+
+	.slide-poster img {
+		width: 92px;
+		height: 138px
+	}
+
+	.slide-poster .poster-overlay {
+		height: 138px;
+	}
+
+	.poster:hover .poster-overlay,
+	.slide-poster:hover .poster-overlay {
+		display: inline-block;
 	}
 
 	.slick-list {
@@ -465,7 +807,7 @@ footer {
 	.slick-next {
 		fill: green;
 		z-index: 2;
-		top: 60%;
+		top: 50%;
 	}
 
 	.slick-prev {
@@ -475,6 +817,123 @@ footer {
 	.slick-next {
 		/*right: -25px;*/
 	}
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	/*  Detail Page (DESKTOP)
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	.detail-page {
+		/*background: url("https://image.tmdb.org/t/p/original//xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg") center;*/
+		min-width: 790px;
+	}
+
+
+	.detail-carousel-container {
+		width: 100%;
+		height: 150px;
+		/*border: 1px solid white;*/
+	}
+
+	#detail-page-container {
+		/*border: 1px solid white;*/
+
+	}
+
+	.detail-poster-container {
+		display: inline-block;
+		width: 30%;
+		float: left;
+		/*border: 1px solid blue;*/
+		vertical-align: top;
+	}
+
+	.poster-num-metadata ul {
+		padding: 0;
+		margin: 0;
+		margin-left: 5px;
+		font-size: 12px;
+	}
+
+	.poster-num-metadata li {
+		display: inline-block;
+		list-style: none;
+	}
+
+	.poster-num-metadata li:not(:last-of-type)::after{
+		content: ' | ';
+		padding: 0 5px;
+	} 
+
+
+	.detail-poster-img-wrap {
+		width: 200px;
+	}
+
+	#detail-poster {
+		width: 100%;
+		height: auto;
+	}
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+	/* Stream links carousel (DESKTOP)
+	/* * * * * * * * * * * * * * * * * * * * * * * * */
+	.streaming-links-container {
+		display: inline-block;
+		/*height: 340px;*/
+		width: 70%;
+		float: right;
+		/*border: 1px solid red;*/
+	}
+
+	.source-slide {
+		width: 145px;
+		/*height: 117px;*/
+		vertical-align: top;
+	}
+
+
+	.meta-data {
+		clear: both;
+		height: 400px;
+		width: 100%;
+		/*border: 1px solid greenyellow;*/
+	}
+
+	.trailer-slider {
+		position: relative;
+		width: 75%;
+		margin: 0  auto;
+		/*border: 1px solid lightslategray;*/
+	}
+
+	.links-slider .slick-next {
+		right:0;
+	}
+
+	.links-slider .slick-prev {
+		left: 0;
+	}
+
+	.trailer-slide {
+		display: inline-block;
+		width: 100px;
+		height: auto;
+	}
+
+	.trailer-slide img {
+		width: 100px;
+		height: auto;
+	}
+
+	.slick-dots li button:before {
+		color: greenyellow;
+	}
+
+	.slick-dots li.slick-active button:before {
+		color: greenyellow;
+	}
+	
+
+
 
 }
 
