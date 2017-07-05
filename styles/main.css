@@ -307,6 +307,11 @@ main {
 	margin-right: 10px;
 }
 
+.slick-list {
+	overflow: hidden;
+}
+
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
 /*  Discovery Carousel (base / mobile)
@@ -1002,9 +1007,9 @@ ul.f-nav-ul-wrap {
 		display: inline-block;
 	}
 
-	.slick-list {
+	/*.slick-list {
 		overflow: hidden;
-	}
+	}*/
 
 	/*.slick-slide {
 		margin-right: 10px;
