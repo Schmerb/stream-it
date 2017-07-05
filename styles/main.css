@@ -223,7 +223,8 @@ main {
 }
 
 .poster-overlay {
-	/*display: none;*/
+	display: none;
+	pointer-events: none;
 }
 
 .poster-img-wrap {

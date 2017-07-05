@@ -60,7 +60,7 @@ const DISCOVER_SLIDE_IMG = '.discover-slide-poster img';
 const DISCOVERY_NAV_GENRE = '.genre-f-nav';
 
 // Detail Carousel
-const POSTER_IMG = '.poster img';
+const POSTER_IMG = '.poster-img-wrap img';
 const DETAIL_PAGE_SLIDER = '.js-carousel';
 const DETAIL_CAROUSEL_LABEL = '.detail-carousel-label';
 const DETAIL_SLIDE = '.detail-slide';
@@ -142,7 +142,7 @@ function posterTemplate(poster) {
                     <span class="view-detail">View Details</span>
                 </div>
                 <label for="${poster.id}" class="poster-label">
-                    <span>${title}</span><br>
+                    <span class="poster-title">${title}</span>
                     <span>${release_date.slice(0,4)}</span>
                 </label> 
             </div>`;
@@ -1223,6 +1223,13 @@ let textFile = null,
 // Handler to attach text file to icon
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
+// ================================================================================
+// URL manipulation -- pushState
+// ===============================================================================
+
+
+
+
 
 // ================================================================================
 //    API Calls   ~   TMDB, OMDB, Guidebox
@@ -1630,7 +1637,6 @@ function getShowAvailableContentGuidebox(showID, callback = printResp) {
 function searchNavClick() {
     $(SEARCH).on('touchstart click', function(e) {
         e.preventDefault();
-
         // Needs UPDATED
         $(FIXED_CONTAINER).removeClass('fixed-overlay');
         showSearchPage();
@@ -1643,6 +1649,7 @@ function popularNavClick() {
     $(POPULAR).on('touchstart click', function(e) {
         e.preventDefault();
         popularHandler();
+        window.location = `#popular`;
     });
 }
 
@@ -1650,6 +1657,7 @@ function discoverNavClick() {
     $(DISCOVER).on('touchstart click', function(e) {
         e.preventDefault();
         discoverHandler();
+        window.location = `#discover`;
     });
 }
 
@@ -1665,6 +1673,7 @@ function searchFormSubmit() {
         state.searchResults = [];
         $(SEARCH_RESULTS_CONTENT).empty();
         searchMultiHandler();
+        window.location = `#search/query=${state.query}`;
     });
 }
 
@@ -1713,6 +1722,7 @@ function popularTvFooterNavClick() {
         $.when(discoverMoviesTMDB(), discoverTvTMDB()).then(function() {
             smoothScroll('.tv-section', 300, 50);
         });
+        window.location = `#popular/tv`;
     });
 }
 
@@ -1721,6 +1731,7 @@ function discoveryFooterNavClick() {
         e.preventDefault();
         discoverHandler($(this).attr('data-id'));
     });
+    window.location = `#discover`;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -1728,15 +1739,15 @@ function discoveryFooterNavClick() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 function posterImgClick() {
-    $('body').on('touchstart click', '.poster-overlay', function(e) {
+    $('body').on('touchstart click', POSTER_IMG, function(e) {
         e.preventDefault();
-        console.log('poster CLICKED!');
         let $poster = $(this);
         if ($poster.attr('data-tv') == 'true') {
             tvDetailHandler($poster, true);
         } else {
             movieDetailPageHandler($poster, true);
         }
+        window.location = `#detail/${$poster.attr('id')}`;
     });
 }
 
