@@ -1199,6 +1199,29 @@ function checkSize() {
     (parseInt($("body").css('width')) <= '414') ? state.isMobile = true : state.isMobile = false;
 }
 
+// ================================================================================
+// Writing JSON reponse to file
+// ================================================================================
+
+let textFile = null,
+  makeTextFile = function (text) {
+    let data = new Blob([text], {type: 'text/plain'});
+
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (textFile !== null) {
+      window.URL.revokeObjectURL(textFile);
+    }
+
+    textFile = window.URL.createObjectURL(data);
+
+    // returns a URL you can use as a href
+    return textFile;
+  };
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// Handler to attach text file to icon
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 
 // ================================================================================
@@ -1705,7 +1728,7 @@ function discoveryFooterNavClick() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 function posterImgClick() {
-    $(CONTENT).on('touchstart click', '.poster-overlay', function(e) {
+    $('body').on('touchstart click', '.poster-overlay', function(e) {
         e.preventDefault();
         let $poster = $(this);
         if ($poster.attr('data-tv') == 'true') {
