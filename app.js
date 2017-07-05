@@ -1752,13 +1752,13 @@ function posterImgClick() {
 }
 
 function popularPosterClick() {
-    $(POPULAR_MOVIE_CONTENT).on('click', '.poster-overlay', function(e) {
+    $(POPULAR_MOVIE_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         state.carouselPosters = state.popularMovies;
         state.carouselLabel = 'Popular Movies';
     });
 
-    $(POPULAR_TV_CONTENT).on('click', '.poster-overlay', function(e) {
+    $(POPULAR_TV_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         state.carouselPosters = state.popularTv;
         state.carouselLabel = 'Popular TV';
@@ -1780,7 +1780,7 @@ function moreContentClick() {
 }
 
 function discoverPosterClick() {
-    $(DISCOVER_CONTENT).on('click', '.poster-overlay', function(e) {
+    $(DISCOVER_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         let $poster = $(this).siblings('.discover-img');
         let genre = $poster.attr('data-genre');
