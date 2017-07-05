@@ -1635,7 +1635,7 @@ function getShowAvailableContentGuidebox(showID, callback = printResp) {
 //   Nav Clicks                                        
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 function searchNavClick() {
-    $(SEARCH).on('touchstart click', function(e) {
+    $(SEARCH).on('click', function(e) {
         e.preventDefault();
         // Needs UPDATED
         $(FIXED_CONTAINER).removeClass('fixed-overlay');
@@ -1646,7 +1646,7 @@ function searchNavClick() {
 }
 
 function popularNavClick() {
-    $(POPULAR).on('touchstart click', function(e) {
+    $(POPULAR).on('click', function(e) {
         e.preventDefault();
         popularHandler();
         window.location = `#popular`;
@@ -1654,7 +1654,7 @@ function popularNavClick() {
 }
 
 function discoverNavClick() {
-    $(DISCOVER).on('touchstart click', function(e) {
+    $(DISCOVER).on('click', function(e) {
         e.preventDefault();
         discoverHandler();
         window.location = `#discover`;
@@ -1716,7 +1716,7 @@ function navSearchGlassClick() {
 }
 
 function popularTvFooterNavClick() {
-    $(POPULAR_TV).on('touchstart click', function(e) {
+    $(POPULAR_TV).on('click', function(e) {
         e.preventDefault();
         popularHandler(MAIN);
         $.when(discoverMoviesTMDB(), discoverTvTMDB()).then(function() {
@@ -1739,7 +1739,7 @@ function discoveryFooterNavClick() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 function posterImgClick() {
-    $('body').on('touchstart click', POSTER_IMG, function(e) {
+    $(CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         let $poster = $(this);
         if ($poster.attr('data-tv') == 'true') {
@@ -1754,6 +1754,7 @@ function posterImgClick() {
 function popularPosterClick() {
     $(POPULAR_MOVIE_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
+        
         state.carouselPosters = state.popularMovies;
         state.carouselLabel = 'Popular Movies';
     });

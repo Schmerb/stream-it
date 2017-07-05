@@ -508,12 +508,14 @@ img#cinemax_amazon_prime {
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 .similar-movies-container {
 	clear: both;
+	width: 75%;
+	margin: 0 auto
 }
 
 .similar-movies-slider {
 	position: relative;
-	width: 75%;
-	margin: 0 auto;
+	/*width: 75%;
+	margin: 0 auto;*/
 }
 
 .similar-slide {
