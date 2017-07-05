@@ -118,7 +118,7 @@ let IMG_BASE_URL = `https://image.tmdb.org/t/p`;
 
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
-//  Returns template for movie poster
+//  Returns template for poster
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function posterTemplate(poster) {
     let isTvShow = poster.hasOwnProperty('first_air_date');
@@ -126,17 +126,8 @@ function posterTemplate(poster) {
     let release_date = isTvShow ? poster.first_air_date : poster.release_date;
     let title = isTvShow ? poster.name : poster.title;
     return `<div class="${isTvShow ? 'tv': ''} poster">
-                <div class="poster-img-wrap">
-                    <img src="${IMG_BASE_URL}/${img_width}/${poster.poster_path}" 
-                        alt="Poster image for ${title}."
-                        id="${poster.id}"
-                        data-tv="${isTvShow}" 
-                        data-title="${title}"
-                        data-id="${poster.id}"
-                        data-overview="${overview}"
-                        data-release-date="${release_date}"
-                        data-backdrop="${poster.backdrop_path}"
-                    >
+                <div class="poster-big-img-wrap poster-img-wrap">
+                    ${getPosterImgTemplate(poster)}
                 </div>
                 <div class="poster-overlay" data-id="${poster.id}" data-tv="${isTvShow}">
                     <span class="view-detail">View Details</span>
@@ -146,6 +137,26 @@ function posterTemplate(poster) {
                     <span>${release_date.slice(0,4)}</span>
                 </label> 
             </div>`;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Returns template for just the poster img 
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function getPosterImgTemplate(poster) {
+    let isTvShow = poster.hasOwnProperty('first_air_date');
+    let overview = poster.overview.replace(/["]/g, "'");
+    let release_date = isTvShow ? poster.first_air_date : poster.release_date;
+    let title = isTvShow ? poster.name : poster.title;
+    return `<img src="${IMG_BASE_URL}/${img_width}/${poster.poster_path}" 
+                 alt="Poster image for ${title}."
+                 id="${poster.id}"
+                 data-tv="${isTvShow}" 
+                 data-title="${title}"
+                 data-id="${poster.id}"
+                 data-overview="${overview}"
+                 data-release-date="${release_date}"
+                 data-backdrop="${poster.backdrop_path}"
+            >`;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -192,6 +203,8 @@ function displayPopularTv() {
 //  Display detail page
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function displayDetailPage(tmdb, imdb) {
+    let type = imdb.Type == 'movie' ? 'movie' : 'tv';
+    window.location = `#detail/${type}/${imdb.imdbID}`;
     console.log('\n\n\ntmdb: ' , tmdb, ' \n\n\nimdb: ', imdb);
     // Poster container data
     $(MOVIE_TITLE).text(imdb.Title);
@@ -229,6 +242,7 @@ function displayDetailPage(tmdb, imdb) {
         displaySeasonPosters(tmdb);
     }
     
+    initStreamingLinksSlider();
 
     // let movie = guidebox; // GUIDEBOX
     // // let movie = obj; // ALIEN (TESTING)
@@ -305,7 +319,7 @@ function displaySeasonDetails(season) {
 function displayStreamingLinks(guidebox) {
     // Streaming links data -- GUIDEBOX DATA
     $(TV_CONTAINER).hide();
-    $(STREAMING_LINKS_CONTAINER).empty().show();
+    // $(STREAMING_LINKS_CONTAINER).empty().show();
 
     let purch_srcs = guidebox.purchase_web_sources; // GUIDEBOX  
     // let purch_srcs = obj.purchase_web_sources; // ALIEN (TESTING)
@@ -437,7 +451,7 @@ function displayDetailCarousel() {
     unslick(DETAIL_PAGE_SLIDER);
     // $(DETAIL_PAGE_SLIDER).empty();
     let slides = state.carouselPosters.map(poster => {
-        return carouselSlideTemplate(poster, 'detail-slide');
+        return carouselSlideTemplate(poster, 'detail-slide poster-img-wrap');
     });
     $(DETAIL_PAGE_SLIDER).html(slides.join('')); //overwrites previous slides
     $(DETAIL_CAROUSEL_LABEL).text(state.carouselLabel);
@@ -446,7 +460,7 @@ function displayDetailCarousel() {
 
 function displaySimilarMoviesCarousel(resp) {
     let posters = resp.results.map(function(movie) {
-        return carouselSlideTemplate(movie, 'similar-slide');
+        return carouselSlideTemplate(movie, 'similar-slide poster-img-wrap');
     });
     unslick(SIMILAR_MOVIES_SLIDER);
     $(SIMILAR_MOVIES_SLIDER).empty().append(posters.join(''));
@@ -533,8 +547,8 @@ function clearDetailPage() {
     $(DETAIL_POSTER).attr('src', '');
     $(SEASONS_CONTAINER).add(SEASON_DETAILS_CONTAINER).empty();
     unslick(STREAMING_LINKS_SLIDER); // unslicks previous slider(s) if initialized
-    $(STREAMING_LINKS_CONTAINER).empty(); // clears previous slider(s)
-    $(STREAMING_LINKS_CONTAINER).html('<h2 class="detail-loading">LOADING . . .</h2>');
+    // $(STREAMING_LINKS_CONTAINER).empty(); // clears previous slider(s)
+    // $(STREAMING_LINKS_CONTAINER).html('<h2 class="detail-loading">LOADING . . .</h2>');
 }
 
 
@@ -613,6 +627,7 @@ function searchMultiHandler(page = 1) {
             state.searchResults = state.searchResults.concat(filteredPosters);
             state.carouselPosters = state.searchResults;
             state.carouselLabel = `'${state.query}' Results`;
+            storeCarouselData(state.carouselPosters, state.carouselLabel);
             let posters = filteredPosters.map(result => {
                 // let isTvShow = result.media_type == 'tv';
                 // let poster_path = result.poster_path == null ? findPoster(isTvShow, result.id) : result.poster_path;
@@ -648,12 +663,12 @@ function movieDetailPageHandler(poster, initCarousel) {
                 console.log(resp);
             });
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                    // displayDetailPage(detail_resp, imdb_resp, gbox_m_resp);
-                });
-            });
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //         // displayDetailPage(detail_resp, imdb_resp, gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -676,14 +691,14 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp);
                     initCarousel ? displayDetailCarousel() : null;
                     // call to guidebox for streaming links / prices
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        console.log(gbox_s_resp);
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            console.log(gbox_tv_resp);
-                            // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                        });
-                    });
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     console.log(gbox_s_resp);
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         console.log(gbox_tv_resp);
+                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
+                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                    //     });
+                    // });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -784,7 +799,7 @@ function discoverHandler(anchor = null) {
                 let genreSlides = resp.results.map(function(movie) {
                     // let overview = movie.overview.replace(/["]/g, "'");
                     return `<div class="disc-slide">
-                                <div class="discover-slide-poster">
+                                <div class="discover-slide-poster poster-img-wrap">
                                     <img    class="discover-img"
                                             src="${IMG_BASE_URL}/${widths[0]}/${movie.poster_path}"
                                             id="${movie.id}"
@@ -898,7 +913,9 @@ function initDetailSlider() {
             },
             {
             breakpoint: 415,
-            settings: {}
+            settings: {
+                arrows: false
+            }
             }
             // You can unslick at a given breakpoint now by adding:
             // settings: "unslick"
@@ -937,7 +954,9 @@ function initSimilarSlider() {
             },
             {
             breakpoint: 415,
-            settings: {}
+            settings: {
+                arrows: false
+            }
             }
             // You can unslick at a given breakpoint now by adding:
             // settings: "unslick"
@@ -1199,6 +1218,15 @@ function checkSize() {
     (parseInt($("body").css('width')) <= '414') ? state.isMobile = true : state.isMobile = false;
 }
 
+function fixedBackgroundMobile() {
+    $(window).scroll(function() {
+        var scrolledY = $(window).scrollTop();
+        if ((parseInt($("body").css('width')) <= '414')) {
+            $('main').css('background-position', '50% ' + (scrolledY - 300) + 'px');
+        }
+    });
+}
+
 // ================================================================================
 // Writing JSON reponse to file
 // ================================================================================
@@ -1222,10 +1250,6 @@ let textFile = null,
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 // Handler to attach text file to icon
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-// ================================================================================
-// URL manipulation -- pushState
-// ===============================================================================
 
 
 
@@ -1624,7 +1648,57 @@ function getShowAvailableContentGuidebox(showID, callback = printResp) {
 
 
 
+// ================================================================================
+// URL manipulation and State capture
+// ===============================================================================
 
+function handleUrl() {
+    let url = window.location.hash;
+    console.log('URL: ', url);
+    if (url == '') {
+        $(SEARCH_FORM).focusin();
+        $(MAIN_INPUT).focus();
+    } else if (url == '#popular') {
+        $(POPULAR).trigger('click');
+    } else if (url == '#discover') {
+        $(DISCOVER).trigger('click');
+    } else if (url.includes('detail')) {
+        urlDetailHandler(url);
+    }
+}
+
+function urlDetailHandler(url) {
+    // let id = parseInt(url.replace(/[^0-9]/g, ''));
+    let type = 'movie';
+    if (url.includes('tv')) {
+        type = 'tv';
+    }
+    let id = url.replace(`#detail/${type}/`, '');
+    console.log('ID: ', id);
+    findByIdTMDB(id, function(resp) {
+        console.log(resp);
+        let movie = resp.movie_results[0];
+        let tv = resp.tv_results[0];
+        state.carouselPosters = JSON.parse(sessionStorage.getItem('posters'));
+        state.carouselLabel = JSON.parse(sessionStorage.getItem('label'));
+        if (movie) {
+            console.log('MOVIE');
+            let $movie = $(getPosterImgTemplate(movie));
+            movieDetailPageHandler($movie, true);
+        } else if (tv) {
+            console.log('TV');
+            let $tv = $(getPosterImgTemplate(tv));
+            tvDetailHandler($tv, true);
+        }
+    });
+}
+
+function storeCarouselData(posters, label) {
+    let posters_str = JSON.stringify(posters);
+    let label_str = JSON.stringify(label);
+    sessionStorage.setItem('posters', posters_str);
+    sessionStorage.setItem('label', label_str);
+}
 
 
 // ================================================================================
@@ -1730,8 +1804,8 @@ function discoveryFooterNavClick() {
     $(DISCOVERY_NAV_GENRE).on('click', function(e) {
         e.preventDefault();
         discoverHandler($(this).attr('data-id'));
+        window.location = `#discover`;
     });
-    window.location = `#discover`;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -1742,12 +1816,13 @@ function posterImgClick() {
     $(CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         let $poster = $(this);
+        console.log('\n\n\n\nPOSTER', $poster, '\n\n\n\n');
         if ($poster.attr('data-tv') == 'true') {
             tvDetailHandler($poster, true);
         } else {
             movieDetailPageHandler($poster, true);
         }
-        window.location = `#detail/${$poster.attr('id')}`;
+        // window.location = `#detail/${$poster.attr('id')}`;
     });
 }
 
@@ -1757,12 +1832,14 @@ function popularPosterClick() {
         
         state.carouselPosters = state.popularMovies;
         state.carouselLabel = 'Popular Movies';
+        storeCarouselData(state.carouselPosters, state.carouselLabel);
     });
 
     $(POPULAR_TV_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
         state.carouselPosters = state.popularTv;
         state.carouselLabel = 'Popular TV';
+        storeCarouselData(state.carouselPosters, state.carouselLabel);
     });
 }
 
@@ -1783,7 +1860,7 @@ function moreContentClick() {
 function discoverPosterClick() {
     $(DISCOVER_CONTENT).on('click', POSTER_IMG, function(e) {
         e.preventDefault();
-        let $poster = $(this).siblings('.discover-img');
+        let $poster = $(this);
         let genre = $poster.attr('data-genre');
     
         state.carouselPosters = state.genreLists[genre];
@@ -1839,8 +1916,7 @@ function similarCarouselClick() {
 //    Event Listener Groups
 // ================================================================================
 function init() {
-    $(SEARCH_FORM).focusin();
-    $(MAIN_INPUT).focus();
+    handleUrl();
     // popularMoviesHandler();
     // popularTvShowsHandler();
 }
@@ -1872,6 +1948,7 @@ function utilities() {
     checkSizeHandler();
     responsiveReslick();
     fixNavOnScroll();
+    fixedBackgroundMobile();
     // collapseNavHandler();
 }
 

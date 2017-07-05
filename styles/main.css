@@ -218,7 +218,6 @@ main {
 .poster {
 	position: relative;
 	margin: 10px auto;
-	max-height: 290px;
 	width: 185px;
 }
 
@@ -227,7 +226,7 @@ main {
 	pointer-events: none;
 }
 
-.poster-img-wrap {
+.poster-big-img-wrap {
 	width: 185px;
 	height: 278px;
 }
@@ -305,6 +304,7 @@ main {
 /* * * * * * * * * * * * * * * * * * * * * * * * */ 
 .slick-slide {
 	cursor: pointer;
+	margin-right: 10px;
 }
 
 
@@ -420,6 +420,11 @@ main {
 	/*border: 1px solid red;*/
 }
 
+.streaming-links-container label {
+	display: block;
+	width: 100px;
+	margin: 0 auto;
+}
 
 .streaming-links-slider {
 	position: relative;
@@ -444,10 +449,18 @@ main {
 	font-size: 12px;
 	/*border: 1px solid white;*/
 	width: 100%;
+	margin-bottom: 20px;
+	background: rgba(96, 125, 139, 0.6);
+}
+
+.source-slide:nth-of-type(2n) {
+	/*background: rgba(96, 125, 139, 0.6);*/
+	background: rgba(55, 71, 79, 0.8);
 }
 
 .source-slide ul {
 	padding: 0;
+	margin-left: 25%;
 }
 
 .source-slide li {
@@ -514,8 +527,6 @@ img#cinemax_amazon_prime {
 
 .similar-movies-slider {
 	position: relative;
-	/*width: 75%;
-	margin: 0 auto;*/
 }
 
 .similar-slide {
@@ -683,6 +694,13 @@ ul.f-nav-ul-wrap {
 	.discover-wrap {
 		width: 90%;
 		margin: auto;
+	}
+
+	main {
+		background-attachment: scroll;
+		background-position: top left;
+		background-size: 200%;
+		background-repeat: no-repeat;
 	}
 }
 
@@ -875,6 +893,7 @@ ul.f-nav-ul-wrap {
 	
 
 	.poster {
+		max-height: 290px;
 		margin-top: 0;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -987,9 +1006,9 @@ ul.f-nav-ul-wrap {
 		overflow: hidden;
 	}
 
-	.slick-slide {
+	/*.slick-slide {
 		margin-right: 10px;
-	}
+	}*/
 
 	.slick-prev,
 	.slick-next {
@@ -1169,13 +1188,27 @@ ul.f-nav-ul-wrap {
 		/*border: 1px solid red;*/
 	}
 	
+	.streaming-links-container label {
+		display: unset;
+		width: unset;
+		margin: unset;
+	}
+
 
 	.source-slide {
 		width: 145px;
 		/*height: 117px;*/
 		vertical-align: top;
+		background: unset;
 	}
 
+	.source-slide:nth-of-type(2n) {
+		background: unset;
+	}
+
+	.source-slide ul {
+		margin: 0;
+	}
 
 	.meta-data {
 		/*clear: none;*/
