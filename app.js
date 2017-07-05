@@ -242,19 +242,9 @@ function displayDetailPage(tmdb, imdb) {
         displaySeasonPosters(tmdb);
     }
     
-    initStreamingLinksSlider();
+    // initStreamingLinksSlider();
 
-    // let movie = guidebox; // GUIDEBOX
-    // // let movie = obj; // ALIEN (TESTING)
-    // // let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
-    // if (movie.in_theaters) {
-    //     $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
-    //     if(movie.other_sources.movie_theater) {
-    //         $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
-    //         let theater_links = getTheaterSources(movie);
-    //         $(STREAMING_LINKS_CONTAINER).append(theater_links);
-    //     }
-    // }
+    
 
 }
 
@@ -319,7 +309,19 @@ function displaySeasonDetails(season) {
 function displayStreamingLinks(guidebox) {
     // Streaming links data -- GUIDEBOX DATA
     $(TV_CONTAINER).hide();
-    // $(STREAMING_LINKS_CONTAINER).empty().show();
+    $(STREAMING_LINKS_CONTAINER).empty().show();
+
+    let movie = guidebox; // GUIDEBOX
+    // let movie = obj; // ALIEN (TESTING)
+    // let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
+    if (movie.in_theaters) {
+        $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
+        if(movie.other_sources.movie_theater) {
+            $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
+            let theater_links = getTheaterSources(movie);
+            $(STREAMING_LINKS_CONTAINER).append(theater_links);
+        }
+    }
 
     let purch_srcs = guidebox.purchase_web_sources; // GUIDEBOX  
     // let purch_srcs = obj.purchase_web_sources; // ALIEN (TESTING)
@@ -547,8 +549,8 @@ function clearDetailPage() {
     $(DETAIL_POSTER).attr('src', '');
     $(SEASONS_CONTAINER).add(SEASON_DETAILS_CONTAINER).empty();
     unslick(STREAMING_LINKS_SLIDER); // unslicks previous slider(s) if initialized
-    // $(STREAMING_LINKS_CONTAINER).empty(); // clears previous slider(s)
-    // $(STREAMING_LINKS_CONTAINER).html('<h2 class="detail-loading">LOADING . . .</h2>');
+    $(STREAMING_LINKS_CONTAINER).empty(); // clears previous slider(s)
+    $(STREAMING_LINKS_CONTAINER).html('<h2 class="detail-loading">LOADING . . .</h2>');
 }
 
 
@@ -663,12 +665,12 @@ function movieDetailPageHandler(poster, initCarousel) {
                 console.log(resp);
             });
             // call to guidebox for streaming links / prices
-            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-            //         displayStreamingLinks(gbox_m_resp);
-            //         // displayDetailPage(detail_resp, imdb_resp, gbox_m_resp);
-            //     });
-            // });
+            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+                    displayStreamingLinks(gbox_m_resp);
+                    // displayDetailPage(detail_resp, imdb_resp, gbox_m_resp);
+                });
+            });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -691,14 +693,14 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp);
                     initCarousel ? displayDetailCarousel() : null;
                     // call to guidebox for streaming links / prices
-                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                    //     console.log(gbox_s_resp);
-                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                    //         console.log(gbox_tv_resp);
-                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
-                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                    //     });
-                    // });
+                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                        console.log(gbox_s_resp);
+                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                            console.log(gbox_tv_resp);
+                            // getAllEpisodesGuidebox(gbox_s_resp.id);
+                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                        });
+                    });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {

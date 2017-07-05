@@ -425,7 +425,7 @@ main {
 	/*border: 1px solid red;*/
 }
 
-.streaming-links-container label {
+.streaming-links-container > label {
 	display: block;
 	width: 100px;
 	margin: 0 auto;
@@ -450,6 +450,7 @@ main {
 }
 
 .source-slide {
+	position: relative;
 	display: inline-block;
 	font-size: 12px;
 	/*border: 1px solid white;*/
@@ -526,7 +527,7 @@ img#cinemax_amazon_prime {
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 .similar-movies-container {
 	clear: both;
-	width: 75%;
+	width: 100%;
 	margin: 0 auto
 }
 
@@ -695,6 +696,8 @@ ul.f-nav-ul-wrap {
 	display: block;
 }
 
+
+
 @media only screen and (max-width: 414px) {
 	.discover-wrap {
 		width: 90%;
@@ -706,6 +709,38 @@ ul.f-nav-ul-wrap {
 		background-position: top left;
 		background-size: 200%;
 		background-repeat: no-repeat;
+	}
+
+	.source-slide {
+		height: 80px;
+	}
+
+	
+	.source-slide ul {
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		margin: 0;
+		transform: translateY(-50%);
+	}
+
+	.source-slide .icon {
+		margin-top: 10px;
+		margin-left: 5%;
+	}
+
+
+	.source-slide label {
+		display: inline-block;
+		margin-top: 10px;
+		margin-left: 5%;
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	.source-slide .icon {
+		/*margin-left: 5px;*/
 	}
 }
 
