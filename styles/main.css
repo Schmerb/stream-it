@@ -241,6 +241,10 @@ main {
 	text-align: center;
 }
 
+.poster-title {
+	display: block;
+}
+
 
 .tv::after {
 	content: 'TV';
