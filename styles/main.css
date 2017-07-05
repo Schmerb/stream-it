@@ -223,7 +223,7 @@ main {
 }
 
 .poster-overlay {
-		display: none;
+	/*display: none;*/
 }
 
 .poster-img-wrap {
