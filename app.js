@@ -1964,9 +1964,7 @@ $(function() {
     init();
 
     // showDetailPage();
-
     // initDiscoverySlider();
-    initStreamingLinksSlider();
-
-    console.log(obj);
+    // initStreamingLinksSlider();
+    // console.log(obj);
 });
