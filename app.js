@@ -1730,6 +1730,7 @@ function discoveryFooterNavClick() {
 function posterImgClick() {
     $('body').on('touchstart click', '.poster-overlay', function(e) {
         e.preventDefault();
+        console.log('poster CLICKED!');
         let $poster = $(this);
         if ($poster.attr('data-tv') == 'true') {
             tvDetailHandler($poster, true);
