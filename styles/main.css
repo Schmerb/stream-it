@@ -124,11 +124,15 @@ body {
 	transform: translateX(-100%);
 	width: 100%;
 	padding: 0;
+	-webkit-transition: all 3s ease-in-out;
+	-moz-transition: all 3s ease-in-out;
+	transition: all 3s ease-in-out;
 }
 
 .mobile-menu.expand {
 	margin-top: 40px;
 	transform: translateX(0);
+	
 }
 
 
