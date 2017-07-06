@@ -67,9 +67,12 @@ body {
     display: inline-block;
 }
 
-#burger-anchor {
-	color: rgba(96, 125, 139, 0.6);;
+a {
 	text-decoration: none;
+}
+
+#burger-anchor {
+	color: rgba(96, 125, 139, 0.6);
 }
 
 
