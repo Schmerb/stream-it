@@ -67,13 +67,10 @@ body {
     display: inline-block;
 }
 
-
-#burger-anchor:link,
-#burger-anchor:active, 
-#burger-anchor:visited {
-	color: rgba(96, 125, 139, 0.6);
+#burger-anchor {
+	color: rgba(96, 125, 139, 0.6);;
+	text-decoration: none;
 }
-
 
 
 .burger.fa.fa-bars {
