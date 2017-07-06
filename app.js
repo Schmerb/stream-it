@@ -1796,6 +1796,8 @@ function searchNavClick() {
     $(SEARCH).on('click', function(e) {
         e.preventDefault();
         $(FIXED_CONTAINER).removeClass('fixed-overlay');
+        $(MOBILE_MENU).removeClass('expand');
+        $(MAIN_NAV).removeClass('expand');
         showSearchPage();
         $(SEARCH_FORM).focusin();
         $(MAIN_INPUT).val('').focus();
@@ -1805,6 +1807,8 @@ function searchNavClick() {
 function popularNavClick() {
     $(POPULAR).on('click', function(e) {
         e.preventDefault();
+        $(MOBILE_MENU).removeClass('expand');
+        $(MAIN_NAV).removeClass('expand');
         popularHandler();
         window.location = `#popular`;
     });
@@ -1813,6 +1817,8 @@ function popularNavClick() {
 function discoverNavClick() {
     $(DISCOVER).on('click', function(e) {
         e.preventDefault();
+        $(MOBILE_MENU).removeClass('expand');
+        $(MAIN_NAV).removeClass('expand');
         discoverHandler();
         window.location = `#discover`;
     });
