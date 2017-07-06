@@ -18,7 +18,7 @@ let state = {
 
 // Selectors
 
-// banner
+// Banner
 const BANNER = '.banner';
 const TITLE = '.title';
 const DISCOVER = '.discover';
@@ -27,6 +27,11 @@ const POPULAR = '.popular';
 const POPULAR_TV = '.popular-tv-f-nav';
 const FIXED_CONTAINER = '.fixed-container'
 const FIXED_SEARCH_QUERY = '.fixed-search-query';
+
+// Mobile Nav
+const BURGER_ANCHOR = '#burger-anchor';
+const MOBILE_MENU = '.mobile-menu';
+const MAIN_NAV = '.main-nav';
 
 // Main / General
 const MAIN = 'main';
@@ -71,7 +76,7 @@ const DETAIL_CAROUSEL_LABEL = '.detail-carousel-label';
 const DETAIL_SLIDE = '.detail-slide';
 const DETAIL_SLIDE_IMG = '.detail-slide img';
 
-// Detail page
+// Detail Page
 const DETAIL_PAGE = '.detail-page';
 const MOVIE_TITLE = '.js-movie-title';
 const YEAR = '.js-year';
@@ -723,11 +728,11 @@ function movieDetailPageHandler(poster, initCarousel) {
                 displaySimilarMoviesCarousel(resp);
             });
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                });
-            });
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -749,13 +754,13 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
                     // call to guidebox for streaming links / prices
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            // console.log(gbox_tv_resp);
-                            // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                        });
-                    });
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         // console.log(gbox_tv_resp);
+                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
+                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                    //     });
+                    // });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -1813,6 +1818,14 @@ function discoverNavClick() {
     });
 }
 
+function burgerMenuClick() {
+    $('.burger').on('click', function(e) {
+        e.preventDefault();
+        $(MOBILE_MENU).toggleClass('expand');
+        $(MAIN_NAV).toggleClass('expand');
+    });
+}
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 //   Search forms                                       
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -1993,6 +2006,8 @@ function watchNavItems() {
     // discover genres
     discoverNavClick();
     discoveryFooterNavClick();
+    // mobile
+    burgerMenuClick();
 }
 
 function utilities() {
