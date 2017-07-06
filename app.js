@@ -36,8 +36,12 @@ const MORE_BTN = '.js-more-btn';
 
 // Popular Page
 const POPULAR_PAGE = '.popular-content';
+const POPULAR_MOVIES_TITLE = '#popular-movies';
 const POPULAR_MOVIE_CONTENT = '.movie-content';
+const POPULAR_TV_TITLE = '#popular-tv';
 const POPULAR_TV_CONTENT = '.tv-content';
+const TV_MORE_BTN = '.tv-btn';
+const MOVIES_MORE_BTN = '.movies-btn';
 
 
 // Search Page
@@ -50,6 +54,7 @@ const SEARCH_FORM = '.search-form';
 const MAIN_INPUT = '#main-input';
 const LOADING = '.loading';
 const USER_QUERY = '.user-query';
+const NO_RESULTS = '.no-results';
 const SEARCH_MORE_BTN = '.search-more-btn';
 
 // Discover Page
@@ -443,6 +448,30 @@ function getTheaterSources(sources) {
             });
 }
 
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Displays search results to screen
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function displaySearchResults(resultsFound, posters, page) {
+    showSearchPage();
+    if (!resultsFound) {
+        $(NO_RESULTS).show();
+        $(FIXED_SEARCH_QUERY).addClass('hidden');
+        $(USER_QUERY).addClass('hidden');
+        state.displayQuery = false;
+    } else {
+        $(FIXED_SEARCH_QUERY).removeClass('hidden');
+        $(USER_QUERY).removeClass('hidden');
+        $(NO_RESULTS).hide();
+    }
+    $(LOADING).addClass('hidden');
+    $(SEARCH_HEADER).text(state.query);
+    if (page < 2) {
+        $(SEARCH_RESULTS_CONTENT).empty();
+    }
+    $(SEARCH_RESULTS_CONTENT).append(posters.join(''));
+}
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 //  Creates new banner carousel for detail page 
 // * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -478,11 +507,44 @@ function displaySimilarMoviesCarousel(resp) {
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 //  Resets pages used in API calls for popular
-//  content
+//  content AND hides titles and more buttons
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function resetPopularPages() {
     state.popularMoviePage = 1;
     state.popularTvPage = 1;
+    $(POPULAR_TV_TITLE).add(POPULAR_MOVIES_TITLE).hide();
+    $(TV_MORE_BTN).add(MOVIES_MORE_BTN).hide(); 
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Resets search page 
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function resetSearchPage() {
+    state.displayQuery = false;
+    state.query = '';
+    $(USER_QUERY).addClass('hidden');
+    $(SEARCH_MORE_BTN).hide();
+    $(SEARCH_RESULTS_CONTENT).add(SEARCH_HEADER).empty();
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Adds 'hidden' class to all target elements
+//  passed in as arguments
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function hide(targets) {
+    Object.values(arguments).forEach(function(target) {
+        $(target).addClass('hidden');
+    });
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Removes 'hidden' class to all target elements
+//  passed in as arguments
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function show(targets) {
+    Object.values(arguments).forEach(function(target) {
+        $(target).removeClass('hidden');
+    });
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -490,13 +552,10 @@ function resetPopularPages() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function showDiscoverPage() {
     resetPopularPages();
-    $(SEARCH_RESULTS_CONTENT).empty();
-    $(SEARCH_RESULTS_PAGE).addClass('hidden');
-    $(POPULAR_PAGE).addClass('hidden');
-    $(DETAIL_PAGE).addClass('hidden');
+    resetSearchPage();
+    hide(SEARCH_RESULTS_PAGE, FIXED_SEARCH_QUERY, POPULAR_PAGE, DETAIL_PAGE);
+
     $(MAIN).removeClass('detail-page-main');
-    $(FIXED_SEARCH_QUERY).addClass('hidden');
-    state.displayQuery = false;
     $(DISCOVER_CONTAINER).removeClass('hidden');
 }
 
@@ -505,13 +564,10 @@ function showDiscoverPage() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function showPopularPage() {
     resetPopularPages();
-    $(SEARCH_RESULTS_CONTENT).empty();
-    $(SEARCH_RESULTS_PAGE).addClass('hidden');
-    $(DISCOVER_CONTAINER).addClass('hidden');
-    $(DETAIL_PAGE).addClass('hidden');
+    resetSearchPage();
+    hide(SEARCH_RESULTS_PAGE, FIXED_SEARCH_QUERY, DISCOVER_CONTAINER, DETAIL_PAGE);
+   
     $(MAIN).removeClass('detail-page-main');
-    $(FIXED_SEARCH_QUERY).addClass('hidden');
-    state.displayQuery = false;
     $(POPULAR_PAGE).removeClass('hidden');
 }
 
@@ -520,12 +576,13 @@ function showPopularPage() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function showSearchPage() {
     resetPopularPages();
-    $(DISCOVER_CONTAINER).addClass('hidden');
-    $(DETAIL_PAGE).addClass('hidden');
-    $(POPULAR_PAGE).addClass('hidden');
+    hide(DISCOVER_CONTAINER, DETAIL_PAGE, POPULAR_PAGE);
+
     $(MAIN).removeClass('detail-page-main');
-    // $(FIXED_SEARCH_QUERY).removeClass('hidden');
-    state.displayQuery = true;
+    if (state.query != '') {
+        state.displayQuery = true;
+    }
+    $(NO_RESULTS).hide();
     $(SEARCH_RESULTS_PAGE).removeClass('hidden');
 }
 
@@ -534,14 +591,11 @@ function showSearchPage() {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function showDetailPage() {
     resetPopularPages();
+    resetSearchPage();
     clearDetailPage();
-    $(SEARCH_RESULTS_CONTENT).empty();
-    $(SEARCH_RESULTS_PAGE).addClass('hidden');
-    $(POPULAR_PAGE).addClass('hidden');
-    $(DISCOVER_CONTAINER).addClass('hidden');
+    hide(SEARCH_RESULTS_PAGE, FIXED_SEARCH_QUERY, POPULAR_PAGE, DISCOVER_CONTAINER);
+
     $(DETAIL_PAGE).removeClass('hidden');
-    $(FIXED_SEARCH_QUERY).addClass('hidden');
-    state.displayQuery = false;
     $(MAIN).addClass('detail-page-main');
 }
 
@@ -591,6 +645,8 @@ function popularMoviesHandler(page = 1) {
         // console.log(resp);
         state.popularMovies = state.popularMovies.concat(resp.results);
         displayPopularMovies();
+        $(POPULAR_MOVIES_TITLE).show();
+        $(MOVIES_MORE_BTN).show();
     });
 }
 
@@ -606,6 +662,8 @@ function popularTvShowsHandler(page = 1) {
         // console.log(resp);
         state.popularTv = state.popularTv.concat(resp.results);
         displayPopularTv();
+        $(POPULAR_TV_TITLE).show();
+        $(TV_MORE_BTN).show();
     });
 }
 
@@ -616,9 +674,7 @@ function searchMultiHandler(page = 1) {
     $(LOADING).removeClass('hidden');
     $(MAIN_INPUT).val('');
     $(NAV_SEARCH_INPUT).val('');
-
-    showSearchPage();
-    page == 1 ? smoothScroll(MAIN) : null;
+    page == 1 ? smoothScroll(MAIN) : null; // if new search, scroll to top of search page
 
     searchAllTMDB(state.query, page, function(resp) {
         searchAllTMDB(state.query, page + 1, function(resp_p2) {
@@ -641,9 +697,8 @@ function searchMultiHandler(page = 1) {
                     return posterTemplate(result);
                 }
             });
-            $(LOADING).addClass('hidden');
-            $(SEARCH_HEADER).text(state.query);
-            $(SEARCH_RESULTS_CONTENT).append(posters.join(''));
+            let resultsFound = results.length;
+            displaySearchResults(resultsFound, posters, page); // Call to display results
         });
     });
 }
@@ -666,11 +721,11 @@ function movieDetailPageHandler(poster, initCarousel) {
                 displaySimilarMoviesCarousel(resp);
             });
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                });
-            });
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -692,13 +747,13 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
                     // call to guidebox for streaming links / prices
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            // console.log(gbox_tv_resp);
-                            // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                        });
-                    });
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         // console.log(gbox_tv_resp);
+                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
+                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                    //     });
+                    // });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -1140,6 +1195,8 @@ function fixNavOnScroll() {
             $(FIXED_CONTAINER).removeClass('fadeout');
         } else {
             $(FIXED_CONTAINER).addClass('fadeout').removeClass('fadein').removeClass('fixed-overlay');
+            if (!state.displayQuery) {
+            }
             $(FIXED_SEARCH_QUERY).addClass('hidden');
         }
     });
@@ -1647,17 +1704,31 @@ function getShowAvailableContentGuidebox(showID, callback = printResp) {
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 function handleUrl() {
     let url = window.location.hash;
-    // console.log('URL: ', url);
+    console.log('URL: ', url);
     if (url == '') {
         $(SEARCH_FORM).focusin();
         $(MAIN_INPUT).focus();
+    } else if (url.includes('search')) {
+        urlSearchHandler(url);
     } else if (url == '#popular') {
-        $(POPULAR).trigger('click');
+        popularHandler();
+        window.location = `#popular`;
     } else if (url == '#discover') {
-        $(DISCOVER).trigger('click');
+        discoverHandler();
+        window.location = `#discover`;
     } else if (url.includes('detail')) {
         urlDetailHandler(url);
-    }
+    } 
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Handles API call for previous state search
+// query                                       
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+function urlSearchHandler(url) {
+    let searchQuery = url.replace('#search/query=', '');
+    state.query = searchQuery;
+    searchMultiHandler();
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -1750,9 +1821,7 @@ function searchFormSubmit() {
         e.preventDefault();
         let $input = $(this).find(QUERY_INPUT);
         state.query = $input.val();
-        $(USER_QUERY).removeClass('hidden');
         state.searchResults = [];
-        $(SEARCH_RESULTS_CONTENT).empty();
         searchMultiHandler();
         window.location = `#search/query=${state.query}`;
     });
@@ -1912,10 +1981,6 @@ function similarCarouselClick() {
 // ================================================================================
 //    Event Listener Groups
 // ================================================================================
-function init() {
-    handleUrl();
-}
-
 function watchNavItems() {
     // search
     searchNavClick();
@@ -1949,14 +2014,19 @@ function displays() {
     similarCarouselClick();
 }
 
+function init() {
+    handleUrl();
+}
+
 // ================================================================================
 //    Entry Point
 // ================================================================================
 $(function() {
-    init();
     watchNavItems();
     utilities();
     displays();
+
+    init(); // Must come after event listeners are binded
 
     // showDetailPage();
     // initDiscoverySlider();

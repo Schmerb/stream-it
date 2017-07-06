@@ -269,6 +269,10 @@ main {
 	clear: both;
 }
 
+.no-results {
+	margin-top: 100px;
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
 /*  Popular Content (base / mobile)
@@ -1053,7 +1057,7 @@ ul.f-nav-ul-wrap {
 	.slick-prev,
 	.slick-next {
 		fill: green;
-		z-index: 2;
+		z-index: 1;
 		top: 50%;
 	}
 
@@ -1180,11 +1184,11 @@ ul.f-nav-ul-wrap {
 	/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
 	/* Similar Movies Carousel (DESKTOP)
 	/* * * * * * * * * * * * * * * * * * * * * * * * */
-	/*.similar-movies-container {
-		clear: both;
+	.similar-movies-container {
+		width: 75%;
 	}
 
-	.similar-movies-slider {
+	/*.similar-movies-slider {
 		position: relative;
 		width: 75%;
 		margin: 0 auto;

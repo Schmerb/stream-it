@@ -72,20 +72,20 @@
                 <section class="popular-content content-container hidden">
                     <h2 class="landing-header">Browse Popular Titles</h2>
                     <section class="movie-section">
-                        <h3 id="popular-movies">Movies</h3>
+                        <h3 id="popular-movies" class="hidden">Movies</h3>
                         <div class="movie-content content">
                             
                         </div>
-                        <button class="movies-btn js-more-btn btn" type="button">more</button>
                     </section>
+                    <button class="movies-btn js-more-btn btn hidden" type="button">more</button>
 
                     <section class="tv-section">
-                        <h3 id="popular-tv">TV</h3>
+                        <h3 id="popular-tv" class="hidden">TV</h3>
                         <div class="tv-content content">
                             
                         </div>
-                        <button class="tv-btn js-more-btn btn" type="button">more</button>
                     </section> 
+                    <button class="tv-btn js-more-btn btn hidden" type="button">more</button>
                 </section>
 
                 <!-- SEARCH REULTS PAGE-->
@@ -93,13 +93,14 @@
                 <section class="search-results-page content-container hidden">
                     <h2 class="loading hidden">LOADING . . .</h2>
                     <h2 class="user-query hidden">'<span class="search-header"></span>' Results</h2>
+                    <h2 class="no-results hidden">Sorry, no results for '<span class="search-header"></span>'</h2>
                     <!--<label for="search-results" class="fixed-search-query">
                         '<span class="search-header"></span>' results
                     </label>-->
                     <div id="search-results" class="search-results-content content">
                          
                     </div>   
-                    <button class="search-more-btn js-more-btn btn" type="button">more</button>        
+                    <button class="search-more-btn js-more-btn btn hidden" type="button">more</button>        
                 </section>
 
 
@@ -117,9 +118,9 @@
 
                 <!-- SEARCH PAGE-->
 
-                <section class="search-page hidden">
+                <!--<section class="search-page hidden">
                     
-                </section>
+                </section>-->
 
 
                 <!-- DETAIL PAGE-->
