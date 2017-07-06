@@ -68,10 +68,10 @@ body {
 }
 
 
-
+#burger-anchor:link,
 #burger-anchor:active, 
 #burger-anchor:visited {
-	color: white;
+	color: rgba(96, 125, 139, 0.6);
 }
 
 
