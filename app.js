@@ -1199,7 +1199,7 @@ function fixNavOnScroll() {
                 show(FIXED_SEARCH_QUERY);
             }
         } else if(scroll <= 100) {
-            $(FIXED_CONTAINER).removeClass('fadeout');
+            $(FIXED_CONTAINER).removeClass('fadeout').removeClass('fadein');
         } else {
             $(FIXED_CONTAINER).addClass('fadeout').removeClass('fadein').removeClass('fixed-overlay');
             hide(FIXED_SEARCH_QUERY);
