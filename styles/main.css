@@ -352,9 +352,12 @@ main {
 }
 
 .btn {
+	display: block;
 	background: transparent;
 	border: none;
 	color: rgb(134, 195, 35);
+	width: auto;
+	margin: 0 auto;
 	font-size: 24px;
 	cursor: pointer;
 }

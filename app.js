@@ -653,7 +653,8 @@ function popularMoviesHandler(page = 1) {
         state.popularMovies = state.popularMovies.concat(resp.results);
         displayPopularMovies();
         $(POPULAR_MOVIES_TITLE).show();
-        $(MOVIES_MORE_BTN).show();
+        show(MOVIES_MORE_BTN);
+        // $(MOVIES_MORE_BTN).show();
     });
 }
 
@@ -669,7 +670,8 @@ function popularTvShowsHandler(page = 1) {
         state.popularTv = state.popularTv.concat(resp.results);
         displayPopularTv();
         $(POPULAR_TV_TITLE).show();
-        $(TV_MORE_BTN).show();
+        show(TV_MORE_BTN);
+        // $(TV_MORE_BTN).show();
     });
 }
 
@@ -1796,8 +1798,8 @@ function searchNavClick() {
     $(SEARCH).on('click', function(e) {
         e.preventDefault();
         $(FIXED_CONTAINER).removeClass('fixed-overlay');
-        $(MOBILE_MENU).removeClass('expand');
-        $(MAIN_NAV).removeClass('expand');
+        $(MOBILE_MENU).toggleClass('expand');
+        $(MAIN_NAV).toggleClass('expand');
         showSearchPage();
         $(SEARCH_FORM).focusin();
         $(MAIN_INPUT).val('').focus();
@@ -1807,8 +1809,8 @@ function searchNavClick() {
 function popularNavClick() {
     $(POPULAR).on('click', function(e) {
         e.preventDefault();
-        $(MOBILE_MENU).removeClass('expand');
-        $(MAIN_NAV).removeClass('expand');
+        $(MOBILE_MENU).toggleClass('expand');
+        $(MAIN_NAV).toggleClass('expand');
         popularHandler();
         window.location = `#popular`;
     });
@@ -1817,8 +1819,8 @@ function popularNavClick() {
 function discoverNavClick() {
     $(DISCOVER).on('click', function(e) {
         e.preventDefault();
-        $(MOBILE_MENU).removeClass('expand');
-        $(MAIN_NAV).removeClass('expand');
+        $(MOBILE_MENU).toggleClass('expand');
+        $(MAIN_NAV).toggleClass('expand');
         discoverHandler();
         window.location = `#discover`;
     });
