@@ -1279,6 +1279,37 @@ function fixedBackgroundMobile() {
     });
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Shows (slides) nav search glass input 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+function showNavSearchInput() {
+    let width = 200;
+    if ((parseInt($("body").css('width')) <= '450')) {
+        width = 140;
+    }
+    $(NAV_SEARCH_INPUT).show()
+                       .animate({width: width}, {
+                                 duration: 500,
+                                 easing: 'linear',
+                                 complete: () => {
+                                     $(NAV_SEARCH_INPUT).focus();
+                                }
+    });
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Hides (slides) nav search glass input 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+function hideNavSearchInput() {
+    $(NAV_SEARCH_INPUT).animate({width: '0'}, {
+                                 duration: 300,
+                                 easing: 'linear',
+                                 complete: () => {
+                                     $(NAV_SEARCH_INPUT).hide();
+                                 }
+    });
+}
+
 // ================================================================================
 // Writing JSON reponse to file
 // ================================================================================
@@ -1863,25 +1894,12 @@ function searchFormFocus() {
 function navSearchGlassClick() {
     $(NAV_SEARCH_GLASS).mouseenter(e => {
         e.preventDefault();
-        $(NAV_SEARCH_INPUT).show()
-                            .animate({width: '200px'}, {
-                                    duration: 500,
-                                    easing: 'linear',
-                                    complete: () => {
-                                        $(NAV_SEARCH_INPUT).focus();
-                                    }
-        });
+        showNavSearchInput();
     });
 
     $(NAV_SEARCH_INPUT).focusout(e => {
         e.preventDefault();
-        $(NAV_SEARCH_INPUT).animate({width: '0'}, {
-                                    duration: 300,
-                                    easing: 'linear',
-                                    complete: () => {
-                                        $(NAV_SEARCH_INPUT).hide();
-                                    }
-        });
+        hideNavSearchInput();
     });
 }
 
