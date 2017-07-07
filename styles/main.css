@@ -671,7 +671,7 @@ img#cinemax_amazon_prime {
 .people-container li p {
 	display: block;
 	max-width: 100%;
-	/*margin-top: 5px;*/
+	margin-top: 5px;
 	vertical-align: top;
 }
 
@@ -1361,6 +1361,7 @@ ul.f-nav-ul-wrap {
 	}
 
 	.frame-ready{
+		background: rgba(0,0,0,0.7);
 		box-shadow: 0 0 30px 5px rgba(0,0,0,0.7);
 	}
 

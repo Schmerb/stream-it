@@ -316,9 +316,9 @@ function displayStreamingLinks(guidebox) {
     $(STREAMING_LINKS_CONTAINER).empty();
     show(STREAMING_LINKS_CONTAINER);
 
-    // let movie = guidebox; // GUIDEBOX
+    let movie = guidebox; // GUIDEBOX
     // let movie = obj; // ALIEN (TESTING)
-    let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
+    // let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
 
     if (movie.in_theaters) {
         $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
@@ -329,9 +329,9 @@ function displayStreamingLinks(guidebox) {
         }
     }
 
-    let respData = obj; // ALIEN (TESTING)
+    // let respData = obj; // ALIEN (TESTING)
     // let respData = theater; // WONDERWOMAN (IN-THEATERS TESTING)
-    // let respData = guidebox; // GUIDEBOX 
+    let respData = guidebox; // GUIDEBOX 
 
     let purch_srcs = respData.purchase_web_sources; 
     let sub_srcs = respData.subscription_web_sources; 
@@ -730,6 +730,7 @@ function movieDetailPageHandler(poster, initCarousel) {
             getSimilarMoviesTMDB(poster.attr('data-id'), 1, resp => {
                 displaySimilarMoviesCarousel(resp);
             });
+            // displayStreamingLinks(gbox_m_resp);
             // call to guidebox for streaming links / prices
             searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
                 getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
@@ -827,13 +828,17 @@ function trailerHandler(resp) {
                                                             data-trailer-type="${trailer.type}"
                                                         > 
                                                     </div>`;
-                        $(TRAILER_SLIDER).append(alt_trailer_thumbnail);
+                        if (trailer.length > 1) {
+                            $(TRAILER_SLIDER).append(alt_trailer_thumbnail);
+                        }
                     }
                 });
         });
         // waits for array of JSON requests to finish, then executes code block
         $.when.apply($, jsonRequests).then(function() {
-            initTrailerSlider();
+            if (trailers.length > 1) {
+                initTrailerSlider();
+            }
             // $(FRAME).attr('src', `https://www.youtube.com/embed/${mainTrailer.key}?`);
             $(FRAME).addClass('frame-ready');
         });

@@ -59,6 +59,6 @@ let icons = {
 };
 
 let package_prices = {
-    netflix: 'SD $9.99, HD $11.99',
+    netflix: "SD $9.99, HD $11.99",
     cinemax_amazon_prime: '$9.99'
 };
