@@ -79,7 +79,7 @@ a {
 	height: 40px;
 	width: 50px;
 	cursor: pointer;
-	border: 1px solid blue;
+	/*border: 1px solid blue;*/
 }
 
 #burger-icon {
@@ -143,7 +143,7 @@ a {
 }
 
 .fixed-overlay #burger-icon.open {
-	right: 10px;
+	right: 5px;
 }
 
 #burger-icon.open::after,
@@ -501,7 +501,7 @@ main {
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 
 .detail-page {
-	/*background: url("https://image.tmdb.org/t/p/original//xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg") center;*/
+	background: rgba(0,0,0,0.2);
 }
 
 
@@ -547,8 +547,8 @@ main {
 
 
 .detail-poster-img-wrap {
-	width: 220px;
-	margin-left: 10px;
+	width: 90%;
+	margin: 0 auto;
 }
 
 #detail-poster {
@@ -557,10 +557,11 @@ main {
 }
 
 .ratings-container {
-	margin-left: 10px;
+	margin-left: 5%;
 }
 
 .ratings-label {
+	display: inline-block;
 	margin-right: 10px;
 }
 
@@ -596,9 +597,7 @@ main {
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 .streaming-links-container {
 	display: block;
-	width: 100%;
-	/*height: 340px;*/
-	float: right;
+	overflow: hidden;
 	/*border: 1px solid red;*/
 }
 
@@ -763,9 +762,24 @@ img#cinemax_amazon_prime {
 	width: 70px;
 }
 
+.top-plot-container {
+	display: block;
+	overflow: hidden;
+	border: 1px solid white;
+}
+
+.top-plot-container span {
+	color: #df9a07;
+	padding: 10px;
+}
+
+.top-plot-container p {
+	padding: 10px;
+}
+
 .trailer-container {
 	display: inline-block;
-	width: 70%;
+	width: 100%;
 	height: 400px;
 	/*border: 1px solid purple;*/
 	vertical-align: top;
@@ -773,7 +787,20 @@ img#cinemax_amazon_prime {
 }
 
 .frame-container {
+	position: relative;
 	text-align: center;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
+}
+
+.frame {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	border: none;
 }
 
 .trailer-slide {
@@ -935,6 +962,10 @@ ul.f-nav-ul-wrap {
 		margin-top: 10px;
 		margin-left: 5%;
 	}
+
+	.top-plot-container {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 340px) {
@@ -982,7 +1013,7 @@ ul.f-nav-ul-wrap {
 	}
 
 	.burger-icon-wrap.open {
-		right: 20px;
+		right: 10px;
 	}
 
 	.expand .burger-icon-wrap.open {
@@ -1215,6 +1246,10 @@ ul.f-nav-ul-wrap {
 		padding-top: 5px;
 	}
 
+	#synopsis-item {
+		display: none;
+	}
+
 	/*.tv::after {
 		content: 'TV';
 		background: #2F3131;
@@ -1315,15 +1350,24 @@ ul.f-nav-ul-wrap {
 	.detail-page {
 		/*background: url("https://image.tmdb.org/t/p/original//xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg") center;*/
 		/*min-width: 790px;*/
+		padding-top: 20px;
 	}
 
+	label.detail-carousel-label {
+		padding-bottom: 5px;
+	}
 
 	.detail-carousel-container {
 		position: relative;
 		width: 75%;
-		height: 150px;
+		height: auto;
 		margin: 0 auto 40px;
 		/*border: 1px solid white;*/
+	}
+
+	#detail-carousel {
+		position: relative;
+		margin-top: 5px;
 	}
 
 	#detail-page-container {
@@ -1336,7 +1380,9 @@ ul.f-nav-ul-wrap {
 		width: 30%;
 		min-width: 240px;
 		float: left;
-		/*border: 1px solid blue;*/
+		border: 1px solid blue;
+		padding-right: 5px;
+		padding-left: 5px;
 		vertical-align: top;
 	}
 
@@ -1359,7 +1405,7 @@ ul.f-nav-ul-wrap {
 
 
 	.detail-poster-img-wrap {
-		width: 200px;
+		width: 100%;
 	}
 
 	#detail-poster {
@@ -1369,6 +1415,10 @@ ul.f-nav-ul-wrap {
 
 	.meta-data ul {
 		padding: 0;
+	}
+
+	.ratings-container {
+		margin-left: 0;
 	}
 
 	.people-container li p {
@@ -1432,10 +1482,13 @@ ul.f-nav-ul-wrap {
 	/* * * * * * * * * * * * * * * * * * * * * * * * */
 	.trailer-container {
 		float: right;
-		/*border: 1px solid orangered;*/
+		border: 1px solid orangered;
+		height: unset;
+		padding-bottom: 0;
 	}
 
 	.frame {
+		position: relative;
 		width: 512px;
 		height: 288px;
 		border:  none;
@@ -1513,12 +1566,8 @@ ul.f-nav-ul-wrap {
 	}
 
 	.streaming-links-container{
-		display: inline-block;
-		min-height: 340px;
-		width: 70%;
-		min-width: 556px;
-		float: right;
-		/*border: 1px solid red;*/
+		display: block;
+		border: 1px solid red;
 	}
 	
 	.streaming-links-container label {
@@ -1528,11 +1577,12 @@ ul.f-nav-ul-wrap {
 	}
 
 	.streaming-links-container > label {
-		margin: 10px 0;
+		margin: 10px;
 	}
 
 	.purchase-links {
-		width: 95%;
+		width: 90%;
+		margin: 10px auto 0;
 	}
 	
 
@@ -1611,7 +1661,6 @@ ul.f-nav-ul-wrap {
 		transform: translateY(0);
 		/*z-index: 10;*/
 	}
-
 }
 
 
@@ -1633,6 +1682,14 @@ ul.f-nav-ul-wrap {
 
 	.mobile-menu li:hover {
 		background: rgba(50,50,50,0.5);
+	}
+
+	.trailer-container {
+		width: 70%;
+	}
+
+	.frame-container {
+		padding-bottom: 300px;
 	}
 }
 

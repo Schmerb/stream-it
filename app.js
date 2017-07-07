@@ -719,11 +719,12 @@ function searchMultiHandler(page = 1) {
 //  display to user
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function movieDetailPageHandler(poster, initCarousel) {
-    showDetailPage(initCarousel);
+    // showDetailPage(initCarousel);
     smoothScroll(MAIN);
     
     getMovieDetailsByIdTMDB(poster.attr('data-id'), function(detail_resp) {
         searchByIdOMDB(detail_resp.imdb_id, function(imdb_resp) {
+            showDetailPage(initCarousel);
             displayDetailPage(detail_resp, imdb_resp);
             initCarousel ? displayDetailCarousel() : null;
 
@@ -750,12 +751,13 @@ function movieDetailPageHandler(poster, initCarousel) {
 //  display to user
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function tvDetailHandler(poster, initCarousel) {
-    showDetailPage(initCarousel);
+    // showDetailPage(initCarousel);
     smoothScroll(MAIN);
     getTvDetailsTMDB(poster.attr('data-id'), function(detail_resp) {
             getTVExternalIdsTMDB(detail_resp.id, function(ids_resp) {
                 searchByIdOMDB(ids_resp.imdb_id, function(imdb_resp) {
-                    displayDetailPage(detail_resp, imdb_resp); // Displays detail page
+                    showDetailPage(initCarousel);
+                    // displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
                     // call to guidebox for streaming links / prices
                     searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
@@ -825,10 +827,11 @@ function trailerHandler(resp) {
                                                             alt="Thumbnail for ${snippet.title}"
                                                             data-title="${snippet.title}"
                                                             data-url="${url}"
+                                                            data-url-autoplay=${url}?autoplay=1
                                                             data-trailer-type="${trailer.type}"
                                                         > 
                                                     </div>`;
-                        if (trailer.length > 1) {
+                        if (trailers.length > 1) {
                             $(TRAILER_SLIDER).append(alt_trailer_thumbnail);
                         }
                     }
@@ -919,16 +922,23 @@ function initDiscoverySlider() {
         infinite: false,
         speed: 300,
         slidesToShow: 8,
-        slidesToScroll: 6,
+        slidesToScroll: 8,
         variableWidth: true,
         responsive: [
             {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 7,
+                slidesToScroll: 7,
                 infinite: false,
                 dots: false
+            }
+            },
+            {
+            breakpoint: 860,
+            settings: {
+                slidesToShow: 6,
+                slidesToScroll: 6
             }
             },
             {
@@ -958,22 +968,28 @@ function initDetailSlider() {
         arrows: true,
         infinite: false,
         speed: 300,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 7,
+        slidesToScroll: 7,
         variableWidth: true,
         responsive: [
             {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
+                slidesToShow: 6,
+                slidesToScroll: 6,
                 infinite: false
+            }
+            },
+            {
+            breakpoint: 860,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4
             }
             },
             {
             breakpoint: 600,
             settings: {
-                arrows: false,
                 slidesToShow: 2,
                 slidesToScroll: 2
             }
@@ -1002,22 +1018,28 @@ function initSimilarSlider() {
         arrows: true,
         infinite: false,
         speed: 300,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 7,
+        slidesToScroll: 7,
         variableWidth: true,
         responsive: [
             {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
+                slidesToShow: 6,
+                slidesToScroll: 6,
                 infinite: false
+            }
+            },
+            {
+            breakpoint: 860,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4
             }
             },
             {
             breakpoint: 600,
             settings: {
-                arrows: false,
                 slidesToShow: 2,
                 slidesToScroll: 2
             }
@@ -1062,7 +1084,6 @@ function initStreamingLinksSlider() {
             {
             breakpoint: 600,
             settings: {
-                arrows: false,
                 slidesToShow: 2,
                 slidesToScroll: 2
             }
@@ -1111,8 +1132,8 @@ function initTrailerSlider() {
             }
             },
             {
-            breakpoint: 415,
-            settings: "unslick"
+            breakpoint: 415
+            // settings: "unslick"
             }
             // You can unslick at a given breakpoint now by adding:
             // settings: "unslick"
@@ -2034,7 +2055,7 @@ function seasonPosterClick() {
 function trailerCarouselClick() {
     $(TRAILER_SLIDER).on('click', 'img', function(e) {
         e.preventDefault();
-        $(FRAME).attr('src', $(this).attr('data-url'));
+        $(FRAME).attr('src', $(this).attr('data-url-autoplay'));
     });
 }
 
