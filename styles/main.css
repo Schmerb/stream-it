@@ -918,6 +918,11 @@ ul.f-nav-ul-wrap {
 		transform: translateY(-50%);
 	}
 
+	.fixed-overlay .expand .burger.fa.fa-bars {
+		top: 5px;
+		transform: translateY(0);
+	}
+
 	.expand .burger.fa.fa-bars {
 		right: 35px;
 	}
@@ -993,6 +998,8 @@ ul.f-nav-ul-wrap {
 		transform: translateY(-50%);
 		font-size: 0;
 	}
+
+
 
 	#search-glass-btn {
 		border: none;
@@ -1547,7 +1554,7 @@ ul.f-nav-ul-wrap {
 	#nav-search-form {
 		top: 10px;
 		transform: translateY(0);
-		z-index: 10;
+		/*z-index: 10;*/
 	}
 
 }
