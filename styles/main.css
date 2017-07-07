@@ -622,6 +622,11 @@ img#cinemax_amazon_prime {
 	display: inline-block;
 }
 
+.similar-slide img {
+	height: 138px;
+	width: 92px;
+}
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
@@ -788,10 +793,15 @@ ul.f-nav-ul-wrap {
 		margin: auto;
 	}
 
+	body {
+		background: rgb(26,19,17);
+	}
+
 	main {
 		background-attachment: scroll;
 		background-size: 500%; 
-		/*background-repeat: no-repeat;*/
+		background-position-y: 0;
+		background-repeat: no-repeat;
 	}
 
 	.source-slide {
