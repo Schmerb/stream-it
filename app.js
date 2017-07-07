@@ -620,6 +620,7 @@ function clearDetailPage(initCarousel) {
         unslick(DETAIL_PAGE_SLIDER);
         $(DETAIL_PAGE_SLIDER).empty();
     }
+    $(FRAME).removeClass('frame-ready');
 }
 
 
@@ -730,11 +731,11 @@ function movieDetailPageHandler(poster, initCarousel) {
                 displaySimilarMoviesCarousel(resp);
             });
             // call to guidebox for streaming links / prices
-            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-            //         displayStreamingLinks(gbox_m_resp);
-            //     });
-            // });
+            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+                    displayStreamingLinks(gbox_m_resp);
+                });
+            });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -756,13 +757,13 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
                     // call to guidebox for streaming links / prices
-                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                    //         // console.log(gbox_tv_resp);
-                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
-                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                    //     });
-                    // });
+                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                            // console.log(gbox_tv_resp);
+                            // getAllEpisodesGuidebox(gbox_s_resp.id);
+                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                        });
+                    });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -810,6 +811,7 @@ function trailerHandler(resp) {
         if (!mainTrailer) { // if no 'main trailer', use first trailer
             mainTrailer = trailers[0];
         }
+        $(FRAME).attr('src', `https://www.youtube.com/embed/${mainTrailer.key}?`);
         // makes JSON request for each trailer obj and maps each call to array
         let jsonRequests = trailers.map(function(trailer) {
                 return searchVideoByIdYoutube(trailer.key, function(youtube_resp) {
@@ -832,7 +834,8 @@ function trailerHandler(resp) {
         // waits for array of JSON requests to finish, then executes code block
         $.when.apply($, jsonRequests).then(function() {
             initTrailerSlider();
-            $(FRAME).attr('src', `https://www.youtube.com/embed/${mainTrailer.key}?`);
+            // $(FRAME).attr('src', `https://www.youtube.com/embed/${mainTrailer.key}?`);
+            $(FRAME).addClass('frame-ready');
         });
     } // end if     
 }
@@ -1795,7 +1798,7 @@ function urlDetailHandler(url) {
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 // Sets the current posters to be displayed in
-// detail banne4r carousel and makes call to handle 
+// detail banner carousel and makes call to handle 
 // session storage of posters                                        
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 function setCarouselPosters(posters, label) {
