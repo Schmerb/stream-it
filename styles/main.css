@@ -873,8 +873,7 @@ ul.f-nav-ul-wrap {
 /*===============================================================================*/
 @media only screen and (min-width: 440px) {
 	.banner {
-		background-attachment: fixed;
-		background-position: right 0 bottom 100px;
+		/*background-position: right 0 bottom 100px;*/
 	}
 
 	.banner-inner-container {
@@ -1514,7 +1513,19 @@ ul.f-nav-ul-wrap {
 
 }
 
+@media only screen and (max-width: 736px) and (min-width: 567px) {
 
+}
+
+@media only screen and (min-width: 737px) {
+	.banner {
+		background-attachment: fixed;
+	}
+
+	main {
+		background-attachment: fixed;
+	}
+}
 
 @media only screen and (min-width: 748px) {
 	.content-container {
