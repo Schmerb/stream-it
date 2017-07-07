@@ -122,10 +122,10 @@ a {
   transition: .25s ease-in-out;
 }
 
-/*#burger-icon.open {
+#burger-icon.open {
 	position: fixed;
 	right: 20px;
-}*/
+}
 
 .fixed-overlay #burger-icon.open {
 	right: 10px;
@@ -981,7 +981,7 @@ ul.f-nav-ul-wrap {
 	}
 
 	#burger-icon.open {
-		position: fixed;
+		/*position: fixed;*/
 		right: 20px;
 	}
 
@@ -1699,7 +1699,7 @@ ul.f-nav-ul-wrap {
 	#burger-icon {
 		display: none;
 	}
-	
+
 	.mobile-menu.expand {
 		transform: translateX(-400%);
 	}
