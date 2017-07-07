@@ -1922,7 +1922,11 @@ function navSearchGlassHover() {
 function navSearchGlassClick() {
     $(NAV_SEARCH_GLASS).on('click', function(e) {
         e.preventDefault();
-
+        if (NAV_SEARCH_INPUT.css(width) == '200px') {
+            hideNavSearchInput();
+        } else {
+            showNavSearchInput();
+        }
     });
 }
 

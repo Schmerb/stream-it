@@ -860,7 +860,7 @@ ul.f-nav-ul-wrap {
 }
 
 /*================================================================================/
-/* DESKTOP VIEW
+/* DESKTOP & LANDSCAPE MOBILE
 /*===============================================================================*/
 @media only screen and (min-width: 440px) {
 	.banner {
@@ -1516,15 +1516,16 @@ ul.f-nav-ul-wrap {
 }
 
 
-
-
+/*================================================================================/
+/* PORTRAIT AND LANDSCAPE 
+/*===============================================================================*/
 @media only screen and (max-width: 736px){
-		main {
-			background-attachment: scroll;
-			background-size: 500%; 
-			background-position-y: 0;
-			background-repeat: no-repeat;
-		}
+	main {
+		background-attachment: scroll;
+		background-size: 500%; 
+		background-position-y: 0;
+		background-repeat: no-repeat;
+	}
 	
 	.main-nav.expand {
 		position: fixed;
@@ -1562,6 +1563,9 @@ ul.f-nav-ul-wrap {
 
 }
 
+/*================================================================================/
+/* DESKTOP ONLY
+/*===============================================================================*/
 @media only screen and (min-width: 737px) {
 	.banner {
 		background-attachment: fixed;
