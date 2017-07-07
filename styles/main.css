@@ -7,7 +7,7 @@
 /* 		Base  / Mobile
 /*================================================================================*/
 body {
-	background: url('../assets/backgrounds/textures/diagonal-texture-black.jpg') center;
+	background: url('../assets/backgrounds/textures/diagonal-texture-black-compressor.jpg') center;
 	background-attachment: fixed;
 	margin: 0;
 	/*border: 2px solid white;*/
@@ -19,7 +19,7 @@ body {
     top: 0;
     left: 0;
     background: rgba(32,178,170,0.95);
-	background: url('../assets/backgrounds/tablets/william-iven-5895.jpg') center;
+	background: url('../assets/backgrounds/tablets/william-iven-5895-compressor.jpg') center;
 	background-size: cover;
 	background-attachment: fixed;
 	background-position: right -100px bottom 100px;
@@ -95,7 +95,7 @@ a {
 	position: absolute;
 	top: 0;
 	background: rgba(96, 125, 139, 1);
-	background: url('../assets/backgrounds/tablets/anna-demianenko-12400.jpg') center;
+	background: url('../assets/backgrounds/tablets/anna-demianenko-12400-compressor.jpg') center;
 	background: url('../assets/backgrounds/tablets/thom-161-compressor.jpg') center;
 	background-size: cover; 
 	display: block;
