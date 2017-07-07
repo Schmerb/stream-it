@@ -124,7 +124,7 @@ a {
 
 .mobile-menu {
 	color: black;
-	transform: translateX(-100%);
+	transform: translateX(-500%);
 	width: 100%;
 	padding: 0;
 	-webkit-transition: all 3s ease-in-out;
@@ -903,7 +903,7 @@ ul.f-nav-ul-wrap {
 	}
 
 	.mobile-menu {
-		display: none;
+		/*transform: translateX(-100%);*/
 	}
 
 	.burger.fa.fa-bars {
@@ -918,12 +918,16 @@ ul.f-nav-ul-wrap {
 		transform: translateY(-50%);
 	}
 
+	.expand .burger.fa.fa-bars {
+		right: 35px;
+	}
+
 	.burger.fa.fa-bars:hover {
-		color: white;
+		/*color: white;*/
 	}
 
 	.burger.fa.fa-bars:hover .mobile-menu {
-		display: inline-block;
+		/*display: inline-block;*/
 	}
 
 	.main-menu {
@@ -1512,6 +1516,42 @@ ul.f-nav-ul-wrap {
 
 
 }
+
+
+
+
+@media only screen and (max-width: 736px){
+	.main-nav.expand {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: rgba(96, 125, 139, 1);
+		background: url('../assets/backgrounds/tablets/anna-demianenko-12400-compressor.jpg') center;
+		background: url('../assets/backgrounds/tablets/thom-161-compressor.jpg') center;
+		background-size: cover; 
+		display: block;
+		width: 100%;
+		height: 100vh;
+		z-index: 10;
+	}
+
+	.burger.fa.fa-bars {
+		top: 5px;
+		transform: translateY(0);
+	}
+
+	.expand .burger.fa.fa-bars {
+
+	}
+
+	#nav-search-form {
+		top: 10px;
+		transform: translateY(0);
+		z-index: 10;
+	}
+
+}
+
 
 @media only screen and (max-width: 736px) and (min-width: 567px) {
 
