@@ -826,15 +826,6 @@ ul.f-nav-ul-wrap {
 	}
 
 
-	main {
-		background-attachment: scroll;
-		background-size: 500%; 
-		background-position-y: 0;
-		background-repeat: no-repeat;
-	}
-
-
-
 	.source-slide {
 		height: 80px;
 	}
@@ -1528,6 +1519,13 @@ ul.f-nav-ul-wrap {
 
 
 @media only screen and (max-width: 736px){
+		main {
+			background-attachment: scroll;
+			background-size: 500%; 
+			background-position-y: 0;
+			background-repeat: no-repeat;
+		}
+	
 	.main-nav.expand {
 		position: fixed;
 		top: 0;
