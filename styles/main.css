@@ -790,7 +790,8 @@ ul.f-nav-ul-wrap {
 
 	main {
 		background-attachment: scroll;
-		background-repeat: no-repeat;
+		background-size: 500%; 
+		/*background-repeat: no-repeat;*/
 	}
 
 	.source-slide {
