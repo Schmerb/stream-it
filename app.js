@@ -1847,6 +1847,7 @@ function searchNavClick() {
         $(FIXED_CONTAINER).removeClass('fixed-overlay');
         $(MOBILE_MENU).removeClass('expand');
         $(MAIN_NAV).removeClass('expand');
+        $('#burger-icon').removeClass('open');
         showSearchPage();
         $(SEARCH_FORM).focusin();
         $(MAIN_INPUT).val('').focus();
@@ -1858,6 +1859,7 @@ function popularNavClick() {
         e.preventDefault();
         $(MOBILE_MENU).removeClass('expand');
         $(MAIN_NAV).removeClass('expand');
+        $('#burger-icon').removeClass('open');
         popularHandler();
         window.location = `#popular`;
     });
@@ -1868,8 +1870,18 @@ function discoverNavClick() {
         e.preventDefault();
         $(MOBILE_MENU).removeClass('expand');
         $(MAIN_NAV).removeClass('expand');
+        $('#burger-icon').removeClass('open');
         discoverHandler();
         window.location = `#discover`;
+    });
+}
+
+function burgerIconClick() {
+    $('#burger-icon').on('click', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('open');
+        $(MOBILE_MENU).toggleClass('expand');
+        $(MAIN_NAV).toggleClass('expand');
     });
 }
 
@@ -1910,12 +1922,12 @@ function searchFormFocus() {
 function navSearchGlassHover() {
     $(NAV_SEARCH_GLASS).mouseenter(e => {
         e.preventDefault();
-        showNavSearchInput();
+        // showNavSearchInput();
     });
 
     $(NAV_SEARCH_INPUT).focusout(e => {
         e.preventDefault();
-        hideNavSearchInput();
+        // hideNavSearchInput();
     });
 }
 
@@ -1923,9 +1935,9 @@ function navSearchGlassClick() {
     $(NAV_SEARCH_GLASS).on('click', function(e) {
         e.preventDefault();
         if (NAV_SEARCH_INPUT.css(width) == '200px') {
-            hideNavSearchInput();
+            // hideNavSearchInput();
         } else {
-            showNavSearchInput();
+            // showNavSearchInput();
         }
     });
 }
@@ -2060,6 +2072,7 @@ function watchNavItems() {
     discoverNavClick();
     discoveryFooterNavClick();
     // mobile
+    burgerIconClick();
     burgerMenuClick();
 }
 

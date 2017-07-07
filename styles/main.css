@@ -69,21 +69,113 @@ a {
 	text-decoration: none;
 }
 
-#burger-anchor {
+/*#burger-anchor {
 	color: rgba(96, 125, 139, 0.6);
-}
+}*/
 
 
-.burger.fa.fa-bars {
+/*.burger.fa.fa-bars {
+	display: none;
 	position: absolute;
 	top: 5px;
 	right: 20px;
 	font-size: 36px;
+}*/
+
+/* * * * * * * Burger * * * * * * */
+
+#burger-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /*margin: 50px auto;*/
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out, right 0.001s linear;
+  cursor: pointer;
+  z-index: 12;
 }
 
-.fixed-overlay .burger.fa.fa-bars {
-	top: 0;
+#burger-icon span{
+  display: block;
+  position: absolute;
+  height: 7px;
+  width: 100%;
+  background: rgba(96, 125, 139, 1);
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
 }
+
+/*#burger-icon.open {
+	position: fixed;
+	right: 20px;
+}*/
+
+.fixed-overlay #burger-icon.open {
+	right: 10px;
+}
+
+#burger-icon.open span {
+	  background: rgba(70, 120, 139, 1);
+	  background: rgba(255, 133, 0, 1);
+	  background: rgb(134, 195, 35);
+}
+
+#burger-icon span:nth-child(1) {
+  top: 0px;
+}
+
+#burger-icon span:nth-child(2),#burger-icon span:nth-child(3) {
+  top: 10px;
+}
+
+#burger-icon span:nth-child(4) {
+  top: 20px;
+}
+
+#burger-icon.open span:nth-child(1) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+#burger-icon.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#burger-icon.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#burger-icon.open span:nth-child(4) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+/* * * * * * * * * * * * * * * * */
 
 
 .main-menu {
@@ -94,18 +186,6 @@ a {
 	transition: all 1s ease-in;
 }
 
-/*.main-nav.expand {
-	position: absolute;
-	top: 0;
-	background: rgba(96, 125, 139, 1);
-	background: url('../assets/backgrounds/tablets/anna-demianenko-12400-compressor.jpg') center;
-	background: url('../assets/backgrounds/tablets/thom-161-compressor.jpg') center;
-	background-size: cover; 
-	display: block;
-	width: 100%;
-	height: 100vh;
-	z-index: 10;
-}*/
 
 .nav-item {
 	position: relative;
@@ -132,15 +212,13 @@ a {
 	transition: all 3s ease-in-out;
 }
 
+
+
 .mobile-menu.expand {
 	margin-top: 40px;
+	padding-top: 5px;
 	transform: translateX(0);
-	
 }
-
-.mobile-menu li:first-of-type {
-	border-top: 1px solid darkslategrey;
-} 
 
 .mobile-menu li {
 	width: 100%;
@@ -149,6 +227,11 @@ a {
 	font-size: 18px;
 	margin: 0;
 	border-bottom: 1px solid darkslategrey;
+}
+
+.mobile-menu li:first-of-type {
+	margin-top: 20px;
+	border-top: 1px solid darkslategrey;
 }
 
 .expand {
@@ -897,10 +980,19 @@ ul.f-nav-ul-wrap {
 		/*transform: translateX(-100%);*/
 	}
 
-	.burger.fa.fa-bars {
+	#burger-icon.open {
+		position: fixed;
+		right: 20px;
+	}
+
+	#burger-icon {
+		top: 10px;
+		right: -30px;
+	}
+	/*.burger.fa.fa-bars {
 		right: -20px;
-		top: 50%;
-		transform: translateY(-50%);
+		top: 5px;
+		transform: translateY(0);
 	}
 
 	.fixed-overlay .burger.fa.fa-bars {
@@ -914,17 +1006,13 @@ ul.f-nav-ul-wrap {
 		transform: translateY(0);
 	}
 
-	.expand .burger.fa.fa-bars {
-		right: 35px;
-	}
-
 	.burger.fa.fa-bars:hover {
-		/*color: white;*/
+		
 	}
 
 	.burger.fa.fa-bars:hover .mobile-menu {
-		/*display: inline-block;*/
-	}
+		
+	}*/
 
 	.main-menu {
 		/*display: inline-block;*/
@@ -939,11 +1027,6 @@ ul.f-nav-ul-wrap {
 	}
 
 	
-
-	/*.footer-nav .main-menu {
-		padding: 0;
-	}*/
-
 	.nav-item {
 		position: relative;
 		display: inline-block;
@@ -961,7 +1044,7 @@ ul.f-nav-ul-wrap {
 		transition: all 0.6s;
 	}
 
-	.nav-item:after {
+	.main-menu.nav-item:after {
 		position: absolute;
 		bottom: -5px;
 		left: 0;
@@ -974,6 +1057,10 @@ ul.f-nav-ul-wrap {
 		height: 2px;
 	}
 
+	.mobile-menu.nav-item:hover {
+		background: rgba(50,50,50,0.5);
+	}
+
 	.nav-item:hover {
 		
 	}
@@ -984,9 +1071,9 @@ ul.f-nav-ul-wrap {
 
 	#nav-search-form {
 		position: absolute;
-		top: 50%;
+		top: 10px;
 		right: 30px;
-		transform: translateY(-50%);
+		transform: translateY(0);
 		font-size: 0;
 	}
 
@@ -1010,8 +1097,18 @@ ul.f-nav-ul-wrap {
 		cursor: pointer;
 	}
 
+	.nav-search-form-inner-wrap:hover #nav-search-input {
+		display: inline-block;
+		width: 200px;
+	}
+
+	.nav-search-glass:blur #nav-search-input {
+		width: 0;
+	}
+
 	#nav-search-input {
 		/*display: inline-block;*/
+		/*width: 0;*/
 		width: 0;
 		background: rgba(248, 241, 229, 0.7);
 		font-size: 16px;
@@ -1019,10 +1116,10 @@ ul.f-nav-ul-wrap {
 		border-radius: 20px;
 		padding-left: 10px;
 	}
-
+/*
 	.nav-search-glass:hover #nav-search-input{
 		display: inline-block;
-	} 
+	} */
 
 	.header-message {
 		min-width: 390px;
@@ -1522,33 +1619,21 @@ ul.f-nav-ul-wrap {
 @media only screen and (max-width: 736px){
 	main {
 		background-attachment: scroll;
-		background-size: 500%; 
+		/*background-size: 500%; */
 		background-position-y: 0;
 		background-repeat: no-repeat;
 	}
 	
-	.main-nav.expand {
-		position: fixed;
-		top: 0;
-		left: 0;
-		background: rgba(96, 125, 139, 1);
-		background: url('../assets/backgrounds/tablets/anna-demianenko-12400-compressor.jpg') center;
-		background: url('../assets/backgrounds/tablets/thom-161-compressor.jpg') center;
-		background-size: cover; 
-		display: block;
-		width: 100%;
-		height: 100vh;
-		z-index: 10;
-	}
+	
 
-	.burger.fa.fa-bars {
+	/*.burger.fa.fa-bars {
 		top: 5px;
 		transform: translateY(0);
-	}
+	}*/
 
-	.expand .burger.fa.fa-bars {
-
-	}
+	/*.expand .burger.fa.fa-bars {
+		right: 35px;
+	}*/
 
 	#nav-search-form {
 		top: 10px;
@@ -1574,6 +1659,10 @@ ul.f-nav-ul-wrap {
 	main {
 		background-attachment: fixed;
 	}
+
+	.mobile-menu li:hover {
+		background: rgba(50,50,50,0.5);
+	}
 }
 
 @media only screen and (min-width: 748px) {
@@ -1582,13 +1671,37 @@ ul.f-nav-ul-wrap {
 	}
 }
 
+@media only screen and (max-width: 777px) {
+	.main-nav.expand {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: rgba(96, 125, 139, 1);
+		background: url('../assets/backgrounds/tablets/anna-demianenko-12400-compressor.jpg') center;
+		background: url('../assets/backgrounds/tablets/thom-161-compressor.jpg') center;
+		background-size: cover; 
+		display: block;
+		width: 100%;
+		height: 100vh;
+		z-index: 10;
+	}
+
+	/*.expand .burger.fa.fa-bars {
+		right: 35px;
+	}*/
+}
+
 @media only screen and (min-width: 778px) {
 	.main-menu {
 		display: inline-block;
 	}
 
-	.burger.fa.fa-bars {
+	#burger-icon {
 		display: none;
+	}
+	
+	.mobile-menu.expand {
+		transform: translateX(-400%);
 	}
 }
 
