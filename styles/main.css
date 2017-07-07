@@ -21,8 +21,6 @@ body {
     background: rgba(32,178,170,0.95);
 	background: url('../assets/backgrounds/tablets/william-iven-5895-compressor.jpg') center;
 	background-size: cover;
-	background-attachment: fixed;
-	background-position: right -100px bottom 100px;
     width: 100%;
     height: 40%;
     z-index: 2;
@@ -399,7 +397,7 @@ main {
 }
 
 #discovery-title {
-	width: 185px;
+	width: 200px;
 	margin: 0 auto;
 }
 
@@ -801,7 +799,9 @@ ul.f-nav-ul-wrap {
 }
 
 
-
+/*================================================================================/
+/* MOBILE ONLY
+/*===============================================================================*/
 @media only screen and (max-width: 439px) {
 	.main-nav.expand {
 		position: absolute;
@@ -873,6 +873,7 @@ ul.f-nav-ul-wrap {
 /*===============================================================================*/
 @media only screen and (min-width: 440px) {
 	.banner {
+		background-attachment: fixed;
 		background-position: right 0 bottom 100px;
 	}
 
@@ -988,6 +989,12 @@ ul.f-nav-ul-wrap {
 		right: 30px;
 		transform: translateY(-50%);
 		font-size: 0;
+	}
+
+	#search-glass-btn {
+		border: none;
+		background: transparent;
+		padding: 0;
 	}
 
 	.nav-search-glass {

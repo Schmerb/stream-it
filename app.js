@@ -732,11 +732,11 @@ function movieDetailPageHandler(poster, initCarousel) {
             });
             // displayStreamingLinks(gbox_m_resp);
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                });
-            });
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -758,13 +758,13 @@ function tvDetailHandler(poster, initCarousel) {
                     displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
                     // call to guidebox for streaming links / prices
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            // console.log(gbox_tv_resp);
-                            // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                        });
-                    });
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         // console.log(gbox_tv_resp);
+                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
+                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                    //     });
+                    // });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -980,7 +980,9 @@ function initDetailSlider() {
             {
             breakpoint: 415,
             settings: {
-                arrows: false
+                arrows: false,
+                slidesToShow: 2,
+                slidesToScroll: 2
             }
             }
             // You can unslick at a given breakpoint now by adding:
@@ -1021,7 +1023,9 @@ function initSimilarSlider() {
             {
             breakpoint: 415,
             settings: {
-                arrows: false
+                arrows: false,
+                slidesToShow: 2,
+                slidesToScroll: 2
             }
             }
             // You can unslick at a given breakpoint now by adding:
@@ -1899,7 +1903,7 @@ function searchFormFocus() {
     });
 }
 
-function navSearchGlassClick() {
+function navSearchGlassHover() {
     $(NAV_SEARCH_GLASS).mouseenter(e => {
         e.preventDefault();
         showNavSearchInput();
@@ -1908,6 +1912,13 @@ function navSearchGlassClick() {
     $(NAV_SEARCH_INPUT).focusout(e => {
         e.preventDefault();
         hideNavSearchInput();
+    });
+}
+
+function navSearchGlassClick() {
+    $(NAV_SEARCH_GLASS).on('click', function(e) {
+        e.preventDefault();
+
     });
 }
 
@@ -2032,7 +2043,7 @@ function watchNavItems() {
     // search
     searchNavClick();
     searchFormSubmit();
-    navSearchGlassClick();
+    navSearchGlassHover();
     searchFormFocus();
     // popular
     popularNavClick();
