@@ -69,28 +69,27 @@ a {
 	text-decoration: none;
 }
 
-/*#burger-anchor {
-	color: rgba(96, 125, 139, 0.6);
-}*/
-
-
-/*.burger.fa.fa-bars {
-	display: none;
-	position: absolute;
-	top: 5px;
-	right: 20px;
-	font-size: 36px;
-}*/
 
 /* * * * * * * Burger * * * * * * */
+
+.burger-icon-wrap {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 40px;
+	width: 50px;
+	cursor: pointer;
+	border: 1px solid blue;
+}
 
 #burger-icon {
 	width: 40px;
 	height: 5px;
 	background: rgba(96, 125, 139, 1);
 	position: absolute;
-	top: 20px;
-	right: 10px;
+	top: 50%;
+	right: 5px;
+	transform: translateY(-50%);
 	border-radius: 9px;
 	/*margin: 50px auto;*/
 	-webkit-transform: rotate(0deg);
@@ -101,7 +100,6 @@ a {
 	-moz-transition: .5s ease-in-out;
 	-o-transition: .5s ease-in-out;
 	transition: .5s ease-in-out, right 0.001s linear;
-	cursor: pointer;
 	z-index: 12;
 }
 
@@ -135,9 +133,12 @@ a {
 	bottom: -10px;
 }
 
-#burger-icon.open {
+.burger-icon-wrap.open {
 	position: fixed;
-	right: 20px;
+	z-index: 12;
+}
+
+#burger-icon.open {
 	background: transparent;
 }
 
@@ -976,56 +977,25 @@ ul.f-nav-ul-wrap {
 		display: inline-block;
 	}
 
-	.mobile-menu {
-		/*transform: translateX(-100%);*/
+	.burger-icon-wrap {
+		right: -30px;
 	}
 
-	#burger-icon.open {
-		/*position: fixed;*/
+	.burger-icon-wrap.open {
 		right: 20px;
 	}
 
-	#burger-icon {
-		top: 20px;
-		right: -30px;
-	}
-	/*.burger.fa.fa-bars {
-		right: -20px;
-		top: 5px;
-		transform: translateY(0);
+	.expand .burger-icon-wrap.open {
+		right: 30px;
 	}
 
-	.fixed-overlay .burger.fa.fa-bars {
-		right: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	.fixed-overlay .expand .burger.fa.fa-bars {
-		top: 5px;
-		transform: translateY(0);
-	}
-
-	.burger.fa.fa-bars:hover {
-		
-	}
-
-	.burger.fa.fa-bars:hover .mobile-menu {
-		
-	}*/
-
-	.main-menu {
-		/*display: inline-block;*/
+	#burger-icon-open {
+		right: 3px;
 	}
 
 	.fixed-overlay .main-menu {
 		margin-left: 100px;
 	}
-
-	.main-menu.expand {
-
-	}
-
 	
 	.nav-item {
 		position: relative;
@@ -1071,7 +1041,7 @@ ul.f-nav-ul-wrap {
 
 	#nav-search-form {
 		position: absolute;
-		top: 10px;
+		top: 15px;
 		right: 30px;
 		transform: translateY(0);
 		font-size: 0;
@@ -1097,13 +1067,10 @@ ul.f-nav-ul-wrap {
 		cursor: pointer;
 	}
 
-	.nav-search-form-inner-wrap:hover #nav-search-input {
-		display: inline-block;
-		width: 200px;
-	}
+	
 
 	.nav-search-glass:blur #nav-search-input {
-		width: 0;
+		/*width: 0;*/
 	}
 
 	#nav-search-input {
@@ -1115,7 +1082,19 @@ ul.f-nav-ul-wrap {
 		border: none;
 		border-radius: 20px;
 		padding-left: 10px;
+		-webkit-transition: all 2s linear;
+		-moz-transition: all 2s linear;
+		transition: all 2s linear;
 	}
+
+	.nav-search-form-inner-wrap:hover #nav-search-input {
+		display: inline-block;
+		width: 150px;
+		-webkit-transition: all 2s linear;
+		-moz-transition: all 2s linear;
+		transition: all 2s linear;
+	}
+
 /*
 	.nav-search-glass:hover #nav-search-input{
 		display: inline-block;
@@ -1612,6 +1591,12 @@ ul.f-nav-ul-wrap {
 
 }
 
+@media only screen and (min-width: 500px) {
+	.nav-search-form-inner-wrap:hover #nav-search-input {
+		display: inline-block;
+		width: 200px;
+	}
+}
 
 /*================================================================================/
 /* PORTRAIT AND LANDSCAPE 
@@ -1624,17 +1609,6 @@ ul.f-nav-ul-wrap {
 		background-repeat: no-repeat;
 	}
 	
-	
-
-	/*.burger.fa.fa-bars {
-		top: 5px;
-		transform: translateY(0);
-	}*/
-
-	/*.expand .burger.fa.fa-bars {
-		right: 35px;
-	}*/
-
 	#nav-search-form {
 		top: 10px;
 		transform: translateY(0);
@@ -1671,6 +1645,9 @@ ul.f-nav-ul-wrap {
 	}
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+/*   Burger Nav Menu                                      
+/* * * * * * * * * * * * * * * * * * * * * * * * */
 @media only screen and (max-width: 777px) {
 	.main-nav.expand {
 		position: fixed;
@@ -1685,18 +1662,17 @@ ul.f-nav-ul-wrap {
 		height: 100vh;
 		z-index: 10;
 	}
-
-	/*.expand .burger.fa.fa-bars {
-		right: 35px;
-	}*/
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+/*   Nav Menu                                      
+/* * * * * * * * * * * * * * * * * * * * * * * * */
 @media only screen and (min-width: 778px) {
 	.main-menu {
 		display: inline-block;
 	}
 
-	#burger-icon {
+	.burger-icon-wrap {
 		display: none;
 	}
 

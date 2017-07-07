@@ -1877,9 +1877,10 @@ function discoverNavClick() {
 }
 
 function burgerIconClick() {
-    $('#burger-icon').on('click', function(e) {
+    $('.burger-icon-wrap').on('click', function(e) {
         e.preventDefault();
         $(this).toggleClass('open');
+        $('#burger-icon').toggleClass('open');
         $(MOBILE_MENU).toggleClass('expand');
         $(MAIN_NAV).toggleClass('expand');
     });
