@@ -762,7 +762,7 @@ function tvDetailHandler(poster, initCarousel) {
                         getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
                             // console.log(gbox_tv_resp);
                             // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                            displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
                         });
                     });
                 });
