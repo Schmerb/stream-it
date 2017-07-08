@@ -631,7 +631,8 @@ section.tv-container {
 }
 
 .streaming-links-container h3,
-.streaming-links-container h4 {
+.streaming-links-container h4,
+.streaming-links-container > label {
 	color: #df9a07;
 }
 
@@ -639,8 +640,7 @@ section.tv-container {
 	display: block;
 	width: 100px;
 	margin: 0 auto;
-}
-
+}	
 .streaming-links-slider {
 	position: relative;
 	padding: 0;
@@ -684,7 +684,7 @@ section.tv-container {
 }
 
 .theater-source {
-	display: block;
+	display: inline-block;
 	width: 60px;
 	margin-bottom: 20px;
 }
@@ -975,6 +975,18 @@ ul.f-nav-ul-wrap {
 		margin: auto;
 	}
 
+	.streaming-links-container h3,
+	.streaming-links-container h4 {
+		/*width: 200px;*/
+		/*margin: 0 auto;*/
+	}
+
+
+	#theater-source-container {
+		width: 200px;
+		margin: 0 auto;
+		text-align: center;
+	}
 
 	.source-slide {
 		height: auto;
@@ -1668,6 +1680,7 @@ ul.f-nav-ul-wrap {
 
 	.source-slide ul {
 		margin: 0;
+		margin-top: 5px;
 	}
 
 	

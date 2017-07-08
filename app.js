@@ -348,11 +348,16 @@ function displayStreamingLinks(guidebox, isTvShow = false) {
     
     let hasSource = false;
     if (movie.in_theaters) {
-        $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
+        // $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
         if(movie.other_sources.movie_theater) {
-            $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
-            let theater_links = getTheaterSources(movie);
-            $(STREAMING_LINKS_CONTAINER).append(theater_links);
+            // $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
+            // let theater_links = getTheaterSources(movie);
+            // $(STREAMING_LINKS_CONTAINER).append(theater_links);
+            $(STREAMING_LINKS_CONTAINER).append(`<div id="theater-source-container">
+                                                    <h3>STILL IN THEATERS</h3>
+                                                    <h4>Grab Tickets</h4>
+                                                    ${getTheaterSources(movie)}
+                                                </div>`);
             hasSource = true;
         }
     }
