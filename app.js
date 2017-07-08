@@ -82,6 +82,7 @@ const MOVIE_TITLE = '.js-movie-title';
 const YEAR = '.js-year';
 const RATED = '.js-rated';
 const RUNTIME = '.js-runtime';
+const POSTER_LINK = '.js-poster-link';
 const DETAIL_POSTER = '.js-detail-poster';
 const IMDB_ICON = '.imdb';
 const ROTTEN_ICON = '.rotten';
@@ -212,12 +213,15 @@ function displayDetailPage(tmdb, imdb) {
     let type = imdb.Type == 'movie' ? 'movie' : 'tv';  // checks if movie or tv show
     window.location = `#detail/${type}/${imdb.imdbID}`; // Sets url for detail page
 
+    console.log('tmdb', tmdb, 'imdb', imdb);
+
     // Poster container 
     // metadata -- numerical 
     $(MOVIE_TITLE).text(imdb.Title);
     $(YEAR).text(imdb.Year);
     $(RATED).text(imdb.Rated);
     $(RUNTIME).text(imdb.Runtime);
+    $(POSTER_LINK).attr('href', tmdb.homepage);
     $(DETAIL_POSTER).attr('src', `${IMG_BASE_URL}/w342/${tmdb.poster_path}`);
 
     // Ratings
@@ -319,13 +323,15 @@ function displayStreamingLinks(guidebox) {
     let movie = guidebox; // GUIDEBOX
     // let movie = obj; // ALIEN (TESTING)
     // let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
-
+    
+    let hasSource = false;
     if (movie.in_theaters) {
         $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
         if(movie.other_sources.movie_theater) {
             $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
             let theater_links = getTheaterSources(movie);
             $(STREAMING_LINKS_CONTAINER).append(theater_links);
+            hasSource = true;
         }
     }
 
@@ -338,6 +344,7 @@ function displayStreamingLinks(guidebox) {
     let tv_srcs = respData.tv_everywhere_web_sources; 
     let free_srcs = respData.free_web_sources; 
     
+
     if(purch_srcs.length) {
         let purch_slides = getSources(purch_srcs, 'purchase');
         let purch_slider = `<label for="purch-links">Buy / Rent</label>
@@ -345,6 +352,7 @@ function displayStreamingLinks(guidebox) {
                                 ${purch_slides.join('')}
                             </ul>`;
         $(STREAMING_LINKS_CONTAINER).append(purch_slider);
+        hasSource = true;
     }
 
     if(sub_srcs.length) {
@@ -354,6 +362,7 @@ function displayStreamingLinks(guidebox) {
                                 ${sub_slides.join('')}
                           </ul>`;
         $(STREAMING_LINKS_CONTAINER).append(sub_slider);
+        hasSource = true;
     }
 
     if (tv_srcs.length) {
@@ -363,6 +372,7 @@ function displayStreamingLinks(guidebox) {
                                 ${tv_slides.join('')}
                           </ul>`;
         $(STREAMING_LINKS_CONTAINER).append(tv_slider);
+        hasSource = true;
     }
 
     if (free_srcs.length) {
@@ -372,8 +382,12 @@ function displayStreamingLinks(guidebox) {
                                 ${free_slides.join('')}
                           </ul>`;
         $(STREAMING_LINKS_CONTAINER).append(free_slider);
+        hasSource = true;
+    }
+
+    if(hasSource) {
+        $(STREAMING_LINKS_CONTAINER).append('<hr class="shadow-hr">');
     }    
-    
     initStreamingLinksSlider(); // init slick slider
 }
 
@@ -1112,7 +1126,7 @@ function initTrailerSlider() {
         slidesToShow: 3,
         slidesToScroll: 3,
         variableWidth: true,
-        centerMode: true,
+        centerMode: false,
         focusOnSelect: true,
         responsive: [
             {
