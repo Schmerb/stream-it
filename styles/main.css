@@ -65,6 +65,10 @@ body {
     display: inline-block;
 }
 
+.main-nav {
+	height: 0;
+}
+
 a {
 	text-decoration: none;
 }
@@ -516,6 +520,7 @@ main {
 #detail-page-container {
 	/*border: 1px solid white;*/
 	margin-top: 25px;
+	padding-bottom: 20px;
 }
 
 .detail-poster-container {
@@ -575,6 +580,14 @@ main {
 .rotten,
 .metacritic {
 	width: 18px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
+/* TV Seasons (Base / Mobile)
+/* * * * * * * * * * * * * * * * * * * * * * * * */
+
+.episode-still-container label {
+	display: block;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
@@ -722,6 +735,7 @@ img#cinemax_amazon_prime {
 }
 
 .similar-slide {
+	position: relative;
 	display: inline-block;
 }
 
@@ -1460,6 +1474,7 @@ ul.f-nav-ul-wrap {
 	.season-poster-container img {
 		height: 133px;
 		width: 92px;
+		cursor: pointer;
 	}
 
 	.season-label {
@@ -1480,6 +1495,7 @@ ul.f-nav-ul-wrap {
 		margin-right: 20px;
 		margin-bottom: 20px;
 		vertical-align: top;
+		cursor: pointer;
 	}
 
 	.episode-number,

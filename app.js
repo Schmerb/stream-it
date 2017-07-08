@@ -84,9 +84,9 @@ const RATED = '.js-rated';
 const RUNTIME = '.js-runtime';
 const POSTER_LINK = '.js-poster-link';
 const DETAIL_POSTER = '.js-detail-poster';
-const IMDB_ICON = '.imdb';
-const ROTTEN_ICON = '.rotten';
-const METACRITIC_ICON = '.metacritic';
+const IMDB_RATING = '.imdb-label';
+const ROTTEN_RATING = '.rotten-label';
+const METACRITIC_RATING= '.metacritic-label';
 const IMDB = '.js-imdb';
 const ROTTEN = '.js-rotten';
 const METACRITIC = '.js-metacritic';
@@ -238,9 +238,9 @@ function displayDetailPage(tmdb, imdb) {
             $(METACRITIC).text(rating.Value);
         }
     });
-    imdb_rating ? $(IMDB_ICON).show() : $(IMDB_ICON).hide();
-    rotten_rating ? $(ROTTEN_ICON).show() : $(ROTTEN_ICON).hide();
-    meta_rating ? $(METACRITIC_ICON).show() : $(METACRITIC_ICON).hide();
+    imdb_rating ? $(IMDB_RATING).show() : $(IMDB_RATING).hide();
+    rotten_rating ? $(ROTTEN_RATING).show() : $(ROTTEN_RATING).hide();
+    meta_rating ? $(METACRITIC_RATING).show() : $(METACRITIC_RATING).hide();
 
     // metadata -- crew
     $(PLOT).text(tmdb.overview);
@@ -248,6 +248,7 @@ function displayDetailPage(tmdb, imdb) {
     $(WRITERS).text(imdb.Writer);
     $(CAST).text(imdb.Actors);
 
+    type = imdb.Type;
     if (type == 'movie') {
         $(DIRECTOR_ITEM).show();
     } else if (type == 'series') {
@@ -308,6 +309,7 @@ function displaySeasonDetails(season) {
     });
     $(SEASON_DETAILS_CONTAINER).empty().append(`<h3>Season ${season.season_number}</h3>`);
     $(SEASON_DETAILS_CONTAINER).append(episodeStills.join(''));
+    $(SEASON_DETAILS_CONTAINER).append('<hr class="shadow-hr">');
 }
 
 
@@ -505,11 +507,11 @@ function displayDetailCarousel() {
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
-//  Creates new carousel with similar movies posters
+//  Creates new carousel with similar posters
 // * * * * * * * * * * * * * * * * * * * * * * * * *
-function displaySimilarMoviesCarousel(resp) {
-    let posters = resp.results.map(function(movie) {
-        return carouselSlideTemplate(movie, 'similar-slide poster-img-wrap');
+function displaySimilarCarousel(resp, isTv) {
+    let posters = resp.results.map(function(video) {
+        return carouselSlideTemplate(video, `similar-slide poster-img-wrap`);
     });
     unslick(SIMILAR_MOVIES_SLIDER);
     $(SIMILAR_MOVIES_SLIDER).empty().append(posters.join(''));
@@ -743,15 +745,15 @@ function movieDetailPageHandler(poster, initCarousel) {
             initCarousel ? displayDetailCarousel() : null;
 
             getSimilarMoviesTMDB(poster.attr('data-id'), 1, resp => {
-                displaySimilarMoviesCarousel(resp);
+                displaySimilarCarousel(resp, false);
             });
             // displayStreamingLinks(gbox_m_resp);
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                });
-            });
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -771,16 +773,20 @@ function tvDetailHandler(poster, initCarousel) {
             getTVExternalIdsTMDB(detail_resp.id, function(ids_resp) {
                 searchByIdOMDB(ids_resp.imdb_id, function(imdb_resp) {
                     showDetailPage(initCarousel);
-                    // displayDetailPage(detail_resp, imdb_resp); // Displays detail page
+                    displayDetailPage(detail_resp, imdb_resp); // Displays detail page
                     initCarousel ? displayDetailCarousel() : null; // inits carousel if needed
-                    // call to guidebox for streaming links / prices
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            // console.log(gbox_tv_resp);
-                            // getAllEpisodesGuidebox(gbox_s_resp.id);
-                            displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                        });
+
+                    getSimilarShowsTMDB(poster.attr('data-id'), resp => {
+                        displaySimilarCarousel(resp, true);
                     });
+                    // call to guidebox for streaming links / prices
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         // console.log(gbox_tv_resp);
+                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
+                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
+                    //     });
+                    // });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -1673,6 +1679,15 @@ function getTvEpisodeVideosTMDB(tvId, seasonNumber, episodeNumber, callback = pr
         api_key: TMDB_KEY
     };
     $.getJSON(TMDB_TV_EPISODE_VIDEOS_URL, query, callback);
+}
+
+function getSimilarShowsTMDB(tvId, callback = printResp) {
+    let TMDB_SIMILAR_SHOWS_URL = `${TMDB_BASE_URL}/tv/${tvId}/similar`;
+    let query = {
+        api_key: TMDB_KEY,
+        page: 1
+    };
+    $.getJSON(TMDB_SIMILAR_SHOWS_URL, query, callback);
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
