@@ -1452,7 +1452,7 @@ ul.f-nav-ul-wrap {
 	.poster-num-metadata ul {
 		padding: 0;
 		margin: 0;
-		margin-left: 5px;
+		/*margin-left: 5px;*/
 		font-size: 12px;
 	}
 
@@ -1731,6 +1731,14 @@ ul.f-nav-ul-wrap {
 		/*z-index: 10;*/
 	}
 
+	.poster-num-metadata {
+		width: 90%;
+		margin: 0 auto 5px;
+	}
+
+	.main-title {
+		font-size: 24px;
+	}
 	
 }
 
