@@ -208,7 +208,7 @@ a {
 }
 
 .mobile-menu {
-	color: black;
+	color: rgb(134, 195, 35);
 	transform: translateX(-500%);
 	width: 100%;
 	padding: 0;
