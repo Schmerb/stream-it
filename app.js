@@ -13,7 +13,8 @@ let state = {
     displayQuery: false,
     isMobile: false,
     count: 0,
-    genreLists: {}
+    genreLists: {},
+    seasons: {}
 };
 
 // Selectors
@@ -114,6 +115,7 @@ const SEASONS_CONTAINER = '.seasons-container';
 const SEASON_POSTER_CONTAINER = '.season-poster-container';
 const SEASON_POSTER = '.season-poster-container img'
 const SEASON_DETAILS_CONTAINER = '.season-details-container';
+const EPISODE_STILL = '.episode-still-container img';
 
 
 // ================================================================================
@@ -263,7 +265,7 @@ function displayDetailPage(tmdb, imdb) {
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function displaySeasonPosters(tmdb) {
     hide(STREAMING_LINKS_CONTAINER);
-    $(TV_CONTAINER).show();
+    show(TV_CONTAINER);
     let seasonPosters = tmdb.seasons.map(function(season, index) {
         if (season.poster_path == null) {
             return '';
@@ -283,7 +285,9 @@ function displaySeasonPosters(tmdb) {
                         </label> 
                       </div>`;
     });
+    unslick(SEASONS_CONTAINER);
     $(SEASONS_CONTAINER).empty().append(seasonPosters.join(''));
+    initTvSeasonsSlider();
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -296,6 +300,7 @@ function displaySeasonDetails(season) {
                     <img src="${IMG_BASE_URL}/w154/${episode.still_path}"
                          alt="Still image for episode ${episode.episode_number}"
                          id="${episode.episode_number}"
+                         data-season="${season.season_number}"
                          data-episode-name="${episode.name}"
                          data-episode-number="${episode.episode_number}"
                          data-episode-overview="${episode.overview}"
@@ -312,14 +317,29 @@ function displaySeasonDetails(season) {
     $(SEASON_DETAILS_CONTAINER).append('<hr class="shadow-hr">');
 }
 
+function displayEpisodeStreamLinks(season, ep) {
+    let episode = state.seasons[`season_${season}`][`ep_${ep}`];
+    if(episode) {
+        displayStreamingLinks(episode, true);
+    }
+}
+
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 //  Displays the different streaming options
 // * * * * * * * * * * * * * * * * * * * * * * * * *
-function displayStreamingLinks(guidebox) {
+function displayStreamingLinks(guidebox, isTvShow = false) {
     // Streaming links data -- GUIDEBOX DATA
-    hide(TV_CONTAINER);
     $(STREAMING_LINKS_CONTAINER).empty();
+    if (!isTvShow) {
+        hide(TV_CONTAINER);
+        $(STREAMING_LINKS_CONTAINER).removeClass('tv-sources');
+    } else {
+        $(STREAMING_LINKS_CONTAINER).append(`<hr class="shadow-hr">
+                                            <h3>Episode ${guidebox.episode_number} Stream Links</h3>`)
+                                    .addClass('tv-sources');
+    }
+
     show(STREAMING_LINKS_CONTAINER);
 
     let movie = guidebox; // GUIDEBOX
@@ -390,7 +410,8 @@ function displayStreamingLinks(guidebox) {
     if(hasSource) {
         $(STREAMING_LINKS_CONTAINER).append('<hr class="shadow-hr">');
     }    
-    initStreamingLinksSlider(); // init slick slider
+    
+    isTvShow ? initTvStreamLinksSlider() : initStreamingLinksSlider(); // init slick slider
 }
 
 
@@ -418,9 +439,11 @@ function getSources(sources, src_type) {
                     }
                 });
             }
+            let baseSource = src.source.substr(0, src.source.indexOf('_'));
+            let iconSrc = icons[baseSource] ? icons[baseSource] : icons[src.source];
             let slide =  `<li class="source-slide">
                                 <a href="${src.link}" target="__blank">
-                                    <img id="${src.source}" class="icon" src="${icons[src.source]}">
+                                    <img id="${src.source}" class="icon" src="${iconSrc}">
                                 </a>
                                 <label for="${src.source}">${src.display_name}<label>`;
             // purchase sources
@@ -442,8 +465,8 @@ function getSources(sources, src_type) {
                                     </li>
                                 </ul>`;
             // subscription sources
-            } else if (src_type == 'subscription') { 
-                slide += `<span class="package-price">${package_prices[src.source] ? package_prices[src.source] : '?'} / month</span>`;
+        } else if (src_type == 'subscription') { 
+                slide += `<span class="package-price">${package_prices[baseSource] ? package_prices[baseSource] : package_prices[src.source]} / month</span>`;
             // tv sources
             } else if (src_type == 'tv') { 
                 slide += `<span class="package-price">Included with ${src.tv_channel}</span>`;
@@ -637,6 +660,7 @@ function clearDetailPage(initCarousel) {
         $(DETAIL_PAGE_SLIDER).empty();
     }
     $(FRAME).removeClass('frame-ready');
+    state.seasons = {};
 }
 
 
@@ -749,11 +773,11 @@ function movieDetailPageHandler(poster, initCarousel) {
             });
             // displayStreamingLinks(gbox_m_resp);
             // call to guidebox for streaming links / prices
-            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-            //         displayStreamingLinks(gbox_m_resp);
-            //     });
-            // });
+            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+                    displayStreamingLinks(gbox_m_resp);
+                });
+            });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -779,14 +803,15 @@ function tvDetailHandler(poster, initCarousel) {
                     getSimilarShowsTMDB(poster.attr('data-id'), resp => {
                         displaySimilarCarousel(resp, true);
                     });
-                    // call to guidebox for streaming links / prices
-                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                    //         // console.log(gbox_tv_resp);
-                    //         // getAllEpisodesGuidebox(gbox_s_resp.id);
-                    //         // displayDetailPage(detail_resp, imdb_resp, gbox_tv_resp);
-                    //     });
-                    // });
+
+                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                            // console.log(gbox_tv_resp);
+                            getAllEpisodesGuidebox(gbox_s_resp.id, function(ep_resp) {
+                                tvEpisodesHandler(ep_resp, detail_resp.number_of_seasons);
+                            });
+                        });
+                    });
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -796,8 +821,34 @@ function tvDetailHandler(poster, initCarousel) {
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
-//  Handler for getting details for a specific
-//  season and displaying the metadata
+//  Handler for all episodes for given tv show.
+//  Stores all episode objects w/ stream links 
+//  for each episode and then displays the 
+//  streaming links for the episode chosen by user,
+//  if it exists
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function tvEpisodesHandler(resp, numSeasons) {
+    for (let i = 1; i <= numSeasons; i++) {
+        state.seasons[`season_${i}`] = {};
+    }
+    resp.results.forEach(function(episode) {
+        if (episode.episode_number === 0) {
+            return;
+        }
+        state.seasons[`season_${episode.season_number}`][`ep_${episode.episode_number}`] = episode; 
+    });
+    $('label', SEASON_DETAILS_CONTAINER).each(function() {
+        if ($(this).hasClass('highlight')) {
+            let $img = $(this).siblings('img');
+            displayEpisodeStreamLinks($img.attr('data-season'), $img.attr('data-episode-number'));
+        }
+    });
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  Handler for getting details and episodes
+//  for a specific season and displaying 
+//  the metadata
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function seasonHandler(showName, showID, season) {
     getTvSeasonDetailsTMDB(showID, season, function(season_resp) {
@@ -1030,6 +1081,47 @@ function initDetailSlider() {
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * *
+// detail page carousel navigation
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function initTvSeasonsSlider() {
+    $(SEASONS_CONTAINER).slick({
+        dots: false,
+        arrows: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        variableWidth: true,
+        mobileFirst: true,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: 'unslick'
+            },
+            {
+            breakpoint: 860,
+            settings: 'unslick'
+            },
+            {
+            breakpoint: 600,
+            settings: 'unslick'
+            },
+            {
+            breakpoint: 415,
+            settings: {
+                arrows: false,
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * *
 // similar movies slider
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function initSimilarSlider() {
@@ -1119,6 +1211,45 @@ function initStreamingLinksSlider() {
     });
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+// streaming options carousel
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function initTvStreamLinksSlider() {
+    $(STREAMING_LINKS_SLIDER).slick({
+        dots: false,
+        arrows: true,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        variableWidth: true,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                infinite: false
+            }
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            },
+            {
+            breakpoint: 415,
+            settings: "unslick"
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+}
+
 
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 // trailers carousels
@@ -1190,6 +1321,9 @@ function responsiveReslick() {
         }
         if(!$(DETAIL_PAGE_SLIDER).hasClass('slick-initialized')) {
             initDetailSlider();
+        }
+        if(!$(SEASONS_CONTAINER).hasClass('slick-initialized')) {
+            initTvSeasonsSlider();
         }
     });
 }
@@ -1777,13 +1911,21 @@ function getShowSeasonsGuidebox(showID, callback = printResp) {
     $.getJSON(SHOW_GBOX_URL, query, callback);
 }
 
-function getAllEpisodesGuidebox(showID, season = 1, callback = printResp, limit = 100) {
+function getAllEpisodesGuidebox(showID, callback = printResp, limit = 100) {
     let SHOW_GBOX_URL = `${GBOX_BASE_URL}/shows/${showID}/episodes`;
     let query = {
         api_key: GUIDEBOX_KEY,
         include_links: true,
-        season: season,
+        // season: season,
         limit: limit
+    };
+    $.getJSON(SHOW_GBOX_URL, query, callback);
+}
+
+function getEpisodeDetailGuidebox(episodeID, callback = printResp) {
+    let EPISODE_GBOX_URL = `${GBOX_BASE_URL}/episodes/${episodeID}`;
+    let query = {
+        api_key: GUIDEBOX_KEY,
     };
     $.getJSON(SHOW_GBOX_URL, query, callback);
 }
@@ -2077,6 +2219,25 @@ function seasonPosterClick() {
     });
 }
 
+function episodeStillClick() {
+    $(SEASON_DETAILS_CONTAINER).on('click', EPISODE_STILL,function(e) {
+        e.preventDefault();
+        console.log('CLICK!!!!');
+        $(SEASON_DETAILS_CONTAINER).find('label').removeClass('highlight');
+        $(this).siblings('label').addClass('highlight');
+        let ep = $(this).attr('data-episode-number');
+        let season = $(this).attr('data-season');
+        if (Object.keys(state.seasons).length != 0) {
+            displayEpisodeStreamLinks(season, ep);
+        } else {
+            $(STREAMING_LINKS_CONTAINER).removeClass('hidden');
+            $(STREAMING_LINKS_CONTAINER).html(`<hr class="shadow-hr">
+                                                <h3>Episode ${ep} Stream Links</h3>
+                                                <h2 id="source-status">LOADING . . .</h2>`);
+        }
+    });
+}
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 //    Carousel Poster clicks                                             
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -2103,7 +2264,11 @@ function detailCarouselClick() {
 function similarCarouselClick() {
     $(SIMILAR_MOVIES_SLIDER).on('click', SIMILAR_SLIDE_IMG, function(e) {
         e.preventDefault();
-        movieDetailPageHandler($(this), false);
+        if ($(this).attr('data-tv') == 'true') {
+            tvDetailHandler($(this), false);
+        } else {
+            movieDetailPageHandler($(this), false);
+        }
     });
 }
 
@@ -2139,7 +2304,9 @@ function displays() {
     popularPosterClick();
     discoverPosterClick();
     seasonPosterClick();
+    episodeStillClick();
     moreContentClick();
+
     // carousel poster clicks
     trailerCarouselClick();
     detailCarouselClick();

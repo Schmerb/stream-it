@@ -586,10 +586,25 @@ main {
 /* TV Seasons (Base / Mobile)
 /* * * * * * * * * * * * * * * * * * * * * * * * */
 
+section.tv-container {
+	margin-bottom: 20px;
+}
+
+.episode-still-container {
+	margin-bottom: 20px;
+}
+
 .episode-still-container label {
 	display: block;
 }
 
+.season-details-container h3 {
+		color: #df9a07;
+}
+
+.highlight {
+	color: #df9a07;
+}
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
 /* Detail Carousel (Base / Mobile)
 /* * * * * * * * * * * * * * * * * * * * * * * * */
@@ -682,7 +697,7 @@ main {
 	display: block;
 	width: 40px;
 	height: 40px;
-	/*border-radius: 5px;*/
+	border-radius: 5px;
 	margin-left: 5px;
 }
 
@@ -719,6 +734,8 @@ img#cinemax_amazon_prime {
 .package-price {
 	display: block;
 }
+
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * =/ 
@@ -933,7 +950,7 @@ ul.f-nav-ul-wrap {
 
 
 /*================================================================================/
-/* MOBILE ONLY
+/* MOBILE PORTRAIT ONLY
 /*===============================================================================*/
 @media only screen and (max-width: 439px) {
 	.main-nav.expand {
@@ -960,9 +977,8 @@ ul.f-nav-ul-wrap {
 
 
 	.source-slide {
-		height: 80px;
+		height: auto;
 	}
-
 	
 	.source-slide ul {
 		display: inline-block;
@@ -985,8 +1001,31 @@ ul.f-nav-ul-wrap {
 		margin-left: 5%;
 	}
 
+	.package-price {
+		position: absolute;
+		top: 10%;
+		right: 40px;
+	}
+
 	.top-plot-container {
 		display: none;
+	}
+
+	.season-poster-container {
+		display: inline-block;
+	}
+
+	.season-poster-container label {
+		display: block;
+	}
+
+	.season-details-container {
+		padding: 0 15%;
+	}
+
+	.season-details-container h3 {
+		width: 100px;
+		margin: 0 auto 10px;
 	}
 }
 
@@ -1462,6 +1501,7 @@ ul.f-nav-ul-wrap {
 
 	.seasons-container {
 		overflow: auto;
+		padding-top: 5px;
 	}
 
 	.season-poster-container {
@@ -1493,7 +1533,7 @@ ul.f-nav-ul-wrap {
 		display: inline-block;
 		width: 154px;
 		margin-right: 20px;
-		margin-bottom: 20px;
+		/*margin-bottom: 20px;*/
 		vertical-align: top;
 		cursor: pointer;
 	}
@@ -1608,7 +1648,8 @@ ul.f-nav-ul-wrap {
 		font-size: 18px;
 	}
 
-	.purchase-links {
+	.purchase-links,
+	.subscription-links {
 		width: 90%;
 		margin-left: 5px;
 	}
@@ -1689,6 +1730,8 @@ ul.f-nav-ul-wrap {
 		transform: translateY(0);
 		/*z-index: 10;*/
 	}
+
+	
 }
 
 
@@ -1718,6 +1761,11 @@ ul.f-nav-ul-wrap {
 
 	.frame-container {
 		padding-bottom: 300px;
+	}
+
+	.streaming-links-container.tv-sources {
+		width: 30%;
+		float: left;
 	}
 }
 

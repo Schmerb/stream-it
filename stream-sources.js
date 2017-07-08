@@ -5,10 +5,12 @@ let icons = {
     amazon_buy: 'assets/icons/amazon_buy.png',
     amazon_instant_video: 'assets/icons/amazon-instant-video.jpeg',
     amazon_prime_instant_video: 'assets/icons/amazon-prime-instant-video.jpeg',
+    amazon_prime: 'assets/icons/amazon-prime-instant-video.jpeg',
     amc: 'assets/icons/amc.jpeg',
     itunes: 'assets/icons/itunes.jpeg',
     britbox: 'assets/icons/britbox.jpeg',
     cbs: 'assets/icons/cbs.jpeg',
+    cbs_all_access: 'assets/icons/cbs.jpeg',
     cinemanow: 'assets/icons/cinemanow.jpeg',
     cinemax_amazon_prime: 'assets/icons/cinemax.png',
     crackle: 'assets/icons/crackle.jpeg',
@@ -27,6 +29,7 @@ let icons = {
     hbo_now: 'assets/icons/hbo-now.jpeg',
     history: 'assets/icons/history.jpeg',
     hulu: 'assets/icons/hulu.jpeg',
+    hulu_with_showtime: 'assets/icons/hulu.jpeg',
     imdb: 'assets/icons/imdb_standard.png',
     imdb_long: 'assets/icons/imdb_long.png',
     lifetime: 'assets/icons/lifetime.jpeg',
@@ -41,6 +44,8 @@ let icons = {
     rotten_tomatoe: 'assets/icons/rotten_tomatoe.png',
     seeso_amazon_prime: 'assets/icons/seeso_app_icon.jpg',
     showtime: 'assets/icons/showtime.jpeg',
+    showtime_amazon_prime: 'assets/icons/showtime.jpeg',
+    showtime_subscription: 'assets/icons/showtime.jpeg',
     shudder: 'assets/icons/shudder.jpeg',
     sony: 'assets/icons/sony-main.png',
     starz: 'assets/icons/starz.jpeg',
@@ -59,6 +64,11 @@ let icons = {
 };
 
 let package_prices = {
-    netflix: "SD $9.99, HD $11.99",
-    cinemax_amazon_prime: '$9.99'
+    netflix: "<span class='definition-span'>SD</span> $9.99, <span class='definition-span'>HD</span> $11.99",
+    cinemax_amazon_prime: '$9.99',
+    amazon_prime: '$8.99',
+    cbs_all_access: '$5.99 - $9.99',
+    showtime: '$9 - $11',
+    hulu: '$7.99',
+    hbo: '$14.99'
 };
