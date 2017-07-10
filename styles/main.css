@@ -866,6 +866,7 @@ footer {
 	/*background: rgba(96, 125, 139, 0.6);*/
 	color: greenyellow;
 	color: rgb(134, 194, 50);
+	color: rgba(96, 125, 139, 1);
 	/*height: 100px;*/
 	font-size: 12px;
 	text-align: center;
@@ -902,6 +903,7 @@ ul.f-nav-ul-wrap {
 }
 
 .f-nav-label {
+	color: rgb(134, 194, 50);
 	display: block;
 	margin-bottom: 5px;
 }
@@ -959,6 +961,9 @@ ul.f-nav-ul-wrap {
 #tmdb-attr {
 	display: block;
 }
+
+
+
 
 
 /*================================================================================/
