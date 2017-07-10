@@ -43,6 +43,7 @@ body {
 }
 
 .title {
+	font-family: 'Viga', sans-serif;
 	color: #F8F1E5;
 	text-decoration: none;
     display: block;
@@ -71,6 +72,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: #F8F1E5;
 }
 
 
@@ -252,6 +254,7 @@ a {
 }
 
 .header-message {
+	font-family: 'Ubuntu', sans-serif;
 	font-size: 24px;
 	text-align: center;
 }
@@ -487,8 +490,7 @@ main {
 }
 
 #discovery-title {
-	width: 200px;
-	margin: 0 auto;
+	text-align: center;
 }
 
 .disc-slide {
@@ -522,7 +524,7 @@ main {
 #detail-page-container {
 	/*border: 1px solid white;*/
 	margin-top: 25px;
-	padding-bottom: 20px;
+	padding-bottom: 50px;
 }
 
 .detail-poster-container {
@@ -861,16 +863,19 @@ img#cinemax_amazon_prime {
 footer {
 	clear: both;
 	position: relative;
-	background: rgba(96, 125, 139, 0.6);
+	/*background: rgba(96, 125, 139, 0.6);*/
 	color: greenyellow;
+	color: rgb(134, 194, 50);
 	/*height: 100px;*/
 	font-size: 12px;
 	text-align: center;
+	padding-bottom: 30px;
 }
 
 .footer-nav {
 	margin-top: 30px;
 	margin-bottom: 50px;
+	font-size: 16px;
 }
 
 .footer-nav ul {
@@ -881,7 +886,7 @@ footer {
 }
 
 ul.f-nav-ul-wrap {
-	width: 75%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -892,7 +897,7 @@ ul.f-nav-ul-wrap {
 
 .f-nav-item {
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 20px;
 	vertical-align: top;
 }
 
@@ -923,6 +928,7 @@ ul.f-nav-ul-wrap {
 	margin-top: 20px;
 }
 
+
 #disc-menu-1 {
 	display: inline-block;
 }
@@ -935,14 +941,18 @@ ul.f-nav-ul-wrap {
 }
 
 .credit {
-	/*position: absolute;
-	bottom: 5px;
-	left: 50%;
-	transform: translateX(-50%);*/
+	color: #F8F1E5;
+	font-size: 13px;
+	width: 95%;
+	margin: 0 auto;
 }
 
 .copy {
 	margin-bottom: 5px;
+}
+
+.copy-symbol {
+	color: rgb(134, 194, 50);
 }
 
 .copy,
@@ -998,7 +1008,7 @@ ul.f-nav-ul-wrap {
 		display: inline-block;
 		position: absolute;
 		top: 50%;
-		right: 10px;
+		left: 55%;
 		margin: 0;
 		transform: translateY(-50%);
 	}
@@ -1046,6 +1056,16 @@ ul.f-nav-ul-wrap {
 @media only screen and (max-width: 340px) {
 	.source-slide .icon {
 		/*margin-left: 5px;*/
+	}
+}
+
+@media only screen and (min-width: 375px) {
+	.f-nav-item {
+		margin-left: 40px;
+	}
+
+	.discover-menus ul {
+		margin-right: 20px;
 	}
 }
 
@@ -1789,6 +1809,14 @@ ul.f-nav-ul-wrap {
 	.streaming-links-container.tv-sources {
 		width: 30%;
 		float: left;
+	}
+
+	.f-nav-item {
+		margin-left: 50px;
+	}
+
+	.discover-menus ul {
+		margin-right: 15px;
 	}
 }
 

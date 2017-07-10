@@ -449,8 +449,8 @@ function getSources(sources, src_type) {
             let slide =  `<li class="source-slide">
                                 <a href="${src.link}" target="__blank">
                                     <img id="${src.source}" class="icon" src="${iconSrc}">
-                                </a>
-                                <label for="${src.source}">${src.display_name}<label>`;
+                                
+                                    <label for="${src.source}">${src.display_name}<label>`;
             // purchase sources
             if (src_type == 'purchase') {
                 slide +=        `<ul class="purchase-options-list">
@@ -478,7 +478,7 @@ function getSources(sources, src_type) {
             } else if (src_type == 'free') {
                 slide += `<span class="package-price">FREE</span>`;
             }
-            slide += `</li>`;                     
+            slide += `</a></li>`;                     
             return slide;
         });
 }
