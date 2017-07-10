@@ -1774,6 +1774,10 @@ ul.f-nav-ul-wrap {
 	.main-title {
 		font-size: 24px;
 	}
+
+	footer {
+		background: url('../assets/backgrounds/textures/diagonal-texture-black-compressor.jpg') center;
+	}
 	
 }
 
