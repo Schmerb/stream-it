@@ -1756,7 +1756,7 @@ ul.f-nav-ul-wrap {
 	main {
 		background-attachment: scroll;
 		background-size: 400%; 
-		background-position-y: 0;
+		background-position-y: 50%;
 		background-repeat: no-repeat;
 	}
 	
