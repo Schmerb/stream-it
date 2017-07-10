@@ -208,7 +208,7 @@ a {
 }
 
 .mobile-menu {
-	color: rgb(134, 195, 35);
+	color: white;
 	transform: translateX(-500%);
 	width: 100%;
 	padding: 0;
@@ -220,9 +220,11 @@ a {
 
 
 .mobile-menu.expand {
+	position: relative;
 	margin-top: 40px;
 	padding-top: 5px;
 	transform: translateX(0);
+	z-index: 4;
 }
 
 .mobile-menu li {
@@ -1812,6 +1814,16 @@ ul.f-nav-ul-wrap {
 		width: 100%;
 		height: 100vh;
 		z-index: 10;
+	}
+
+	.main-nav.expand::after {
+		position: absolute;
+		background: rgba(0,0,0,0.3);
+		content: '';
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
 	}
 }
 
