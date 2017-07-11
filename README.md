@@ -29,7 +29,7 @@ Stream It is a search engine for users to find out exactly where and for how muc
 * CSS3
 * JavaScript
 * jQuery
-  * Slick - Responsive carousel jQuery plugin
+  * [Slick](http://kenwheeler.github.io/slick/) - Responsive carousel jQuery plugin
 
 ## Notes
 * Responsive, mobile first design strategy 
