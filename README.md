@@ -19,4 +19,4 @@ Stream It is a search engine for users to find out exactly where and for how muc
 
 ![Discover Content Page](./working-screenshots/discover-content.png?raw=true "Discover Content Page")
 
-## 
+## Live [DEMO](https://schmerb.github.io/stream-it/)
