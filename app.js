@@ -88,6 +88,9 @@ const DETAIL_POSTER = '.js-detail-poster';
 const IMDB_RATING = '.imdb-label';
 const ROTTEN_RATING = '.rotten-label';
 const METACRITIC_RATING= '.metacritic-label';
+const IMDB_LINK = '.imdb-link';
+// const ROTTEN_LINK = '.imdb-link';
+// const METACRITIC_LINK = '.imdb-link';
 const IMDB = '.js-imdb';
 const ROTTEN = '.js-rotten';
 const METACRITIC = '.js-metacritic';
@@ -231,6 +234,7 @@ function displayDetailPage(tmdb, imdb) {
     imdb.Ratings.forEach(function(rating) {
         if (rating.Source == 'Internet Movie Database') {
             imdb_rating = true; // exists
+            $(IMDB_LINK).attr('href', `http://www.imdb.com/title/${imdb.imdbID}`);
             $(IMDB).text(rating.Value);
         } else if (rating.Source == 'Rotten Tomatoes') {
             rotten_rating = true; // exists

@@ -1855,7 +1855,7 @@ ul.f-nav-ul-wrap {
 
 	.main-nav.expand::after {
 		position: absolute;
-		background: rgba(0,0,0,0.3);
+		background: rgba(0,0,0,0.4);
 		content: '';
 		width: 100%;
 		height: 100%;
