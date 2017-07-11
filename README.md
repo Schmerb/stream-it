@@ -19,6 +19,13 @@ Asynchronous API Client-Side Capstone Project from [Thinkful's](https://www.thin
 
 ## Live [DEMO](https://schmerb.github.io/stream-it/)
 
-Stream It is a search engine for users to find out exactly where and for how much they can currently stream a movie or tv show and view ratings as well as other useful information. It makes the process of searching for titles across multiple streaming platforms as easy as a few clicks. Provides lists of popular movies and tv shows and a discover content section to browse movies by genre. Currently leverages about 340 sources.
+## Description
+Stream It is a search engine for users to find out exactly where and for how much they can currently stream a movie or tv show and view ratings as well as other useful information. It makes the process of searching for titles across multiple streaming platforms as easy as a few clicks. Provides lists of popular movies and tv shows and a discover content section to browse movies by genre as well as suggestions for similar movies and tv shows. Currently leverages about 340 sources.
 
+## Built With
+* HTML5 
+* CSS3
+* JavaScript
+* jQuery
+  * Slick - Responsive carousel jQuery plugin
 
