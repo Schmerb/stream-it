@@ -905,6 +905,7 @@ ul.f-nav-ul-wrap {
 .f-nav-label {
 	color: rgb(134, 194, 50);
 	display: block;
+	margin-top: 25px;
 	margin-bottom: 5px;
 }
 
@@ -1818,6 +1819,10 @@ ul.f-nav-ul-wrap {
 	.streaming-links-container.tv-sources {
 		width: 30%;
 		float: left;
+	}
+
+	.f-nav-label {
+		margin-top: 0;
 	}
 
 	.f-nav-item {

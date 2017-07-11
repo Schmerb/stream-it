@@ -352,11 +352,7 @@ function displayStreamingLinks(guidebox, isTvShow = false) {
     
     let hasSource = false;
     if (movie.in_theaters) {
-        // $(STREAMING_LINKS_CONTAINER).append(`<h3>STILL IN THEATERS</h3>`);
         if(movie.other_sources.movie_theater) {
-            // $(STREAMING_LINKS_CONTAINER).append(`<h4>Grab Tickets</h4>`);
-            // let theater_links = getTheaterSources(movie);
-            // $(STREAMING_LINKS_CONTAINER).append(theater_links);
             $(STREAMING_LINKS_CONTAINER).append(`<div id="theater-source-container">
                                                     <h3>STILL IN THEATERS</h3>
                                                     <h4>Grab Tickets</h4>
@@ -704,7 +700,6 @@ function popularMoviesHandler(page = 1) {
         displayPopularMovies();
         $(POPULAR_MOVIES_TITLE).show();
         show(MOVIES_MORE_BTN);
-        // $(MOVIES_MORE_BTN).show();
     });
 }
 
@@ -721,7 +716,6 @@ function popularTvShowsHandler(page = 1) {
         displayPopularTv();
         $(POPULAR_TV_TITLE).show();
         show(TV_MORE_BTN);
-        // $(TV_MORE_BTN).show();
     });
 }
 
@@ -730,7 +724,6 @@ function popularTvShowsHandler(page = 1) {
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function searchMultiHandler(page = 1) { 
     show(LOADING);
-    // $(LOADING).removeClass('hidden');
     $(MAIN_INPUT).val('');
     $(NAV_SEARCH_INPUT).val('');
     page == 1 ? smoothScroll(MAIN) : null; // if new search, scroll to top of search page
@@ -768,7 +761,6 @@ function searchMultiHandler(page = 1) {
 //  display to user
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function movieDetailPageHandler(poster, initCarousel) {
-    // showDetailPage(initCarousel);
     smoothScroll(MAIN);
     
     getMovieDetailsByIdTMDB(poster.attr('data-id'), function(detail_resp) {
@@ -780,7 +772,6 @@ function movieDetailPageHandler(poster, initCarousel) {
             getSimilarMoviesTMDB(poster.attr('data-id'), 1, resp => {
                 displaySimilarCarousel(resp, false);
             });
-            // displayStreamingLinks(gbox_m_resp);
             // call to guidebox for streaming links / prices
             searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
                 getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
@@ -800,7 +791,6 @@ function movieDetailPageHandler(poster, initCarousel) {
 //  display to user
 // * * * * * * * * * * * * * * * * * * * * * * * * *
 function tvDetailHandler(poster, initCarousel) {
-    // showDetailPage(initCarousel);
     smoothScroll(MAIN);
     getTvDetailsTMDB(poster.attr('data-id'), function(detail_resp) {
             getTVExternalIdsTMDB(detail_resp.id, function(ids_resp) {
@@ -815,7 +805,6 @@ function tvDetailHandler(poster, initCarousel) {
 
                     searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
                         getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            // console.log(gbox_tv_resp);
                             getAllEpisodesGuidebox(gbox_s_resp.id, function(ep_resp) {
                                 tvEpisodesHandler(ep_resp, detail_resp.number_of_seasons);
                             });
@@ -922,10 +911,9 @@ function trailerHandler(resp) {
             if (trailers.length > 1) {
                 initTrailerSlider();
             }
-            // $(FRAME).attr('src', `https://www.youtube.com/embed/${mainTrailer.key}?`);
             $(FRAME).addClass('frame-ready');
         });
-    } // end if     
+    } // end if (trailers.length > 0)     
 }
 
 
@@ -936,7 +924,6 @@ function trailerHandler(resp) {
 // * * * * * * * * * * * * * * * * * * * * * * * * *
                //  0  ,  1   ,  2   ,  3   ,  4   ,  5   ,    6
 // let widths = ["w92","w154","w185","w342","w500","w780","original"]
-// let img_width = widths[2];
 function discoverHandler(anchor = null) {
     $(DISCOVER_CONTENT).empty();
     $(MAIN_INPUT).val('');
@@ -1355,18 +1342,13 @@ function printResp(resp) {
 // Collapses nav bar to set height
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function collapseNav(newHeight) {
-    // $('.logo').fadeOut(200);
-    // $('.monitor').fadeOut(200);
     $(TITLE).stop().animate({'font-size': '20px', width: '85px'}, {
                                     duration: 100,
                                     easing: 'linear'
     });
     $(BANNER).stop().animate({height: newHeight}, { // 48px
                                 duration: 100,
-                                easing: 'linear',
-                                step: function(currentHeight) {
-                                    // console.log("height: ", currentHeight);
-                                }
+                                easing: 'linear'
     });
 }
 
@@ -1374,18 +1356,13 @@ function collapseNav(newHeight) {
 // Expands nav bar to set height
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 function uncollapseNav(newHeight) {
-    // $('.logo').fadeIn(200)
-    // $('.monitor').fadeIn(200);
     $(TITLE).stop().animate({'font-size': '36px', width: '150px'}, {
                                     duration: 100,
                                     easing: 'linear'
     });
     $(BANNER).stop().animate({height: newHeight}, { // 100px
                                 duration: 100,
-                                easing: 'linear',
-                                step: function(currentHeight) {
-                                    // console.log("height: ", currentHeight);
-                                }
+                                easing: 'linear'
     });
 }
 
@@ -1466,18 +1443,6 @@ function collapseNavHandler() {
     });
 }
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-// Used to keep background in place on mobile
-// Currently -- NOT IN USE
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-function fixedBackgroundMobile() {
-    $(window).scroll(function() {
-        var scrolledY = $(window).scrollTop();
-        if ((parseInt($("body").css('width')) <= '414')) {
-            $('main').css('background-position', '50% ' + (scrolledY - 300) + 'px');
-        }
-    });
-}
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 // Shows (slides) nav search glass input 
@@ -1530,12 +1495,6 @@ let textFile = null,
     return textFile;
   };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// Handler to attach text file to icon
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-// Needs implementation
-
 
 
 
@@ -1564,8 +1523,9 @@ let searchVideoByIdYoutube = function (video_ID, callback = printResp) {
 // * * * * * * * * * * * * * * * * * * * * * * * * * //
 let TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_KEY = '33e990a96c93fc44034cdc76ec1ec949';
+
 // * * * * * * * * * * * * *
-//  Search ALL 
+//  Search ALL (TMDB)
 // * * * * * * * * * * * * *
 function searchAllTMDB(searchQuery, page = 1, callback = printResp) {
     let TMDB_SEARCH_ALL_URL = `${TMDB_BASE_URL}/search/multi`;
@@ -1925,7 +1885,6 @@ function getAllEpisodesGuidebox(showID, callback = printResp, limit = 100) {
     let query = {
         api_key: GUIDEBOX_KEY,
         include_links: true,
-        // season: season,
         limit: limit
     };
     $.getJSON(SHOW_GBOX_URL, query, callback);
@@ -2124,12 +2083,12 @@ function searchFormFocus() {
 function navSearchGlassHover() {
     $(NAV_SEARCH_GLASS).mouseenter(e => {
         e.preventDefault();
-        // showNavSearchInput();
+        showNavSearchInput();
     });
 
     $(NAV_SEARCH_INPUT).focusout(e => {
         e.preventDefault();
-        // hideNavSearchInput();
+        hideNavSearchInput();
     });
 }
 
@@ -2137,9 +2096,9 @@ function navSearchGlassClick() {
     $(NAV_SEARCH_GLASS).on('click', function(e) {
         e.preventDefault();
         if (NAV_SEARCH_INPUT.css(width) == '200px') {
-            // hideNavSearchInput();
+            hideNavSearchInput();
         } else {
-            // showNavSearchInput();
+            showNavSearchInput();
         }
     });
 }
@@ -2231,7 +2190,6 @@ function seasonPosterClick() {
 function episodeStillClick() {
     $(SEASON_DETAILS_CONTAINER).on('click', EPISODE_STILL,function(e) {
         e.preventDefault();
-        console.log('CLICK!!!!');
         $(SEASON_DETAILS_CONTAINER).find('label').removeClass('highlight');
         $(this).siblings('label').addClass('highlight');
         let ep = $(this).attr('data-episode-number');
@@ -2288,7 +2246,6 @@ function watchNavItems() {
     // search
     searchNavClick();
     searchFormSubmit();
-    navSearchGlassHover();
     searchFormFocus();
     // popular
     popularNavClick();
@@ -2335,9 +2292,4 @@ $(function() {
     displays();
 
     init(); // Must come after event listeners are binded
-
-    // showDetailPage();
-    // initDiscoverySlider();
-    // initStreamingLinksSlider();
-    // console.log(obj);
 });
