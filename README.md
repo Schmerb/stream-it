@@ -13,6 +13,8 @@ Asynchronous API Client-Side Capstone Project from [Thinkful's](https://www.thin
 
 ![Alien Detail Page](./working-screenshots/alien-detail-page-with-similar-carousel.png?raw=true "Alien Detial Page")
 
+![Silicon Valley Detail Page](./working-screenshots/silicon-valley-detail-page.png?raw=true "Silicon Valley Detial Page")
+
 ![Popular Page](./working-screenshots/popular-movies.png?raw=true "Popular Page")
 
 ![Discover Content Page](./working-screenshots/discover-content.png?raw=true "Discover Content Page")
