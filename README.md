@@ -1,5 +1,5 @@
 # STREAM IT
-Capstone Project from [Thinkful's](https://www.thinkful.com/) fullstack web development program. 
+Asynchronous API Client-Side Capstone Project from [Thinkful's](https://www.thinkful.com/) fullstack web development program. 
 
 Stream It is a search engine for users to find out exactly where and for how much they can currently stream a movie or tv show and view ratings as well as other useful information. It makes the process of searching for titles across multiple streaming platforms as easy as a few clicks. Currently leverages about 340 sources.
 
