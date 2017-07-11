@@ -8,8 +8,7 @@
         <!-- Normalize.css, a cross-browser reset file -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./slick-1.6.0/slick/slick-theme.css"/>
-        <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono|Droid+Serif|Open+Sans|Open+Sans+Condensed:300|Raleway|Roboto+Condensed|Rubik" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Frijole|Viga|Ubuntu" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Frijole|Viga|Ubuntu" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles/main.css">
     </head>
     <body>
@@ -46,9 +45,7 @@
                             <form id="nav-search-form" class="search-form">
                                 <div class="nav-search-form-inner-wrap">
                                     <input id="nav-search-input" class="query-input" type="text" name="" value="" placeholder="Search . . ." required>
-                                     <!--<button id="search-glass-btn" type="submit">-->
-                                    <svg class="nav-search-glass" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="3 0 22 25"><path d="M14 8c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3m0-1c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zM4.195 17.674c0 1.727 1.404 3.131 3.131 3.131.756 0 1.503-.277 2.104-.783l2.397-2.386c.685.227 1.412.364 2.173.364 3.86 0 7-3.141 7-7s-3.14-7-7-7c-3.859 0-7 3.141-7 7 0 .761.136 1.486.364 2.173l-2.245 2.283c-.596.59-.924 1.378-.924 2.218zm6.459-1.694l-2.512 2.511c-.223.187-.504.313-.816.313-.624 0-1.131-.506-1.131-1.131 0-.311.127-.594.332-.797l2.492-2.531c.435.645.99 1.2 1.635 1.635zm3.346.02c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"/></svg>
-                                    <!--</button>-->
+                                     <svg class="nav-search-glass" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="3 0 22 25"><path d="M14 8c1.656 0 3 1.344 3 3s-1.344 3-3 3-3-1.344-3-3 1.344-3 3-3m0-1c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zM4.195 17.674c0 1.727 1.404 3.131 3.131 3.131.756 0 1.503-.277 2.104-.783l2.397-2.386c.685.227 1.412.364 2.173.364 3.86 0 7-3.141 7-7s-3.14-7-7-7c-3.859 0-7 3.141-7 7 0 .761.136 1.486.364 2.173l-2.245 2.283c-.596.59-.924 1.378-.924 2.218zm6.459-1.694l-2.512 2.511c-.223.187-.504.313-.816.313-.624 0-1.131-.506-1.131-1.131 0-.311.127-.594.332-.797l2.492-2.531c.435.645.99 1.2 1.635 1.635zm3.346.02c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"/></svg>
                                 </div>
                             </form>
                        </div>
@@ -91,15 +88,13 @@
                     <button class="tv-btn js-more-btn btn hidden" type="button">more</button>
                 </section>
 
+
                 <!-- SEARCH REULTS PAGE-->
 
                 <section class="search-results-page content-container hidden">
                     <h2 class="loading hidden">LOADING . . .</h2>
                     <h2 class="user-query hidden">'<span class="search-header"></span>' Results</h2>
                     <h2 class="no-results hidden">Sorry, no results for '<span class="search-header"></span>'</h2>
-                    <!--<label for="search-results" class="fixed-search-query">
-                        '<span class="search-header"></span>' results
-                    </label>-->
                     <div id="search-results" class="search-results-content content">
                          
                     </div>   
@@ -117,13 +112,6 @@
                         </div>
                     </div>
                 </section>
-
-
-                <!-- SEARCH PAGE-->
-
-                <!--<section class="search-page hidden">
-                    
-                </section>-->
 
 
                 <!-- DETAIL PAGE-->
@@ -218,213 +206,6 @@
                         <!-- STREAMING-LINKS CONTAINER-->
                         <section class="streaming-links-container">
                             
-                            <!-- PURCHASE LINKS SLIDER -->
-                            <!--<label for="purch-links">Buy / Rent</label>
-                            <ul id="purch-links" class="purchase-links streaming-links-slider">
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="amazon" class="icon" src="./assets/icons/amazon-instant-video.jpeg" alt=""></a>
-                                    <label for="amazon">Amazon Prime Video</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li>  
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="itunes" class="icon" src="./assets/icons/itunes.jpeg" alt=""></a>
-                                    <label for="itunes">iTunes</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="vudu" class="icon" src="./assets/icons/vudu.jpeg" alt=""></a>
-                                    <label for="vudu">Vudu</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="google-play" class="icon" src="./assets/icons/google-play.jpeg" alt=""></a>
-                                    <label for="google-play">Google Play</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="cinemanow" class="icon" src="./assets/icons/cinemanow.jpeg" alt=""></a>
-                                    <label for="cinemanow">Cinema Now</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="youtube-play" class="icon" src="./assets/icons/youtube-play.png" alt=""></a>
-                                    <label for="youtube-play">YouTube Play</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="sony" class="icon" src="./assets/icons/sony-main.png" alt=""></a>
-                                    <label for="sony">Sony</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                 Source Option
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="verizon-on-demand" class="icon" src="./assets/icons/Verizon-on-Demand.png" alt=""></a>
-                                    <label for="verizon-on-demand">Verizon (On Demand)</label>
-                                    <ul class="purchase-options-list"> 
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Buy</dt>
-                                                <dd><span class="definition-span">HD</span>$12.99</dd>
-                                                <dd><span class="definition-span">SD</span>$6.99</dd>
-                                            </dl>
-                                        </li>
-                                        <li> 
-                                            <dl class="prices">
-                                                <dt>Rent</dt>
-                                                <dd><span class="definition-span">HD</span>$3.99</dd>
-                                                <dd><span class="definition-span">SD</span>$2.99</dd>
-                                            </dl>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>-->
-
-                            <!-- SUBSCRIPTION LINKS SLIDER -->
-                            <!--<label for="sub-links">Subscription</label>
-                            <ul id="sub-links" class="subscription-links streaming-links-slider">
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="starz_amazon_prime" class="icon" src="./assets/icons/starz.jpeg" alt=""></a>
-								  	<label for="starz_amazon_prime">Starz (via Amazon Prime)</label>
-                                    <span class="package-price">$8.99 / month</span>
-                                </li>
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="starz_amazon_prime" class="icon" src="./assets/icons/starz.jpeg" alt=""></a>
-								  	<label for="starz_amazon_prime">Starz (via Amazon Prime)</label>
-                                    <span class="package-price">$8.99 / month</span>
-                                </li>
-                            </ul>-->
-
-                            <!-- TV LINKS SLIDER -->
-                            <!--<label for="tv-stream-link">TV</label>
-                            <ul id="tv-stream-link" class="tv-links streaming-links-slider">
-                                <li class="source-slide">
-                                    <a href="" target="__blank"><img id="starz_tveverywhere" src="assets/icons/cinemax-max-go.png" alt="" class="icon"></a>
-									<label for="starz_tveverywhere">MAX GO</label>
-                                    <span class="package-price">Included with Cinemax</span>
-                                </li>
-                            </ul>-->
-
                         </section> <!-- stream links container-->
 
 
@@ -453,7 +234,6 @@
                     </div>  <!-- detail-page-container -->         
 
                 </section>
-
             </div>
         </main>
 
@@ -515,7 +295,7 @@
 
         <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
         <script type="text/javascript" src="./slick-1.6.0/slick/slick.min.js"></script>
-        <script src="https://use.fontawesome.com/9f828cce4e.js"></script>
+        <!--<script src="https://use.fontawesome.com/9f828cce4e.js"></script>-->
         <script src="https://use.fontawesome.com/3e1d7b509c.js"></script>
         <script type="text/javascript" src="stream-sources.js"></script>
         <script type="text/javascript" src="category-ids.js"></script>
