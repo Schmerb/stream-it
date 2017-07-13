@@ -34,7 +34,7 @@ Stream It is a search engine for users to find out exactly where and for how muc
 ## Notes
 * Responsive, mobile first design strategy 
 * Specifies hash URL endpoints to retain state of app on page refresh for all views.
-  * Utilizes session storage for storing data currently displayed in Slick carousel(s) to save detail page context on page refresh.
+  * Utilizes session storage to serialize and store data currently displayed in Slick carousel(s) to save detail page context on page refresh.
 * APIs
   * Search powered by The Movie DB (TMDb) API
   * Ratings (IMDB etc..) and metadata from The Open Movie Database (OMDB) API
