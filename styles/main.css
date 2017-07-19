@@ -18,7 +18,7 @@ body {
     top: 0;
     left: 0;
     background: rgba(32,178,170,0.95);
-	background: url('../assets/backgrounds/tablets/william-iven-5895-compressor.jpg') center;
+	background: url('../assets/backgrounds/tablets/william-iven-5895-compressor.jpg') center; 
 	background-size: cover;
     width: 100%;
     height: 100vh;
@@ -926,12 +926,20 @@ ul.f-nav-ul-wrap {
 	color: rgb(134, 194, 50);
 }
 
-.copy,
-#tmdb-attr {
+.github-icon {
+	font-size: 17px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+#tmdb-attr,
+.my-info {
 	display: block;
 }
 
-
+.my-info {
+	margin-bottom: 10px;
+}
 
 
 

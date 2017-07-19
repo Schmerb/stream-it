@@ -911,6 +911,7 @@ function trailerHandler(resp) {
             if (trailers.length > 1) {
                 initTrailerSlider();
             }
+            debugger;
             $(FRAME).addClass('frame-ready');
         });
     } // end if (trailers.length > 0)     
