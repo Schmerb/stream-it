@@ -218,7 +218,7 @@ function displayDetailPage(tmdb, imdb) {
     let type = imdb.Type == 'movie' ? 'movie' : 'tv';  // checks if movie or tv show
     window.location = `#detail/${type}/${imdb.imdbID}`; // Sets url for detail page
 
-    console.log('tmdb', tmdb, 'imdb', imdb);
+    // console.log('tmdb', tmdb, 'imdb', imdb);
 
     // Poster container 
     // metadata -- numerical 
