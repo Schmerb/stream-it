@@ -34,6 +34,7 @@
                                     <li class="nav-item search">Search</li>
                                     <li class="nav-item popular">Popular</li>
                                     <li class="nav-item discover">Discover</li>
+                                    <!-- <li class="nav-item"><a class="download" href="" target="__blank">Download</a></li> -->
                                 </ul>
                                 <ul class="mobile-menu">
                                     <li class="nav-item search">Search</li>
@@ -149,10 +150,12 @@
                                         <span class="js-imdb"></span>
                                     </label>
                                 </a>
-                                <label for="" class="ratings-label rotten-label">
-                                    <img class="ratings rotten" src="./assets/icons/rotten-tomatoe.png" alt="">
-                                    <span class="js-rotten"></span>
-                                </label>
+                                <a class="rotten-link" href="#!" target="__blank">
+                                    <label for="" class="ratings-label rotten-label">
+                                        <img class="ratings rotten" src="./assets/icons/rotten-tomatoe.png" alt="">
+                                        <span class="js-rotten"></span>
+                                    </label>
+                                </a>
                                 <label for="" class="ratings-label metacritic-label">
                                     <img class="ratings metacritic" src="./assets/icons/metacritic.png" alt="">
                                     <span class="js-metacritic"></span>
@@ -302,9 +305,9 @@
         <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
         <script type="text/javascript" src="./slick-1.6.0/slick/slick.min.js"></script>
         <script src="https://use.fontawesome.com/3e1d7b509c.js"></script>
-        <script type="text/javascript" src="stream-sources.js"></script>
-        <script type="text/javascript" src="category-ids.js"></script>
-        <script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="data/stream-sources.js"></script>
+        <script type="text/javascript" src="data/sourceData.js"></script>
+        <script type="text/javascript" src="data/category-ids.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -14,7 +14,8 @@ let state = {
     isMobile: false,
     count: 0,
     genreLists: {},
-    seasons: {}
+    seasons: {},
+    moviesJson: []
 };
 
 // Selectors
@@ -89,7 +90,7 @@ const IMDB_RATING = '.imdb-label';
 const ROTTEN_RATING = '.rotten-label';
 const METACRITIC_RATING= '.metacritic-label';
 const IMDB_LINK = '.imdb-link';
-// const ROTTEN_LINK = '.imdb-link';
+const ROTTEN_LINK = '.rotten-link';
 // const METACRITIC_LINK = '.imdb-link';
 const IMDB = '.js-imdb';
 const ROTTEN = '.js-rotten';
@@ -220,6 +221,8 @@ function displayDetailPage(tmdb, imdb) {
 
     // console.log('tmdb', tmdb, 'imdb', imdb);
 
+    console.log(tmdb, imdb);
+
     // Poster container 
     // metadata -- numerical 
     $(MOVIE_TITLE).text(imdb.Title);
@@ -238,6 +241,10 @@ function displayDetailPage(tmdb, imdb) {
             $(IMDB).text(rating.Value);
         } else if (rating.Source == 'Rotten Tomatoes') {
             rotten_rating = true; // exists
+            let url = imdb.tomatoURL;
+            if(url && url.length > 0){
+                $(ROTTEN_LINK).attr('href', url);
+            } 
             $(ROTTEN).text(rating.Value);
         } else if (rating.Source == 'Metacritic') {
             meta_rating = true; // exists
@@ -328,6 +335,30 @@ function displayEpisodeStreamLinks(season, ep) {
     }
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  checks if source data for movie exists. 
+//  displays sources if exist, error message
+//  otherwise
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function streamLinkHandler(imdb) {
+    let movie = sources[imdb];
+    if(movie !== undefined) {
+        displayStreamingLinks(movie);
+    } else {
+        // display message that data does not exist
+        displayNoDataMessage();
+    }
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+//  displays Guidebox end of service message
+// * * * * * * * * * * * * * * * * * * * * * * * * *
+function displayNoDataMessage() {
+    let msg = 'Sorry, Guidebox API is no longer servicing this website. No source(s) data on file for this movie.'
+    $(STREAMING_LINKS_CONTAINER).html(`<div class="no-data-msg">
+                                        <p>${msg}</p>
+                                       </div>`);
+}
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 //  Displays the different streaming options
@@ -347,8 +378,6 @@ function displayStreamingLinks(guidebox, isTvShow = false) {
     show(STREAMING_LINKS_CONTAINER);
 
     let movie = guidebox; // GUIDEBOX
-    // let movie = obj; // ALIEN (TESTING)
-    // let movie = theater; // WONDERWOMAN (IN-THEATERS TESTING)
     
     let hasSource = false;
     if (movie.in_theaters) {
@@ -362,8 +391,6 @@ function displayStreamingLinks(guidebox, isTvShow = false) {
         }
     }
 
-    // let respData = obj; // ALIEN (TESTING)
-    // let respData = theater; // WONDERWOMAN (IN-THEATERS TESTING)
     let respData = guidebox; // GUIDEBOX 
 
     let purch_srcs = respData.purchase_web_sources; 
@@ -773,11 +800,13 @@ function movieDetailPageHandler(poster, initCarousel) {
                 displaySimilarCarousel(resp, false);
             });
             // call to guidebox for streaming links / prices
-            searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
-                getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
-                    displayStreamingLinks(gbox_m_resp);
-                });
-            });
+            let imdb = imdb_resp.imdbID;
+            streamLinkHandler(imdb);
+            // searchByExternalIdGuidebox(imdb_resp.imdbID, 'movie', 'imdb', function(gbox_s_resp) {
+            //     getMovieGuidebox(gbox_s_resp.id, function(gbox_m_resp) {
+            //         displayStreamingLinks(gbox_m_resp);
+            //     });
+            // });
         });
         getMovieVideosTMDB(detail_resp.id, function(video_resp) {
             trailerHandler(video_resp);
@@ -1498,6 +1527,7 @@ let textFile = null,
 
 
 
+
 // ================================================================================
 //    API Calls   ~   TMDB, OMDB, Guidebox
 // ================================================================================
@@ -1830,7 +1860,10 @@ function getQuota() {
     let query = {
         api_key: "db85b00dc1a54c2a02ed61575609802bb3d8c498"
     };
-    $.getJSON(QUOTA_GUIDEBOX_URL, query, printResp);
+    $.getJSON(QUOTA_GUIDEBOX_URL, query, (res) => {
+        console.log('Current: ', res.monthly_quota.current);
+        console.log('REMAINING: ',  res.monthly_quota.total - res.monthly_quota.current);
+    });
 }
 
 function getPopularTitles(limit = 250, offset = 0, sources = 'all', callback = printResp) {
@@ -1841,7 +1874,7 @@ function getPopularTitles(limit = 250, offset = 0, sources = 'all', callback = p
         offset: offset,
         sources: sources
     };
-    $.getJSON(RECENT_MOVIES_URL, query, callback);
+    return $.getJSON(RECENT_MOVIES_URL, query, callback);
 }
                                                               // imdb OR themoviedb   
 function searchByExternalIdGuidebox(external_id, type = 'movie', idType = 'imdb', callback = printResp) {
@@ -1861,7 +1894,7 @@ function getMovieGuidebox(movieID, callback = printResp) {
     let query = {
         api_key: GUIDEBOX_KEY,
     };
-    $.getJSON(MOVIE_GBOX_URL, query, callback);
+    return $.getJSON(MOVIE_GBOX_URL, query, callback);
 }
 
 function getShowGuidebox(showID, callback = printResp) {
@@ -1907,10 +1940,75 @@ function getShowAvailableContentGuidebox(showID, callback = printResp) {
 }
 
 
+// ================================================================================
+// Gets titles from guidebox, stores them
+// ================================================================================
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Gets popular movies short metadata from Guidebox
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+function writeDataToFile() {
+    let arr = [];
+    let jsonRequests = [];
+    for (let i = 0; i < 10; i++) {
+        jsonRequests.push(
+            getPopularTitles(250, i, 'all', function(res) {
+                res.results.forEach((title) => {
+                    arr.push(title);
+                });
+            })
+        );
+    }
+
+    $.when.apply($, jsonRequests).then(() => {
+        console.log('DONE');
+        let jsonStr = JSON.stringify(arr);
+        let jsonBlobURL = makeTextFile(jsonStr);
+        $('.download').attr('href', jsonBlobURL);
+    });
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Creates blob with data as argument and sets its 
+// download URL to download nav item href
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+function writeThisToFile(data) {
+    let jsonStr = JSON.stringify(data);
+    let jsonBlobURL = makeTextFile(jsonStr);
+    $('.download').attr('href', jsonBlobURL);
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+// Loops through guidebox popular movies results
+// and makes calls for each movies complete metadata
+// and creates blob with data to download
+// * * * * * * * * * * * * * * * * * * * * * * * * * 
+function writeMovieDetailsToFile() {
+    let jsonRequests = [];
+    let movies = [];
+
+    // Start at 845 and continue collecting 
+    for (let i = 1150; i < 1350; i++) { 
+        jsonRequests.push(
+            getMovieGuidebox(data[i].id, (res) => {
+                movies.push(res);
+                state.moviesJson.push(res);
+            })
+        );
+    }
+    $.when.apply($, jsonRequests).then(() => {
+        console.log('DONE');
+        let jsonStr = JSON.stringify(movies);
+        let jsonBlobURL = makeTextFile(jsonStr);
+        $('.download').attr('href', jsonBlobURL);
+    });
+
+}
+
 
 // ================================================================================
 // URL manipulation and State capture
-// ===============================================================================
+// ================================================================================
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * 
 // Handles URL on page reload to display 
@@ -2293,3 +2391,5 @@ $(function() {
 
     init(); // Must come after event listeners are binded
 });
+
+

@@ -9,6 +9,7 @@
 body {
 	background: url('../assets/backgrounds/textures/diagonal-texture-black-compressor.jpg') center;
 	background-attachment: fixed;
+	min-width: 315px;
 	margin: 0;
 	color: #F8F1E5;
 }
@@ -242,7 +243,7 @@ a {
 
 .nav-search-glass,
 #nav-search-input {
-	display: none;
+	/* display: none; */
 }
 
 .header-message {
@@ -560,6 +561,7 @@ main {
 .ratings-label {
 	display: inline-block;
 	margin-right: 10px;
+	cursor: pointer;
 }
 
 .ratings { 
@@ -618,6 +620,17 @@ section.tv-container {
 .streaming-links-container {
 	display: block;
 	overflow: hidden;
+}
+
+.no-data-msg {
+	padding: 50px 30px;
+	color: grey;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.no-data-msg p {
+	margin: 0;
 }
 
 .streaming-links-container h3,
@@ -1154,22 +1167,23 @@ ul.f-nav-ul-wrap {
 
 	#nav-search-input {
 		width: 0;
-		background: rgba(248, 241, 229, 0.7);
+		background: transparent;
 		font-size: 16px;
 		border: none;
 		border-radius: 20px;
 		padding-left: 10px;
-		-webkit-transition: all 2s linear;
-		-moz-transition: all 2s linear;
-		transition: all 2s linear;
+		-webkit-transition: all 0.5s linear;
+		-moz-transition: all 0.5s linear;
+		transition: all 0.5s linear;
 	}
 
 	.nav-search-form-inner-wrap:hover #nav-search-input {
+		background: rgba(248, 241, 229, 0.7);
 		display: inline-block;
 		width: 150px;
-		-webkit-transition: all 2s linear;
-		-moz-transition: all 2s linear;
-		transition: all 2s linear;
+		-webkit-transition: all 1s linear;
+		-moz-transition: all 1s linear;
+		transition: all 1s linear;
 	}
 
 	.header-message {
@@ -1406,6 +1420,8 @@ ul.f-nav-ul-wrap {
 	.ratings-container {
 		margin-left: 0;
 	}
+
+
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * =/ 
 	/* TV Seasons (DESKTOP)
