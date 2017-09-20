@@ -897,9 +897,23 @@ function trailerHandler(resp) {
                                 && trailer.site.toLowerCase() == 'youtube');
     });
     if (trailers.length > 0) {
-        let mainTrailer = trailers.find(function(trailer) {
-        let name = trailer.name.toLowerCase();
-        return name == 'official trailer' 
+        // let mainTrailer = trailers.find(function(trailer) {
+        // let name = trailer.name.toLowerCase();
+        // return name == 'official trailer' 
+        //         || name == 'official main trailer' 
+        //         || name == 'main trailer'
+        //         || name.includes('1')
+        //         || name.includes('official trailer')
+        //         || name.includes('official teaser')
+        //         || name.includes('official')
+        //         || name.includes('teaser') 
+        //         || name.includes('trailer');
+        // });
+        let mainTrailer = undefined;
+        for(let i = 0; i < trailers.length; i++) {
+            let trailer = trailers[i];
+            let name = trailer.name.toLowerCase();
+            if(    name == 'official trailer' 
                 || name == 'official main trailer' 
                 || name == 'main trailer'
                 || name.includes('1')
@@ -907,8 +921,12 @@ function trailerHandler(resp) {
                 || name.includes('official teaser')
                 || name.includes('official')
                 || name.includes('teaser')
-                || name.includes('trailer');
-        });
+                || name.includes('trailer')) {
+                    mainTrailer = trailer;
+            }
+        }
+
+
         if (!mainTrailer) { // if no 'main trailer', use first trailer
             mainTrailer = trailers[0];
         }
@@ -2368,7 +2386,7 @@ function displays() {
     popularPosterClick();
     discoverPosterClick();
     seasonPosterClick();
-    episodeStillClick();
+    episodeStillClick(); 
     moreContentClick();
 
     // carousel poster clicks
