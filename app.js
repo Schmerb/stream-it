@@ -16,7 +16,7 @@ let state = {
     genreLists: {},
     seasons: {},
     moviesJson: []
-};
+};  
 
 // Selectors
 
@@ -30,7 +30,7 @@ const POPULAR_TV = '.popular-tv-f-nav';
 const FIXED_CONTAINER = '.fixed-container'
 const FIXED_SEARCH_QUERY = '.fixed-search-query';
 
-// Mobile Nav
+// Mobile Nav 
 const BURGER_ANCHOR = '#burger-anchor';
 const MOBILE_MENU = '.mobile-menu';
 const MAIN_NAV = '.main-nav';
@@ -221,7 +221,7 @@ function displayDetailPage(tmdb, imdb) {
 
     // console.log('tmdb', tmdb, 'imdb', imdb);
 
-    console.log(tmdb, imdb);
+    // console.log(tmdb, imdb);
 
     // Poster container 
     // metadata -- numerical 
@@ -1979,7 +1979,7 @@ function writeDataToFile() {
     }
 
     $.when.apply($, jsonRequests).then(() => {
-        console.log('DONE');
+        // console.log('DONE');
         let jsonStr = JSON.stringify(arr);
         let jsonBlobURL = makeTextFile(jsonStr);
         $('.download').attr('href', jsonBlobURL);
@@ -2015,7 +2015,7 @@ function writeMovieDetailsToFile() {
         );
     }
     $.when.apply($, jsonRequests).then(() => {
-        console.log('DONE');
+        // console.log('DONE');
         let jsonStr = JSON.stringify(movies);
         let jsonBlobURL = makeTextFile(jsonStr);
         $('.download').attr('href', jsonBlobURL);

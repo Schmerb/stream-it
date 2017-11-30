@@ -13,7 +13,6 @@ const gulp        = require('gulp'),
 /////////////////////////////////
  
 gulp.task('build_es6', () => {
-	gulp.watch([['app.js', 'data/*.js']], () => {
 		return gulp.src(['app.js', 'data/*.js'])
 		    .pipe(concat('bundle.js'))
 			.pipe(babel({
@@ -35,7 +34,11 @@ gulp.task('build_es6', () => {
 				min: '.js'
 			}))
 			.pipe(gulp.dest('build'))
-	});
 });
 
-gulp.task('default', ['build_es6']);
+const SRC = ['app.js', 'data/*.js'];
+gulp.task('watch_es6', () => {
+	gulp.watch(SRC, ['build_es6']);
+})
+
+gulp.task('default', ['build_es6', 'watch_es6']);
