@@ -43,6 +43,10 @@ gulp.task('watch_es6', () => {
 	gulp.watch(JS_SRC, ['build_es6']);
 })
 
+//////////////////////////////////
+// - CSS minify
+/////////////////////////////////
+
 const CSS_SRC = 'src/styles/main.css';
 gulp.task('minify_css', () => {
 	return gulp.src(CSS_SRC)
@@ -51,4 +55,8 @@ gulp.task('minify_css', () => {
 		.pipe(gulp.dest('build'))
 });
 
-gulp.task('default', ['build_es6', 'watch_es6', 'minify_css']);
+gulp.task('watch_css', () => {
+	gulp.watch(CSS_SRC, ['minify_css']);
+})
+
+gulp.task('default', ['build_es6', 'watch_es6', 'minify_css', 'watch_css']);
