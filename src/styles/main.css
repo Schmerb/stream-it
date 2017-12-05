@@ -343,7 +343,7 @@ a {
 /* Main landing (Base / Mobile)
 /* * * * * * * * * * * * * * * * * * * * * * * * */ 
 main {
-	background: url('../assets/backgrounds/tablets/gilles-lambert-8649.jpg') center;
+	background: url('../assets/backgrounds/tablets/gilles-lambert-8649-compressor.jpg') center;
 	background-size: cover;
 	background-attachment: fixed;
     min-height: 100vh;
