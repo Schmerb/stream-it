@@ -25,8 +25,10 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-browserify": "^0.5.1",
+    "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
     "gulp-minify": "^1.0.0",
+    "gulp-rename": "^1.2.2",
     "webpack": "^3.6.0"
   },
   "dependencies": {
