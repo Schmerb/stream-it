@@ -35,6 +35,8 @@ Stream It is a search engine for users to find out exactly where and for how muc
   * [Gulp](https://gulpjs.com/)
     * Task manager, build step
   * [Browsersync](https://www.browsersync.io/)
+    * Automation tool to make the development process faster. 
+    * Allows for multiple screens to reload live and all interactions are in synchronization, mirroring actions across every browser on any device located on local network.
   * [Browserify](http://browserify.org/)
     * npm module support for browser
   * [Babel](https://babeljs.io/) + [Webpack](https://webpack.js.org/) 
