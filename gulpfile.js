@@ -11,9 +11,10 @@ const gulp        = require('gulp'),
 //////////////////////////////////
 // - BABEL / Minify / Browserify
 /////////////////////////////////
- 
+
+const JS_SRC = ['src/app.js', 'src/data/*.js'];
 gulp.task('build_es6', () => {
-		return gulp.src(['app.js', 'data/*.js'])
+		return gulp.src(JS_SRC)
 		    .pipe(concat('bundle.js'))
 			.pipe(babel({
 				presets: ['env'],
@@ -36,9 +37,8 @@ gulp.task('build_es6', () => {
 			.pipe(gulp.dest('build'))
 });
 
-const SRC = ['app.js', 'data/*.js'];
 gulp.task('watch_es6', () => {
-	gulp.watch(SRC, ['build_es6']);
+	gulp.watch(JS_SRC, ['build_es6']);
 })
 
 gulp.task('default', ['build_es6', 'watch_es6']);
