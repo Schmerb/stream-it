@@ -25,11 +25,20 @@ Asynchronous API Client-Side Capstone Project from [Thinkful's](https://www.thin
 Stream It is a search engine for users to find out exactly where and for how much they can currently stream a movie or tv show and view ratings as well as other useful information. It makes the process of searching for titles across multiple streaming platforms as easy as a few clicks. Provides lists of popular movies and tv shows and a discover content section to browse movies by genre as well as suggestions for similar movies and tv shows. Currently leverages about 340 sources.
 
 ## Built With
-* HTML5 
-* CSS3
-* JavaScript
-* jQuery
-  * [Slick](http://kenwheeler.github.io/slick/) - Responsive carousel jQuery plugin
+* Production
+  * HTML5 
+  * CSS3
+  * JavaScript
+  * jQuery
+    * [Slick](http://kenwheeler.github.io/slick/) - Responsive carousel jQuery plugin
+* Development
+  * [Gulp](https://gulpjs.com/)
+    * Task manager, build step
+  * [Browsersync](https://www.browsersync.io/)
+  * [Browserify](http://browserify.org/)
+    * npm module support for browser
+  * [Babel](https://babeljs.io/) + [Webpack](https://webpack.js.org/) 
+    * ES6 support for older environments (IE8 etc)
 
 ## Notes
 * Responsive, mobile first design strategy 
