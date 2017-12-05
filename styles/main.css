@@ -243,8 +243,16 @@ a {
 
 .nav-search-glass,
 #nav-search-input {
-	/* display: none; */
+	display: none;
 }
+
+/* .nav-search-glass {
+	fill: rgb(134, 195, 35);
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	vertical-align: top;
+} */
 
 .header-message {
 	font-family: 'Ubuntu', sans-serif;
@@ -291,7 +299,8 @@ a {
 	width: 60px;
     border: none;
     padding: 0;
-    vertical-align: top;
+	vertical-align: top;
+	border-radius: 0;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
