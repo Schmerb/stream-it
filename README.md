@@ -7,17 +7,17 @@ Asynchronous API Client-Side Capstone Project from [Thinkful's](https://www.thin
 * Responsive: The final version of your app should work on both mobile and desktop.
 
 ## Screenshots
-![Home Page](./working-screenshots/home-page-alien-search.png?raw=true "Home Page")
+![Home Page](./working-screenshots/home-page-alien-search-compressor.png?raw=true "Home Page")
 
-![Alien search results](./working-screenshots/alien-query.png?raw=true "Alien search results")
+![Alien search results](./working-screenshots/alien-query-compressor.png?raw=true "Alien search results")
 
-![Alien Detail Page](./working-screenshots/alien-detail-page-with-similar-carousel.png?raw=true "Alien Detial Page")
+![Alien Detail Page](./working-screenshots/alien-detail-page-with-similar-carousel-compressor.png?raw=true "Alien Detial Page")
 
-![Silicon Valley Detail Page](./working-screenshots/silicon-valley-detail-page.png?raw=true "Silicon Valley Detial Page")
+![Silicon Valley Detail Page](./working-screenshots/silicon-valley-detail-page-compressor.png?raw=true "Silicon Valley Detial Page")
 
-![Popular Page](./working-screenshots/popular-movies.png?raw=true "Popular Page")
+![Popular Page](./working-screenshots/popular-movies-compressor.png?raw=true "Popular Page")
 
-![Discover Content Page](./working-screenshots/discover-content.png?raw=true "Discover Content Page")
+![Discover Content Page](./working-screenshots/discover-content-compressor.png?raw=true "Discover Content Page")
 
 ## Live [DEMO](https://schmerb.github.io/stream-it/)
 
