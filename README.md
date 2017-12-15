@@ -39,7 +39,7 @@ Stream It is a search engine for users to find out exactly where and for how muc
     * Allows for multiple screens to reload live and all interactions are in synchronization, mirroring actions across every browser on any device located on local network.
   * [Browserify](http://browserify.org/)
     * npm module support for browser
-  * [Babel](https://babeljs.io/) + [Webpack](https://webpack.js.org/) 
+  * [Babel](https://babeljs.io/) 
     * ES6 support for older environments (IE8 etc)
 
 ## Notes
