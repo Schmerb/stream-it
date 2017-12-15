@@ -18,6 +18,14 @@ let state = {
     moviesJson: []
 };  
 
+// // // // // // // //
+// 
+//  ES6 Polyfills
+//
+// // // // // // // //
+const values = require('object.values');
+require('es6-object-assign').polyfill();
+
 // Selectors
 
 // Banner
@@ -831,14 +839,15 @@ function tvDetailHandler(poster, initCarousel) {
                     getSimilarShowsTMDB(poster.attr('data-id'), resp => {
                         displaySimilarCarousel(resp, true);
                     });
+                    // Guidebox API no longer in service to site
 
-                    searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
-                        getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
-                            getAllEpisodesGuidebox(gbox_s_resp.id, function(ep_resp) {
-                                tvEpisodesHandler(ep_resp, detail_resp.number_of_seasons);
-                            });
-                        });
-                    });
+                    // searchByExternalIdGuidebox(imdb_resp.imdbID, 'show', 'imdb', function(gbox_s_resp) {
+                    //     getShowGuidebox(gbox_s_resp.id, function(gbox_tv_resp) {
+                    //         getAllEpisodesGuidebox(gbox_s_resp.id, function(ep_resp) {
+                    //             tvEpisodesHandler(ep_resp, detail_resp.number_of_seasons);
+                    //         });
+                    //     });
+                    // }); 
                 });
             });
             getTvVideosTMDB(detail_resp.id, function(video_resp) {
@@ -935,7 +944,7 @@ function trailerHandler(resp) {
         let jsonRequests = trailers.map(function(trailer) {
                 return searchVideoByIdYoutube(trailer.key, function(youtube_resp) {
                     if(youtube_resp.items.length > 0) {
-                        let snippet = youtube_resp.items[0].snippet;
+                        let snippet   = youtube_resp.items[0].snippet;
                         let thumbnail = snippet.thumbnails.high.url;
                         let url = `https://www.youtube.com/embed/${youtube_resp.items[0].id}`;
                         let alt_trailer_thumbnail = `<div class="trailer-slide">

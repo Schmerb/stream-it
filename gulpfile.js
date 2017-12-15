@@ -19,16 +19,7 @@ gulp.task('build_es6', () => {
 		return gulp.src(JS_SRC)
 		    .pipe(concat('bundle.js'))
 			.pipe(babel({
-				presets: ['env'],
-				plugins: [
-					'transform-object-assign',
-					['transform-runtime', {
-						"helpers": false,
-						"polyfill": true,
-						"regenerator": true,
-						"moduleName": "babel-runtime"
-					}]
-				]
+				presets: ['env']
 			}))
 			.pipe(browserify({
 				insertGlobals: true
